@@ -39,6 +39,8 @@
 
     <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
     <script>document.documentElement.classList.add("js");</script>
+    <!-- The list of Business Friends. Add a business in sponsors.js -->
+    <script src="sponsors.js" defer></script>
     <script src="script.js" defer></script>
     <!-- Tells search engines who the Friends are (shows in Google's info panels) -->
     <script type="application/ld+json">
@@ -355,6 +357,18 @@
                         <a href="mailto:info@fotcpl.org?subject=Book%20donation">Email us about a donation</a>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Business Friends: script.js fills in the logos from sponsors.js -->
+        <section class="band biz-band">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Thank You, Business Friends</h2>
+                    <p>These local businesses support the Friends and our library. Please support them too!</p>
+                </div>
+                <div class="biz-strip" data-business-friends="strip"></div>
+                <p class="biz-band-cta"><a class="button button-secondary" href="join.html#business">Become a Business Friend</a></p>
             </div>
         </section>
 

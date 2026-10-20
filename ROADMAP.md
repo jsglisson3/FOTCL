@@ -23,6 +23,7 @@ Check items off (`[x]`) as they're done.
 - [x] Automatic checks on GitHub: every push re-runs the HTML, link, phone-layout and accessibility tests
 - [x] Style guide page for anyone editing the site (`styleguide.html`)
 - [x] Code tidy-up: unused styles removed, and a table of contents at the top of `style.css`
+- [x] Business Friends showcase: one list in `sponsors.js`, logos that link to each business, a new random order on every visit, a home page row that scrolls once it's full (with a Pause button), and an open "Your Business Here" spot
 
 ## Chunk A: Quick checks for Jeremy (no code)
 
@@ -39,6 +40,8 @@ Check items off (`[x]`) as they're done.
 - [ ] Ask if they want a one-time donation option beside memberships (Donorbox can do both)
 - [ ] Check if Donorbox can open with the chosen level already filled in, so each "Join as a ..." link skips a step
 - [ ] Ask whether there's a newer newsletter than Fall/Summer 2025
+- [ ] Ask which membership level each Business Friend is at, then add it in `sponsors.js` (Partners and Patrons get bigger spots)
+- [ ] Ask each Business Friend for a sharp copy of their logo, and if they're happy with the link to their website
 
 ## Chunk C: Content from the Friends (biggest boost to trust)
 

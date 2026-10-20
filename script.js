@@ -381,6 +381,212 @@ if ("IntersectionObserver" in window && !reduceMotion) {
     });
 }
 
+// ===== Business Friends (home, About and Join pages) =====
+// Builds the business logos from the list in sponsors.js.
+//  - Every visit shows a new random order, with Partners and Patrons first.
+//  - About page: every business, each linking to its website, plus an
+//    open "Your Business Here" spot.
+//  - Home page: one row that starts scrolling slowly once there are more
+//    logos than fit, with a Pause button. It stays still for anyone who has
+//    asked their device to reduce motion, and while someone tabs through
+//    the logos with the keyboard.
+//  - Join page: a small "Join these local Business Friends" list.
+// Without JavaScript these sections stay hidden (see style.css).
+const LEVELS = ["Partner", "Patron", "Supporter", "Friend"];
+const FEATURED_LEVELS = ["Partner", "Patron"];   // the levels that include logo placement
+const SCROLL_SPEED = 30;    // pixels per second
+const MIN_TO_SCROLL = 5;    // with fewer logos than this, the row never scrolls
+
+function svgIcon(shapes) {
+    return `<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${shapes}</svg>`;
+}
+
+// "patron" and "Patron" both work; anything else counts as no level
+function businessLevel(friend) {
+    const level = String(friend.level || "").trim().toLowerCase();
+    return LEVELS.find((name) => name.toLowerCase() === level) || "";
+}
+
+function businessFriendsInOrder() {
+    const friends = typeof BUSINESS_FRIENDS === "undefined" ? [] : [...BUSINESS_FRIENDS];
+    // Shuffle so every order is equally likely
+    for (let i = friends.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [friends[i], friends[j]] = [friends[j], friends[i]];
+    }
+    // Then higher levels first. Sorting keeps the shuffled order within each level.
+    const rank = (friend) => {
+        const index = LEVELS.indexOf(businessLevel(friend));
+        return index === -1 ? LEVELS.length : index;
+    };
+    return friends.sort((a, b) => rank(a) - rank(b));
+}
+
+function businessCard(friend, withLink) {
+    const item = document.createElement("li");
+    item.className = "biz";
+    const level = businessLevel(friend);
+    const featured = FEATURED_LEVELS.includes(level);
+    if (featured) item.classList.add("biz-featured");
+
+    const card = document.createElement(withLink && friend.website ? "a" : "div");
+    card.className = "biz-card";
+    if (card.tagName === "A") {
+        card.href = friend.website;
+        card.rel = "sponsored";   // tells search engines this is a sponsor's link
+    }
+
+    const logoBox = document.createElement("span");
+    logoBox.className = "biz-logo";
+    const logo = document.createElement("img");
+    logo.src = friend.logo;
+    logo.alt = "";   // the business name is written out right below
+    logo.loading = "lazy";
+    logo.decoding = "async";
+    logo.addEventListener("error", () => logoBox.remove());   // a missing logo leaves just the name
+    logoBox.append(logo);
+
+    const name = document.createElement("span");
+    name.className = "biz-name";
+    name.textContent = friend.name;
+    card.append(logoBox, name);
+
+    if (featured) {
+        const badge = document.createElement("span");
+        badge.className = "biz-badge";
+        badge.textContent = `${level} level`;
+        card.append(badge);
+    }
+
+    item.append(card);
+    return item;
+}
+
+// About page: every business, then an open spot for the next one
+function buildBusinessWall(spot, friends) {
+    const list = document.createElement("ul");
+    list.className = "biz-wall";
+    friends.forEach((friend) => list.append(businessCard(friend, true)));
+
+    const invite = document.createElement("li");
+    invite.className = "biz biz-invite";
+    invite.innerHTML = `<a class="biz-card" href="join.html#business">
+        <span class="biz-plus">${svgIcon('<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>')}</span>
+        <span class="biz-name">Your Business Here</span>
+        <span class="biz-invite-text">Become a Business Friend</span>
+    </a>`;
+    list.append(invite);
+    spot.append(list);
+}
+
+// Join page: names and logos, without links, so businesses stay on the page
+function buildBusinessProof(spot, friends) {
+    const list = document.createElement("ul");
+    list.className = "biz-proof";
+    friends.forEach((friend) => list.append(businessCard(friend, false)));
+    spot.append(list);
+}
+
+// Home page: one row that scrolls once it's too long to fit
+function buildBusinessStrip(spot, friends) {
+    const viewport = document.createElement("div");
+    viewport.className = "biz-marquee";
+    const track = document.createElement("div");
+    track.className = "biz-track";
+    const list = document.createElement("ul");
+    list.className = "biz-row";
+    friends.forEach((friend) => list.append(businessCard(friend, true)));
+    track.append(list);
+    viewport.append(track);
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "biz-toggle";
+    toggle.hidden = true;
+    spot.append(viewport, toggle);
+
+    let copy = null;              // a second copy of the logos makes the loop seamless
+    let paused = false;           // the visitor pressed Pause
+    let keyboardInside = false;   // someone is tabbing through the logos
+
+    function paintToggle() {
+        toggle.innerHTML = paused
+            ? `${svgIcon('<polygon points="7 4 19 12 7 20 7 4"/>')} Play<span class="visually-hidden"> the scrolling logos</span>`
+            : `${svgIcon('<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>')} Pause<span class="visually-hidden"> the scrolling logos</span>`;
+    }
+
+    function update() {
+        const items = [...list.children];
+        const gap = parseFloat(getComputedStyle(list).columnGap) || 0;
+        const rowWidth = items.reduce((sum, item) => sum + item.getBoundingClientRect().width, 0) + gap * (items.length - 1);
+        const canScroll = !reduceMotion && items.length >= MIN_TO_SCROLL && rowWidth > viewport.clientWidth;
+        const scrolling = canScroll && !keyboardInside;
+
+        toggle.hidden = !canScroll;
+        viewport.classList.toggle("is-scrolling", scrolling);
+        viewport.classList.toggle("is-paused", scrolling && paused);
+
+        if (scrolling && !copy) {
+            copy = list.cloneNode(true);
+            copy.setAttribute("aria-hidden", "true");   // screen readers hear the list once
+            copy.inert = true;                          // and the Tab key skips it
+            copy.querySelectorAll("a").forEach((link) => {
+                link.tabIndex = -1;
+            });
+            track.append(copy);
+        } else if (!scrolling && copy) {
+            copy.remove();
+            copy = null;
+        }
+
+        // The same gentle speed, however many logos there are
+        const seconds = Math.max(12, Math.round((rowWidth + gap) / SCROLL_SPEED));
+        track.style.setProperty("--biz-duration", `${seconds}s`);
+    }
+
+    toggle.addEventListener("click", () => {
+        paused = !paused;
+        paintToggle();
+        update();
+    });
+
+    // Tabbing to a logo stops the row and lays every logo out, so the
+    // highlighted one never slides out of view. (A mouse click doesn't.)
+    list.addEventListener("focusin", (event) => {
+        if (!event.target.matches(":focus-visible")) return;
+        keyboardInside = true;
+        update();
+        event.target.scrollIntoView({ block: "nearest", inline: "nearest" });
+    });
+    list.addEventListener("focusout", (event) => {
+        if (!list.contains(event.relatedTarget)) {
+            keyboardInside = false;
+            update();
+        }
+    });
+
+    paintToggle();
+    update();
+
+    // Check again whenever the row's width changes (turning a phone, resizing a window)
+    let lastWidth = Math.round(viewport.getBoundingClientRect().width);
+    new ResizeObserver(([entry]) => {
+        const width = Math.round(entry.contentRect.width);
+        if (width !== lastWidth) {
+            lastWidth = width;
+            update();
+        }
+    }).observe(viewport);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const spots = document.querySelectorAll("[data-business-friends]");
+    const friends = spots.length ? businessFriendsInOrder() : [];
+    const builders = { wall: buildBusinessWall, strip: buildBusinessStrip, proof: buildBusinessProof };
+    if (!friends.length) return;
+    spots.forEach((spot) => builders[spot.dataset.businessFriends]?.(spot, friends));
+});
+
 // ===== Back-to-top button =====
 // Shows up once you've scrolled down more than a screen and a half.
 const backToTop = document.querySelector(".back-to-top");

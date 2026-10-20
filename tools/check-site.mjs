@@ -4,7 +4,8 @@
 // own computer with:  npm install   then   npm run check
 //
 // What it checks on every page:
-//   1. Every link and #jump inside the site goes somewhere real
+//   1. Every link and #jump inside the site goes somewhere real,
+//      and every logo listed in sponsors.js exists
 //   2. No JavaScript errors while the page loads
 //   3. Nothing makes the page scroll sideways on a phone
 //   4. The axe accessibility checker finds no problems
@@ -17,6 +18,7 @@ import { chromium } from "playwright";
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import vm from "node:vm";
 
 const SITE = resolve(import.meta.dirname, "..");
 const pages = readdirSync(SITE).filter((name) => name.endsWith(".html")).sort();
@@ -44,6 +46,27 @@ for (const page of pages) {
         if (jump && file.endsWith(".html") && !idsByPage[file]?.has(jump)) {
             problems.push(`${page}: links to "${target}", but ${file} has nothing with id="${jump}"`);
         }
+    }
+}
+
+// ----- The Business Friends list (sponsors.js) -----
+const sponsorsFile = join(SITE, "sponsors.js");
+if (existsSync(sponsorsFile)) {
+    // A missing comma, quote or bracket stops the whole list from working
+    try {
+        new vm.Script(readFileSync(sponsorsFile, "utf8"), { filename: "sponsors.js" });
+    } catch (error) {
+        const line = error.stack.match(/sponsors\.js:(\d+)/)?.[1];
+        problems.push(`sponsors.js: there's a typo${line ? ` on or just before line ${line}` : ""} (${error.message}). Look for a missing comma, quote or bracket.`);
+    }
+
+    // Skip the instructions at the top (lines starting with //)
+    const sponsors = readFileSync(sponsorsFile, "utf8").replace(/^\s*\/\/.*$/gm, "");
+    for (const [, logo] of sponsors.matchAll(/logo:\s*"([^"]*)"/g)) {
+        if (!existsSync(join(SITE, logo))) problems.push(`sponsors.js: the logo "${logo}" doesn't exist`);
+    }
+    for (const [, website] of sponsors.matchAll(/website:\s*"([^"]*)"/g)) {
+        if (website && !website.startsWith("https://")) problems.push(`sponsors.js: the website "${website}" should start with https://`);
     }
 }
 

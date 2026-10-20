@@ -1652,36 +1652,260 @@ a.feature-item:hover .feature-more {
     color: var(--ink-soft);
 }
 
-/* Business Friends: logos in an even row */
-.business-logos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    margin-bottom: 32px;
+/* ===== Business Friends (home, About and Join) =====
+   script.js builds these from the list in sponsors.js. Without
+   JavaScript there's nothing to show, so they stay hidden. */
+.biz-band,
+.business-block,
+.biz-proof-block {
+    display: none;
 }
 
-.business-logos li {
-    width: auto;
+.js .biz-band,
+.js .business-block,
+.js .biz-proof-block {
+    display: block;
 }
 
-.business-logos li {
-    width: 200px;
-    height: auto;
-    padding: 20px 16px 16px;
-    gap: 12px;
-    align-content: start;
+.biz-wall,
+.biz-row,
+.biz-proof {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-.business-logos img {
-    height: 70px;
-    max-height: none;
+/* One business: its logo, its name, and a badge for Partners and Patrons */
+.biz-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    padding: 18px 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    text-align: center;
+    text-decoration: none;
+    color: var(--blue-dark);
+}
+
+a.biz-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+a.biz-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(19, 88, 151, 0.4);
+    box-shadow: 0 12px 26px rgba(13, 61, 105, 0.12);
+}
+
+/* Every logo fits inside the same size box, whatever its shape */
+.biz-logo {
+    display: block;
+    width: 100%;
+    height: 84px;
+}
+
+.biz-logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
-.business-logos span {
+.biz-name {
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* The name is underlined, so it reads as a link */
+a.biz-card .biz-name {
+    text-decoration: underline;
+    text-decoration-color: rgba(19, 88, 151, 0.35);
+    text-underline-offset: 3px;
+}
+
+a.biz-card:hover .biz-name {
+    text-decoration-color: currentColor;
+}
+
+.biz-badge {
+    padding: 2px 10px;
+    border-radius: 999px;
+    background-color: var(--tint);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--blue);
+}
+
+/* About page: every business in an even grid */
+.biz-wall {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+}
+
+/* The open spot that invites the next business */
+.biz-invite .biz-card {
+    justify-content: center;
+    border: 2px dashed rgba(19, 88, 151, 0.3);
+    background-color: transparent;
+}
+
+.biz-invite .biz-card:hover {
+    border-color: var(--blue);
+}
+
+.biz-plus {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--tint);
+    color: var(--blue);
+}
+
+.biz-invite-text {
     font-size: 0.9rem;
     font-weight: 700;
+    color: var(--blue);
+}
+
+.biz-note {
+    margin: 16px 0 0;
+    font-size: 0.9rem;
     color: var(--ink-soft);
-    line-height: 1.3;
+}
+
+/* Home page: one centered row that scrolls once it's too long */
+.biz-band {
+    text-align: center;
+}
+
+.biz-band .section-head {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.biz-marquee {
+    padding: 6px 0 10px;   /* room for the lift and shadow when you point at a logo */
+}
+
+.biz-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.biz-row .biz {
+    flex: 0 0 200px;   /* every logo gets the same width, so the row can measure itself */
+}
+
+.biz-marquee.is-scrolling {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.biz-marquee.is-scrolling .biz-track {
+    display: flex;
+    width: max-content;
+    animation: biz-scroll var(--biz-duration, 40s) linear infinite;
+}
+
+.biz-marquee.is-scrolling .biz-row {
+    flex-wrap: nowrap;
+    padding-right: 16px;   /* the same gap where the two copies meet */
+}
+
+/* Pointing at a logo, or pressing Pause, stops the row */
+.biz-marquee.is-scrolling:hover .biz-track,
+.biz-marquee.is-paused .biz-track {
+    animation-play-state: paused;
+}
+
+@keyframes biz-scroll {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.biz-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 8px 18px;
+    border: 1px solid rgba(19, 88, 151, 0.35);
+    border-radius: 999px;
+    background-color: var(--white);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+    cursor: pointer;
+}
+
+.biz-toggle:hover {
+    border-color: var(--blue);
+}
+
+.biz-toggle .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.biz-band-cta {
+    margin: 32px 0 0;
+}
+
+/* Community partners sit just under the Business Friends */
+.biz-band + .partners {
+    padding-top: 0;
+}
+
+.biz-band + .partners .wrap {
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+}
+
+/* Join page: a compact list under the business levels */
+.biz-proof-block {
+    margin-top: 32px;
+}
+
+.biz-proof-title {
+    margin: 0 0 12px;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+
+.biz-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.biz-proof .biz-card {
+    flex-direction: row;
+    gap: 12px;
+    padding: 8px 16px 8px 8px;
+    text-align: left;
+}
+
+.biz-proof .biz-logo {
+    flex: 0 0 auto;
+    width: 56px;
+    height: 40px;
+}
+
+.biz-proof .biz-name {
+    font-size: 0.95rem;
 }
 
 /* Bylaws: a document icon in a rounded square */
@@ -3273,12 +3497,10 @@ a.feature-item:hover .feature-more {
     color: var(--ink-soft);
 }
 
-/* ===== About: Business Friends beside the bylaws ===== */
+/* ===== About: Business Friends, then the bylaws ===== */
 .business-governance {
     display: grid;
-    grid-template-columns: 1.45fr 1fr;
     gap: 24px;
-    align-items: stretch;
 }
 
 .business-block,
@@ -3324,6 +3546,57 @@ a.feature-item:hover .feature-more {
 
 .governance-card :focus-visible {
     outline-color: var(--white);
+}
+
+/* On wider screens the bylaws card lies flat: icon, words, button */
+@media (min-width: 761px) {
+    .governance-card {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+            "icon title button"
+            "icon text button"
+            "icon note button";
+        column-gap: 28px;
+        align-items: center;
+    }
+
+    .governance-card .doc-icon {
+        grid-area: icon;
+        align-self: start;
+        margin-bottom: 0;
+    }
+
+    .governance-card h2 {
+        grid-area: title;
+        margin-bottom: 6px;
+    }
+
+    .governance-card > p:not(.governance-note) {
+        grid-area: text;
+        margin: 0;
+    }
+
+    .governance-card .button {
+        grid-area: button;
+    }
+
+    .governance-note {
+        grid-area: note;
+        margin: 0;
+        padding-top: 10px;
+    }
+}
+
+/* Partners and Patrons get a double-width spot with a bigger logo */
+@media (min-width: 360px) {
+    .biz-wall .biz-featured {
+        grid-column: span 2;
+    }
+
+    .biz-wall .biz-featured .biz-logo {
+        height: 110px;
+    }
 }
 
 /* ===== About: arriving from a "Learn more" link =====
@@ -3499,8 +3772,7 @@ code {
     .contact-layout,
     .newsletter-layout,
     .spotlight-inner,
-    .faq-layout,
-    .business-governance {
+    .faq-layout {
         grid-template-columns: 1fr;
     }
 
@@ -3945,18 +4217,38 @@ code {
         box-shadow: 1px 0 0 var(--line);
     }
 
-    /* Business Friends become a simple list: logo, then name */
-    .business-logos li {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        width: 100%;
-        padding: 12px 16px;
+    /* Business Friends: smaller tiles, two to a row */
+    .business-block {
+        padding: 24px 16px;
     }
 
-    .business-logos img {
-        width: 72px;
-        height: 48px;
+    .biz-wall {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 12px;
+    }
+
+    .biz-row {
+        gap: 12px;
+    }
+
+    .biz-row .biz {
+        flex-basis: 150px;
+    }
+
+    .biz-marquee.is-scrolling .biz-row {
+        padding-right: 12px;
+    }
+
+    .biz-card {
+        padding: 14px 10px 12px;
+    }
+
+    .biz-logo {
+        height: 60px;
+    }
+
+    .biz-name {
+        font-size: 0.95rem;
     }
 
     /* Style guide: each color chip sits beside its name */
