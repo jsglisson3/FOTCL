@@ -12,15 +12,21 @@ Check items off (`[x]`) as they're done.
 - [x] Contact page: address and hours side by side on tablets
 - [x] 404 page sends old fotcpl.org addresses to the new pages (works once the site is live)
 - [x] Home-screen icon for phones and a backup tab icon for older browsers
-- [x] Photos come in several sizes, so phones and laptops download only what they need (gallery photos are less than half the size on a laptop)
+- [x] Photos come in several sizes, so phones and laptops download only what they need
 - [x] Photo captions show on touchscreens, not only on mouse hover
 - [x] "Already a Friend? Renew online" link in the join banner
 - [x] Join page: compare the membership levels side by side
 - [x] Branded preview image for when the site is shared on Facebook or in a text (works once the site is live)
 - [x] Accessibility page, linked from every footer
+- [x] Photos, partner logos and the bylaws PDF moved off GoDaddy into `images/` and `files/`. Nothing loads from GoDaddy anymore
+- [x] Every photo has its width and height set (no jumping while pages load), plus 400, 800 and 1200-pixel versions
+- [x] Automatic checks on GitHub: every push re-runs the HTML, link, phone-layout and accessibility tests
+- [x] Style guide page for anyone editing the site (`styleguide.html`)
+- [x] Code tidy-up: unused styles removed, and a table of contents at the top of `style.css`
 
 ## Chunk A: Quick checks for Jeremy (no code)
 
+- [ ] After the next Commit and Sync, open the Actions tab on GitHub and look for the green check
 - [ ] Click a few newsletter links (Google Drive) and make sure they open
 - [ ] Try one test membership on Donorbox, or ask the treasurer to
 - [ ] Show the draft to your friend at the library and collect feedback
@@ -45,19 +51,18 @@ Check items off (`[x]`) as they're done.
 
 ## Chunk D: Launch prep (after the board approves)
 
-- [ ] Move the photos, partner logos and bylaws PDF off GoDaddy into `images/` and `files/`
-- [ ] Then: add width and height to each photo, and make smaller versions for phones
+The step-by-step version is the launch checklist in `README.md`.
+
 - [ ] Ask the logo's designer for an SVG version (sharper and smaller than the PNG)
-- [ ] Remove the draft banner and the "noindex" tag from every page
-- [ ] Remove the `preconnect` line for img1.wsimg.com once photos are local
+- [ ] Remove the draft banner, and the "noindex" tag from every page except `styleguide.html`
 - [ ] Connect fotcpl.org in GitHub Pages, then add it to Google Search Console with the sitemap
 - [ ] Test the old-address redirects on the live site (the list is in `404.html`)
 - [ ] On fotcpl.org, switch `404.html` to addresses starting with `/` (like `/style.css`), so the page keeps its styling for any mistyped address
 - [ ] Share a page on Facebook and check the preview image appears
+- [ ] Cancel only the GoDaddy website plan, last (keep the domain and email if they're with GoDaddy)
 
 ## Chunk E: Learning projects
 
-- [ ] Automatic checks on GitHub: re-run the HTML and accessibility tests on every commit
 - [ ] Library events that load onto the home page automatically and refresh every day
 - [ ] A flyer or poster with a QR code for the library's front desk, linking to the Join page
 
@@ -68,3 +73,4 @@ Check items off (`[x]`) as they're done.
 - [ ] Privacy-friendly visitor counts (only if the board wants them; update the Privacy page too)
 - [ ] A Terms page, if the board wants to keep the one from the old site
 - [ ] Spanish version of the key pages
+- [ ] WebP copies of the photos, which are usually smaller than JPEGs (speed is already 94 to 96, so this is a small extra)

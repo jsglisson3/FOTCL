@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Guide | Friends of The Colony Public Library</title>
+    <meta name="description" content="Colors, type, buttons and writing rules for people editing the Friends of The Colony Public Library website.">
+    <meta name="theme-color" content="#0d3d69">
+    <meta name="color-scheme" content="light">
+
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- The page's official address (search engines use this one) -->
+    <link rel="canonical" href="https://fotcpl.org/styleguide.html">
+    <meta property="og:url" content="https://fotcpl.org/styleguide.html">
+
+    <!-- Browser tab icon, a backup for older browsers, and the icon for a phone's home screen -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="Style Guide | Friends of The Colony Public Library">
+    <meta property="og:description" content="Colors, type, buttons and writing rules for people editing the Friends of The Colony Public Library website.">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Friends of The Colony Public Library">
+    <meta property="og:image" content="https://fotcpl.org/images/share-card.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Friends of The Colony Public Library logo with a smiling book. Supporting The Colony Public Library. Become a Friend. Memberships start at $15 a year.">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts are stored in the site itself: faster, and no outside service needed.
+         Literata for headings (made for reading books), Public Sans for text
+         (made for clear, accessible public-service websites). -->
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
+    <script>document.documentElement.classList.add("js");</script>
+    <script src="script.js" defer></script>
+</head>
+<body id="top">
+
+    <!-- Lets keyboard users jump past the menu -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <aside class="draft-banner" aria-label="Draft notice">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </aside>
+
+    <!-- ===== Info bar ===== -->
+    <nav class="topbar" aria-label="Contact and social links">
+        <div class="topbar-inner">
+            <a class="topbar-link" href="mailto:info@fotcpl.org">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>info@fotcpl.org</span>
+            </a>
+
+            <div class="topbar-social">
+                <a class="topbar-link library-link" href="https://www.thecolonytx.gov/404/Library">Visit The Colony Public Library</a>
+                <a class="topbar-link" href="https://www.facebook.com/FOTCPL/" aria-label="Facebook">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a class="topbar-link" href="https://www.instagram.com/fotcpl/" aria-label="Instagram">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== Site header ===== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html">
+                <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
+            </a>
+
+            <!-- Only show on phones and tablets -->
+            <a class="button header-join" href="join.html">Join</a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+                <span class="menu-bars" aria-hidden="true"></span>
+                Menu
+            </button>
+
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <a href="about.html">About</a>
+                <a href="newsletters.html">Newsletters</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+                <a class="button" href="join.html">Become a Friend</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>Style Guide</h1>
+                <p class="lead">A quick reference for anyone editing this website. Everything here uses the same styles as the real pages.</p>
+            </div>
+            <!-- The smiling book peeks up over the water -->
+            <img class="peek" src="images/book-friend.svg" alt="" width="320" height="260">
+            <div class="wave" aria-hidden="true">
+                <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+                    <path class="wave-back" d="M0 30 C 160 10 320 12 480 28 S 800 50 960 34 S 1280 8 1440 24 V64 H0 Z"/>
+                    <path class="wave-front" d="M0 42 C 200 24 380 28 560 40 S 900 58 1100 42 S 1340 28 1440 36 V64 H0 Z"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Keep this page out of search results: leave its noindex tag in place at launch. -->
+        <section class="band">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Colors</h2>
+                    <p>The three logo colors (green, blue and red) plus a few neutrals. They're defined once at the top of <code>style.css</code>.</p>
+                </div>
+                <ul class="swatches">
+                    <li class="swatch">
+                        <span class="swatch-color sw-blue" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Blue</span>
+                            <code>#135897</code> <code>var(--blue)</code>
+                            <span class="swatch-use">Links, icons and outlines</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-blue-dark" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Dark blue</span>
+                            <code>#0d3d69</code> <code>var(--blue-dark)</code>
+                            <span class="swatch-use">Headings and dark sections</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-blue-deep" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Deep blue</span>
+                            <code>#0a2f52</code> <code>var(--blue-deep)</code>
+                            <span class="swatch-use">Info bar and footer</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-red" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Red</span>
+                            <code>#b32b39</code> <code>var(--red)</code>
+                            <span class="swatch-use">Main buttons, like "Become a Friend"</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-red-dark" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Dark red</span>
+                            <code>#921f2c</code> <code>var(--red-dark)</code>
+                            <span class="swatch-use">Main buttons when you point at them</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-green" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Green</span>
+                            <code>#79a048</code> <code>var(--green)</code>
+                            <span class="swatch-use">Decoration only. For green text, use #4f7329</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-ink" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Ink</span>
+                            <code>#1f2933</code> <code>var(--ink)</code>
+                            <span class="swatch-use">Body text</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-ink-soft" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Soft ink</span>
+                            <code>#4a5866</code> <code>var(--ink-soft)</code>
+                            <span class="swatch-use">Secondary text</span>
+                        </span>
+                    </li>
+                    <li class="swatch">
+                        <span class="swatch-color sw-tint" aria-hidden="true"></span>
+                        <span class="swatch-text">
+                            <span class="swatch-name">Tint</span>
+                            <code>#eef3f8</code> <code>var(--tint)</code>
+                            <span class="swatch-use">Light section backgrounds</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="band band-tint">
+            <div class="wrap narrow">
+                <div class="section-head">
+                    <h2>Type</h2>
+                    <p>Literata for headings (it was made for reading books). Public Sans for everything else (it was made for clear public-service websites).</p>
+                </div>
+                <div class="type-samples">
+                    <p class="type-h1">Page title</p>
+                    <p class="type-label">Literata, 36 to 54 pixels. One per page.</p>
+                    <p class="type-h2">Section heading</p>
+                    <p class="type-label">Literata, 27 to 36 pixels</p>
+                    <p class="type-h3">Card heading</p>
+                    <p class="type-label">Literata, 19 pixels</p>
+                    <p class="lead">An introduction sentence, a little larger and softer than body text.</p>
+                    <p class="type-label">Public Sans, 20 pixels</p>
+                    <p>Body text for paragraphs and lists, sized for comfortable reading on any screen.</p>
+                    <p class="type-label">Public Sans, 17 pixels</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="band">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Buttons</h2>
+                    <p>One red button per section for the main action. Outlined buttons for everything else.</p>
+                </div>
+                <div class="button-row">
+                    <span class="button">Main action</span>
+                    <span class="button button-secondary">Other action</span>
+                    <span class="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Payment button</span>
+                </div>
+                <div class="sample-dark">
+                    <div class="button-row">
+                        <span class="button button-light">On dark blue</span>
+                        <span class="button button-outline-light">Other action on dark blue</span>
+                    </div>
+                </div>
+                <div class="section-head sample-gap">
+                    <h2>Icons</h2>
+                    <p>Line icons in a soft circle. The colors take turns: green, blue, red.</p>
+                </div>
+                <ul class="badge-row">
+                    <li><span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span></li>
+                    <li><span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span></li>
+                    <li><span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="band band-tint">
+            <div class="wrap narrow prose">
+                <h2>Writing</h2>
+                <ul>
+                    <li><strong>Headings, buttons and menu items</strong> use Title Case ("Become a Friend"). Sentences use normal capitalization.</li>
+                    <li>Always capitalize <strong>The</strong> in "The Colony".</li>
+                    <li>Times look like <strong>10 a.m. to 8 p.m.</strong> Prices look like <strong>$15 a year</strong>.</li>
+                    <li>Use plain, friendly words, and keep paragraphs short.</li>
+                    <li>Only publish facts the Friends have confirmed. Never make up numbers, quotes or reviews.</li>
+                    <li>Link text should say where it goes ("Read the bylaws"), never "click here".</li>
+                </ul>
+
+                <h2>Accessibility Checklist</h2>
+                <ul>
+                    <li>Every photo gets a short description (alt text) of what's in it.</li>
+                    <li>Headings go in order: one page title, then section headings, then card headings.</li>
+                    <li>Never use color alone to show something; add words or an icon too.</li>
+                    <li>New colors need strong contrast with their background. Check them with <a href="https://webaim.org/resources/contrastchecker/">WebAIM's contrast checker</a>.</li>
+                    <li>Try any new feature with only the keyboard (Tab, Enter and the arrow keys).</li>
+                    <li>GitHub checks every page automatically when you push. A red X on the Actions tab means something needs fixing.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Site footer ===== -->
+    <footer class="site-footer">
+        <!-- Night over Lake Lewisville: a nod to The Colony, the City by the Lake -->
+        <div class="lake-scene" aria-hidden="true">
+            <svg class="lake-shore" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" focusable="false">
+                <defs>
+                    <mask id="crescent">
+                        <circle cx="972" cy="30" r="11" fill="#ffffff"/>
+                        <circle cx="977" cy="26" r="9.5" fill="#000000"/>
+                    </mask>
+                </defs>
+                <g fill="rgba(255,255,255,0.5)"><circle cx="70" cy="30" r="1.2"/><circle cx="190" cy="14" r="1.6"/><circle cx="310" cy="40" r="1.2"/><circle cx="450" cy="18" r="1.4"/><circle cx="590" cy="36" r="1.2"/><circle cx="720" cy="12" r="1.6"/><circle cx="840" cy="34" r="1.2"/><circle cx="1100" cy="18" r="1.4"/><circle cx="1220" cy="40" r="1.2"/><circle cx="1320" cy="14" r="1.6"/><circle cx="1410" cy="32" r="1.2"/></g>
+                <circle cx="972" cy="30" r="11" fill="rgba(255,255,255,0.85)" mask="url(#crescent)"/>
+                <path d="M0 80 q16 -10 32 0 q17 -18 34 0 q12 -8 23 0 q20 -8 39 0 q16 -16 33 0 q12 -16 23 0 q14 -8 28 0 q12 -14 24 0 q18 -8 35 0 q14 -8 29 0 q20 -14 39 0 q12 -16 23 0 q12 -10 25 0 q21 -18 42 0 q20 -8 40 0 q20 -16 40 0 q17 -8 34 0 q14 -8 29 0 q20 -10 39 0 q16 -14 31 0 q13 -16 26 0 q12 -16 25 0 q16 -16 31 0 q22 -10 43 0 q12 -16 25 0 q20 -18 40 0 q14 -12 28 0 q12 -16 25 0 q22 -8 44 0 q20 -8 40 0 q20 -10 41 0 q18 -18 37 0 q20 -14 39 0 q23 -12 46 0 q18 -16 36 0 q18 -12 36 0 q16 -10 31 0 q14 -18 27 0 q23 -10 46 0 q12 -16 24 0 q16 -16 31 0 q18 -12 37 0 q22 -14 45 0 V104 H0 Z" fill="rgba(121,160,72,0.18)"/>
+                <path d="M0 84 q14 -14 27 0 q10 -6 20 0 q17 -12 34 0 q12 -10 23 0 q11 -12 22 0 q16 -6 31 0 q10 -14 20 0 q14 -10 28 0 q14 -14 29 0 q16 -14 33 0 q16 -6 32 0 q10 -10 20 0 q16 -6 33 0 q10 -10 19 0 q16 -10 32 0 q15 -10 30 0 q9 -12 18 0 q14 -8 29 0 q10 -12 21 0 q10 -8 19 0 q14 -8 27 0 q12 -12 25 0 q15 -12 30 0 q10 -8 20 0 q16 -12 32 0 q13 -8 26 0 q16 -14 31 0 q13 -12 26 0 q14 -12 29 0 q12 -8 25 0 q10 -8 20 0 q11 -8 22 0 q12 -6 25 0 q16 -14 33 0 q12 -10 23 0 q14 -6 27 0 q11 -12 22 0 q14 -14 29 0 q14 -8 28 0 q17 -14 34 0 q10 -12 19 0 q15 -12 30 0 q15 -12 30 0 q10 -12 21 0 q15 -6 30 0 q12 -6 24 0 q12 -12 24 0 q12 -6 23 0 q14 -14 28 0 q10 -6 19 0 q9 -14 18 0 q11 -14 22 0 q10 -10 21 0 q9 -6 18 0 q12 -14 24 0 q15 -8 30 0 q13 -10 26 0 V104 H0 Z" fill="rgba(121,160,72,0.32)"/>
+                <path d="M0 86 C 120 78 240 78 360 86 S 600 94 720 86 S 960 78 1080 86 S 1320 94 1440 86 V120 H0 Z" fill="rgba(19,88,151,0.65)"/>
+                <g transform="translate(560 32)">
+                    <g class="night-boat">
+                        <path d="M32 4 L40 7.5 L32 11 Z" fill="#e0707b"/>
+                        <path d="M32 6 V48" stroke="#ffffff" stroke-width="2"/>
+                        <path d="M34 10 L34 45 L55 45 Z" fill="rgba(255,255,255,0.92)"/>
+                        <path d="M30 15 L30 45 L13 45 Z" fill="#b9d58f"/>
+                        <path d="M7 48 H57 L50 57 H14 Z" fill="#ffffff"/>
+                    </g>
+                    <g stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 62 H24"/><path d="M38 62 H60"/><path d="M14 68 H48"/>
+                    </g>
+                </g>
+                <path d="M0 98 C 140 90 280 90 420 98 S 700 106 840 98 S 1120 90 1260 98 S 1400 102 1440 100 V120 H0 Z" fill="rgba(19,88,151,0.45)"/>
+                <path d="M0 108 C 160 102 320 102 480 108 S 800 114 960 108 S 1280 102 1440 108 V120 H0 Z" fill="#0a2f52"/>
+                <g stroke="rgba(255,255,255,0.24)" stroke-width="2" stroke-linecap="round">
+                    <path d="M954 94 H990"/><path d="M960 102 H984"/><path d="M966 110 H978"/>
+                </g>
+            </svg>
+        </div>
+
+        <div class="footer-inner">
+            <div class="footer-about">
+                <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
+                <p>A 501(c)(3) nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+            </div>
+
+            <nav class="footer-links" aria-label="Footer">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="about.html">About the Friends</a></li>
+                    <li><a href="join.html">Become a Friend</a></li>
+                    <li><a href="newsletters.html">Newsletters</a></li>
+                    <li><a href="gallery.html">Photos and Videos</a></li>
+                    <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h2>Get in Touch</h2>
+                <address>
+                    The Colony Public Library<br>
+                    6800 Main St.<br>
+                    The Colony, TX 75056
+                </address>
+                <ul>
+                    <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
+                    <li><a href="contact.html">All Contact Options</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-support">
+                <h2>Support the Friends</h2>
+                <ul>
+                    <li><a href="join.html">Join or Renew</a></li>
+                    <li><a href="https://www.krogercommunityrewards.com">Kroger Community Rewards</a> <span class="footer-note">(NE251)</span></li>
+                    <li><a href="https://www.northtexasgivingday.org/fotcpl">North Texas Giving Day</a></li>
+                </ul>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/FOTCPL/" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="https://www.instagram.com/fotcpl/" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-inner">
+                <p>&copy; 2026 Friends of The Colony Public Library</p>
+                <p class="footer-legal"><a href="privacy.html">Privacy</a> <a href="accessibility.html">Accessibility</a></p>
+                <p class="made-in">Made with <svg class="icon heart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="visually-hidden">love</span> in The Colony, the City by the Lake</p>
+            </div>
+        </div>
+
+        <!-- Appears in the corner after you scroll down a long page -->
+        <a class="back-to-top" href="#top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="visually-hidden">Back to top</span></a>
+    </footer>
+
+</body>
+</html>

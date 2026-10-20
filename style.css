@@ -1,5 +1,16 @@
 /* =========================================================
    Friends of The Colony Public Library
+   ---------------------------------------------------------
+   What's in this file, in order (use Ctrl+F to jump to a section):
+     Fonts, Design tokens (colors and sizes), Base styles, Buttons,
+     Draft notice, Info bar, Header, Navigation, Back to top,
+     Library hours, Bands (full-width sections), Home, Photos,
+     Join band, Inner page header, About page, Membership levels,
+     Join, Videos, Contact, 404 page, Footer, Extra touches
+     (waves, open-now notes, spotlight, copy buttons, tabs,
+     comparison tables, FAQ, video previews, newsletter drawing,
+     timeline), then the layouts for medium screens, tablets and
+     phones, printing, and reduced motion.
    ========================================================= */
 
 /* ===== Fonts (stored in the fonts folder) =====
@@ -1689,37 +1700,6 @@ a.feature-item:hover .feature-more {
     height: 30px;
 }
 
-/* ===== Lists ===== */
-
-/* Check marks instead of dots */
-.check-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.check-list li {
-    position: relative;
-    padding: 10px 0 10px 36px;
-    border-bottom: 1px solid var(--line);
-}
-
-.check-list li:last-child {
-    border-bottom: none;
-}
-
-.check-list li::before {
-    content: "";
-    position: absolute;
-    left: 6px;
-    top: 15px;
-    width: 7px;
-    height: 13px;
-    border: solid var(--green);
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-}
-
 /* Newsletter editions */
 .edition-list {
     list-style: none;
@@ -1762,11 +1742,6 @@ a.feature-item:hover .feature-more {
     background-color: var(--blue-dark);
     background-image: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
     color: rgba(255, 255, 255, 0.88);
-}
-
-.current-card .icon-badge {
-    color: var(--white);
-    background-color: rgba(255, 255, 255, 0.14);
 }
 
 .current-card .kicker {
@@ -1825,23 +1800,6 @@ a.feature-item:hover .feature-more {
 
 .edition-year .edition-list li:last-child {
     border-bottom: none;
-}
-
-.current-edition {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px 24px;
-    margin-bottom: 64px;
-    padding: 32px;
-    background-color: var(--tint);
-    border-radius: var(--radius);
-    border-left: 6px solid var(--blue);
-}
-
-.current-edition h2 {
-    margin: 0;
 }
 
 .kicker {
@@ -3091,10 +3049,6 @@ a.feature-item:hover .feature-more {
     text-align: center;
 }
 
-.current-card .button-row {
-    justify-content: center;
-}
-
 .paper-stack {
     position: absolute;
     top: -64px;
@@ -3438,6 +3392,102 @@ a.feature-item:hover .feature-more {
     white-space: nowrap;
 }
 
+/* ===== Style guide page (styleguide.html) ===== */
+.swatches {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.swatch {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.swatch-color {
+    display: block;
+    height: 72px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.swatch-text {
+    display: block;
+}
+
+.sw-blue { background-color: var(--blue); }
+.sw-blue-dark { background-color: var(--blue-dark); }
+.sw-blue-deep { background-color: var(--blue-deep); }
+.sw-red { background-color: var(--red); }
+.sw-red-dark { background-color: var(--red-dark); }
+.sw-green { background-color: var(--green); }
+.sw-ink { background-color: var(--ink); }
+.sw-ink-soft { background-color: var(--ink-soft); }
+.sw-tint { background-color: var(--tint); }
+
+.swatch-name {
+    display: block;
+    font-weight: 700;
+}
+
+.swatch-use {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
+
+code {
+    padding: 1px 6px;
+    border-radius: 4px;
+    background-color: var(--tint);
+    font-size: 0.85em;
+}
+
+.type-samples .type-h1,
+.type-samples .type-h2,
+.type-samples .type-h3 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--blue-dark);
+}
+
+.type-h1 { font-size: clamp(2.25rem, 4.5vw, 3.4rem); }
+.type-h2 { font-size: clamp(1.7rem, 3vw, 2.25rem); }
+.type-h3 { font-size: 1.2rem; }
+
+.type-label {
+    margin: 4px 0 28px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
+
+.sample-dark {
+    margin-top: 24px;
+    padding: 28px;
+    border-radius: var(--radius);
+    background-color: var(--blue-dark);
+}
+
+.sample-gap {
+    margin-top: 56px;
+}
+
+.badge-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 16px;
+}
+
 /* ===== Medium screens ===== */
 @media (max-width: 960px) {
     .feature-grid,
@@ -3498,7 +3548,6 @@ a.feature-item:hover .feature-more {
     }
 }
 
-/* ===== Phones ===== */
 /* ===== Phones and tablets: the menu folds into a "Menu" button ===== */
 @media (max-width: 900px) {
     /* Menu button: show the "Menu" button, hide the links until it's tapped.
@@ -3706,7 +3755,6 @@ a.feature-item:hover .feature-more {
         padding-bottom: 96px;   /* room for the wave and the peeking book */
     }
 
-    .current-edition,
     .panel {
         padding: 24px;
     }
@@ -3855,6 +3903,7 @@ a.feature-item:hover .feature-more {
     }
 
     .footer-inner {
+        gap: 32px;
         padding-top: 40px;
     }
 
@@ -3910,8 +3959,18 @@ a.feature-item:hover .feature-more {
         height: 48px;
     }
 
-    .footer-inner {
-        gap: 32px;
+    /* Style guide: each color chip sits beside its name */
+    .swatch {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px;
+    }
+
+    .swatch-color {
+        flex: 0 0 56px;
+        height: 56px;
+        margin-bottom: 0;
     }
 }
 
