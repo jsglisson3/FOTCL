@@ -191,7 +191,6 @@ if (statusNotes.length || hoursRows.length) {
         if (!text.endsWith(".")) text += ".";   // "8 p.m." already ends with one
         note.textContent = text.charAt(0).toUpperCase() + text.slice(1);
         note.classList.add(status.open ? "is-open" : "is-closed");
-        note.hidden = false;
     });
 
     // Highlight today's row in the hours list (Contact page)
@@ -215,7 +214,7 @@ document.querySelectorAll("[data-tabs]").forEach((tabs) => {
     const buttons = [...list.querySelectorAll(".tab")];
     const panels = buttons.map((button) => document.getElementById(button.dataset.panel));
 
-    // Label everything for screen readers, then show the tabs
+    // Label everything for screen readers
     list.setAttribute("role", "tablist");
     buttons.forEach((button, i) => {
         button.setAttribute("role", "tab");
@@ -224,7 +223,6 @@ document.querySelectorAll("[data-tabs]").forEach((tabs) => {
         panels[i].setAttribute("aria-labelledby", button.id);
         panels[i].tabIndex = 0;
     });
-    list.hidden = false;
     tabs.classList.add("tabs-ready");
 
     function select(index, moveFocus) {
@@ -238,7 +236,10 @@ document.querySelectorAll("[data-tabs]").forEach((tabs) => {
     }
 
     buttons.forEach((button, i) => {
-        button.addEventListener("click", () => select(i, false));
+        button.addEventListener("click", () => {
+            tabs.classList.add("tabs-switched");   // lets the new list fade in
+            select(i, false);
+        });
 
         // Arrow keys move between tabs, Home and End jump to the first and last
         button.addEventListener("keydown", (event) => {
@@ -250,27 +251,24 @@ document.querySelectorAll("[data-tabs]").forEach((tabs) => {
             };
             if (event.key in keys) {
                 event.preventDefault();
+                tabs.classList.add("tabs-switched");
                 select(keys[event.key], true);
             }
         });
     });
 
-    // A link to join.html#business opens the Business tab. (The browser
-    // scrolls to it by itself; style.css leaves room above for the tabs.)
+    // A link to join.html#business opens the Business tab and scrolls to it
+    // (style.css leaves room above it, so the tabs stay in view)
     function selectFromAddress() {
         const index = panels.findIndex((panel) => `#${panel.id}` === location.hash);
         if (index === -1) return false;
         select(index, false);
+        panels[index].scrollIntoView();
         return true;
     }
 
     if (!selectFromAddress()) select(0, false);
-
-    window.addEventListener("hashchange", () => {
-        if (selectFromAddress()) {
-            panels.find((panel) => !panel.hidden).scrollIntoView();
-        }
-    });
+    window.addEventListener("hashchange", selectFromAddress);
 });
 
 // ===== Videos (Gallery page) =====
