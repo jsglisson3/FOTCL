@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Friend | Friends of The Colony Public Library</title>
+
+    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
+    <script>document.documentElement.classList.add("js");</script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Lets keyboard users jump past the menu -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Info bar ===== -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a class="topbar-link" href="mailto:info@fotcpl.org">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>info@fotcpl.org</span>
+            </a>
+
+            <div class="topbar-social">
+                <a class="topbar-link library-link" href="https://www.thecolonytx.gov/404/Library">Visit The Colony Public Library</a>
+                <a class="topbar-link" href="https://www.facebook.com/FOTCPL/" aria-label="Facebook">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a class="topbar-link" href="https://www.instagram.com/fotcpl/" aria-label="Instagram">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Site header ===== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html">
+                <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
+            </a>
+
+            <!-- Only shows on phones -->
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+                <span class="menu-bars" aria-hidden="true"></span>
+                Menu
+            </button>
+
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <a href="about.html">About</a>
+                <a href="newsletters.html">Newsletters</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+                <a class="button" href="join.html" aria-current="page">Become a Friend</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="page-title">
+            <h1>Let's become Friends</h1>
+            <p class="lead">Joining the Friends of The Colony Public Library is a great way to support our community and our local library.</p>
+            <a class="button" href="https://donorbox.org/fotcpl">Join or renew online</a>
+        </section>
+
+        <section>
+            <h2>Every membership includes</h2>
+            <ul class="check-list">
+                <li>The quarterly newsletter</li>
+                <li>Invitations to private events</li>
+                <li>Access to forums</li>
+                <li>10% off FOTCPL books and sale items</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Individual memberships</h2>
+            <div class="card-grid three">
+                <div class="card tier">
+                    <h3>Friend</h3>
+                    <p class="price">$15 <small>a year</small></p>
+                </div>
+                <div class="card tier">
+                    <h3>Supporter</h3>
+                    <p class="price">$100 <small>a year, or $10 a month</small></p>
+                    <p>Plus 2 tickets to our annual event</p>
+                </div>
+                <div class="card tier">
+                    <h3>Patron</h3>
+                    <p class="price">$200 <small>a year, or $20 a month</small></p>
+                    <p>Plus your name in the quarterly newsletter and 4 annual event tickets</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="business">
+            <h2>Business memberships</h2>
+            <div class="card-grid">
+                <div class="card tier">
+                    <h3>Friend</h3>
+                    <p class="price">$50 <small>a year</small></p>
+                </div>
+                <div class="card tier">
+                    <h3>Supporter</h3>
+                    <p class="price">$500 <small>a year, or $45 a month</small></p>
+                    <p>Plus your name in the quarterly newsletter and 2 annual event tickets</p>
+                </div>
+                <div class="card tier">
+                    <h3>Patron</h3>
+                    <p class="price">$1,000 <small>a year, or $85 a month</small></p>
+                    <p>Plus newsletter name placement, a sponsorship table, logo placement and 4 annual event tickets</p>
+                </div>
+                <div class="card tier">
+                    <h3>Partner</h3>
+                    <p class="price">$2,000 <small>a year, or $200 a month</small></p>
+                    <p>Plus newsletter name placement, a sponsorship table, logo placement and 8 annual event tickets</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Good to know</h2>
+            <ul>
+                <li>Lifetime members still receive all the benefits of the Friend level.</li>
+                <li>You can also join by bringing a check to the library.</li>
+            </ul>
+            <a class="button" href="https://donorbox.org/fotcpl">Join or renew online</a>
+        </section>
+    </main>
+
+    <!-- ===== Site footer ===== -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
+                <p>A nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+            </div>
+
+            <nav class="footer-links" aria-label="Footer">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="about.html">About the Friends</a></li>
+                    <li><a href="join.html">Become a Friend</a></li>
+                    <li><a href="newsletters.html">Newsletters</a></li>
+                    <li><a href="gallery.html">Photos and videos</a></li>
+                    <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h2>Get in touch</h2>
+                <ul>
+                    <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
+                    <li><a href="https://www.facebook.com/FOTCPL/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/fotcpl/">Instagram</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-kroger">
+                <h2>Shop at Kroger?</h2>
+                <p>Add your Kroger Shopper Card to Community Rewards and choose the Friends, organization number <strong>NE251</strong>.</p>
+                <a href="https://www.krogercommunityrewards.com">Enroll in Kroger Community Rewards</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Friends of The Colony Public Library</p>
+        </div>
+    </footer>
+
+</body>
+</html>

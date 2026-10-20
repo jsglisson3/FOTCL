@@ -11,47 +11,114 @@
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
+    <script>document.documentElement.classList.add("js");</script>
+    <script src="script.js" defer></script>
 </head>
 <body>
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
 
+    <!-- ===== Info bar ===== -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a class="topbar-link" href="mailto:info@fotcpl.org">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>info@fotcpl.org</span>
+            </a>
+
+            <div class="topbar-social">
+                <a class="topbar-link library-link" href="https://www.thecolonytx.gov/404/Library">Visit The Colony Public Library</a>
+                <a class="topbar-link" href="https://www.facebook.com/FOTCPL/" aria-label="Facebook">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a class="topbar-link" href="https://www.instagram.com/fotcpl/" aria-label="Instagram">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- ===== Site header ===== -->
     <header class="site-header">
         <div class="header-inner">
-            <a class="brand" href="#home">
+            <a class="brand" href="index.html">
                 <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
             </a>
 
-            <nav class="main-nav" aria-label="Main navigation">
-                <a href="#about">About</a>
-                <a href="#support">Ways to help</a>
-                <a href="#contact">Contact</a>
-                <a class="button" href="#support">Become a Friend</a>
+            <!-- Only shows on phones -->
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+                <span class="menu-bars" aria-hidden="true"></span>
+                Menu
+            </button>
+
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <a href="about.html">About</a>
+                <a href="newsletters.html">Newsletters</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+                <a class="button" href="join.html">Become a Friend</a>
             </nav>
         </div>
     </header>
 
     <main id="main">
-        <section id="home">
-            <h1>Welcome</h1>
-            <p>Welcome to the new home of the Friends of The Colony Public Library!</p>
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Supporting The Colony Public Library</h1>
+                <p class="lead">We're a nonprofit that raises money and volunteers for our library, a cultural and educational asset for The Colony and Denton County.</p>
+                <div class="button-row">
+                    <a class="button" href="join.html">Become a Friend</a>
+                    <a class="button button-secondary" href="about.html">What we do</a>
+                </div>
+            </div>
+            <img class="hero-art" src="images/book-friend.svg" alt="" width="320" height="260">
         </section>
 
-        <section id="about">
-            <h2>About the Friends</h2>
-            <p>Learn how community support helps our public library.</p>
+        <section>
+            <h2>What we do</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Technology projects</h3>
+                    <p>3D printing and technology grants to support the library.</p>
+                </div>
+                <div class="card">
+                    <h3>Book donations and memoriams</h3>
+                    <p>Accepting and facilitating book donations and adoptions.</p>
+                </div>
+                <div class="card">
+                    <h3>Genealogy projects</h3>
+                    <p>Helping research the history of The Colony and its residents.</p>
+                </div>
+                <div class="card">
+                    <h3>Little Free Libraries</h3>
+                    <p>Working with littlefreelibrary.org to promote reading and community outreach.</p>
+                </div>
+            </div>
+            <p><a href="about.html">More about the Friends</a></p>
         </section>
 
-        <section id="support">
-            <h2>Support the Library</h2>
-            <p>Discover ways to get involved and support our mission.</p>
+        <section>
+            <h2>Become a Friend</h2>
+            <p>Memberships start at <strong>$15 a year</strong>. Every level includes:</p>
+            <ul class="check-list">
+                <li>The quarterly newsletter</li>
+                <li>Invitations to private events</li>
+                <li>Access to forums</li>
+                <li>10% off FOTCPL books and sale items</li>
+            </ul>
+            <a class="button" href="join.html">See membership levels</a>
         </section>
 
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>More information coming soon.</p>
+        <section>
+            <h2>Latest newsletter</h2>
+            <p>The <strong>Fall/Summer 2025</strong> edition is out.</p>
+            <div class="button-row">
+                <a class="button button-secondary" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the newsletter</a>
+                <a class="button button-secondary" href="newsletters.html">Past editions</a>
+            </div>
         </section>
     </main>
 
@@ -66,8 +133,10 @@
             <nav class="footer-links" aria-label="Footer">
                 <h2>Explore</h2>
                 <ul>
-                    <li><a href="#about">About the Friends</a></li>
-                    <li><a href="#support">Become a Friend</a></li>
+                    <li><a href="about.html">About the Friends</a></li>
+                    <li><a href="join.html">Become a Friend</a></li>
+                    <li><a href="newsletters.html">Newsletters</a></li>
+                    <li><a href="gallery.html">Photos and videos</a></li>
                     <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
                 </ul>
             </nav>

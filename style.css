@@ -60,6 +60,72 @@ a {
     top: 16px;
 }
 
+/* Red pill button, used in the menu and the welcome section */
+.button {
+    display: inline-block;
+    color: var(--white);
+    background-color: var(--red);
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+}
+
+.button:hover {
+    background-color: var(--red-dark);
+}
+
+/* Line-drawn icons (email, Facebook, Instagram) */
+.icon {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;   /* takes the color of the text around it */
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ===== Info bar ===== */
+.topbar {
+    background-color: var(--blue-dark);
+    color: var(--white);
+    font-size: 0.9rem;
+}
+
+.topbar-inner {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 6px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.topbar-social {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topbar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.topbar-link:hover {
+    text-decoration: underline;
+}
+
+.topbar :focus-visible {
+    outline-color: var(--white);
+}
+
 /* ===== Header ===== */
 .site-header {
     position: sticky;   /* stays at the top while you scroll */
@@ -67,6 +133,12 @@ a {
     z-index: 10;
     background-color: var(--white);
     box-shadow: 0 1px 0 rgba(19, 88, 151, 0.15);
+    transition: box-shadow 0.2s ease;
+}
+
+/* Added by script.js once you scroll down */
+.site-header.is-scrolled {
+    box-shadow: 0 6px 20px rgba(13, 61, 105, 0.12);
 }
 
 /* The three-color stripe, one color for each figure in the logo */
@@ -102,7 +174,6 @@ a {
 .main-nav {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: 8px 28px;
 }
 
@@ -118,18 +189,17 @@ a {
     border-bottom-color: var(--blue);
 }
 
-/* "Become a Friend" button. "a.button" is more specific than
-   ".main-nav a", so these rules win over the plain link rules. */
+/* "a.button" is more specific than ".main-nav a",
+   so the button keeps its own look inside the menu. */
 .main-nav a.button {
     color: var(--white);
-    background-color: var(--red);
     padding: 10px 22px;
-    border-radius: 999px;
     border-bottom: none;
 }
 
-.main-nav a.button:hover {
-    background-color: var(--red-dark);
+/* The "Menu" button is hidden on big screens */
+.menu-toggle {
+    display: none;
 }
 
 /* ===== Main content ===== */
@@ -147,12 +217,224 @@ main h2 {
 }
 
 main h1 {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
+    margin: 0 0 12px;
 }
 
 section {
     padding: 16px 0;
     scroll-margin-top: 110px;   /* so the sticky header doesn't cover headings */
+}
+
+/* Welcome section: words on the left, smiling book on the right */
+.hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 32px;
+    padding: 24px 0 40px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin: 0 0 24px;
+}
+
+.hero-art {
+    width: 100%;
+    max-width: 320px;
+    justify-self: center;
+}
+
+/* ===== Shared page pieces ===== */
+
+/* A line between sections */
+main > section + section {
+    border-top: 1px solid rgba(19, 88, 151, 0.12);
+    padding-top: 32px;
+}
+
+.lead {
+    font-size: 1.2rem;
+}
+
+.page-title {
+    padding-bottom: 24px;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Outlined button for less important actions */
+.button-secondary {
+    color: var(--blue-dark);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px var(--blue);
+}
+
+.button-secondary:hover {
+    background-color: rgba(19, 88, 151, 0.08);
+}
+
+/* Highlights the page you're on in the menu */
+.main-nav a[aria-current="page"] {
+    border-bottom-color: var(--blue);
+}
+
+.main-nav a.button[aria-current="page"] {
+    background-color: var(--red-dark);
+}
+
+/* Cards: the top border cycles green, blue, red like the logo */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);   /* two across: four cards make a neat 2 x 2 */
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.card-grid.three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+    padding: 20px;
+    background-color: var(--paper);
+    border-radius: 10px;
+    border-top: 4px solid var(--blue);
+}
+
+.card:nth-child(3n + 1) {
+    border-top-color: var(--green);
+}
+
+.card:nth-child(3n + 3) {
+    border-top-color: var(--red);
+}
+
+.card h3 {
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+    color: var(--blue-dark);
+}
+
+.card p {
+    margin: 0;
+}
+
+/* Membership prices */
+.tier .price {
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--blue-dark);
+}
+
+.tier .price small {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--ink);
+}
+
+/* Lists with check marks instead of dots */
+.check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+}
+
+.check-list li {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 8px;
+}
+
+.check-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.35em;
+    width: 7px;
+    height: 13px;
+    border: solid var(--green);
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* Current newsletter */
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.feature h3 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+/* Past newsletters */
+.edition-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.edition-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(19, 88, 151, 0.12);
+}
+
+.edition-list a {
+    font-weight: 700;
+}
+
+/* Hidden on screen, but read aloud by screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* Videos */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.video {
+    margin: 0;
+}
+
+.video iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;   /* keeps the video the right shape at any width */
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--paper);
+}
+
+.video figcaption {
+    margin-top: 10px;
+}
+
+.video figcaption strong {
+    display: block;
+    color: var(--blue-dark);
 }
 
 /* ===== Footer ===== */
@@ -234,22 +516,105 @@ section {
     }
 }
 
-@media (max-width: 640px) {
-    .site-header {
-        position: static;   /* a wrapped menu is too tall to stick on phones */
+@media (max-width: 760px) {
+    /* Phone menu: show the "Menu" button, hide the links until it's tapped.
+       Only when JavaScript is running, so the links never get stuck hidden. */
+    .js .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        font: inherit;
+        font-weight: 700;
+        color: var(--ink);
+        background: none;
+        border: 2px solid rgba(19, 88, 151, 0.25);
+        border-radius: 999px;
+        cursor: pointer;
     }
 
-    .header-inner {
-        justify-content: center;
+    /* Three bars drawn with CSS: the span is the middle bar,
+       ::before and ::after are the top and bottom bars */
+    .menu-bars,
+    .menu-bars::before,
+    .menu-bars::after {
+        display: block;
+        width: 18px;
+        height: 2px;
+        background-color: currentColor;
+        border-radius: 2px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .menu-bars {
+        position: relative;
+    }
+
+    .menu-bars::before,
+    .menu-bars::after {
+        content: "";
+        position: absolute;
+        left: 0;
+    }
+
+    .menu-bars::before {
+        top: -6px;
+    }
+
+    .menu-bars::after {
+        top: 6px;
+    }
+
+    /* When open, the bars turn into an X */
+    .menu-open .menu-bars {
+        background-color: transparent;
+    }
+
+    .menu-open .menu-bars::before {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    .menu-open .menu-bars::after {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .js .main-nav {
+        display: none;
+    }
+
+    .js .menu-open .main-nav {
+        display: flex;
+    }
+
+    .main-nav {
+        flex-basis: 100%;   /* drops below the logo and button */
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding-bottom: 8px;
+    }
+
+    .main-nav a {
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(19, 88, 151, 0.12);
+    }
+
+    .main-nav a:hover {
+        border-bottom-color: rgba(19, 88, 151, 0.12);
+        color: var(--blue);
+    }
+
+    .main-nav a.button {
+        margin-top: 12px;
+        text-align: center;
     }
 
     .brand img {
         height: 48px;
     }
 
-    .main-nav {
-        justify-content: center;
-        gap: 8px 20px;
+    .library-link {
+        display: none;   /* not enough room on phones */
     }
 
     main {
@@ -257,8 +622,41 @@ section {
         padding: 16px 20px;
     }
 
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 8px;
+    }
+
+    .hero-art {
+        grid-row: 1;   /* book above the words on phones */
+        max-width: 220px;
+    }
+
+    .hero .button-row {
+        justify-content: center;
+    }
+
+    main h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .card-grid,
+    .card-grid.three {
+        grid-template-columns: 1fr;
+    }
+
     .footer-inner {
         grid-template-columns: 1fr;
         gap: 32px;
+    }
+}
+
+/* Respect people who turn off animations in their device settings */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
     }
 }
