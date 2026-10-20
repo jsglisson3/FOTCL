@@ -93,12 +93,51 @@
                         <a class="button button-secondary" href="about.html">What we do</a>
                     </div>
                 </div>
-                <div class="hero-collage">
-                    <img class="collage-main" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:1000" alt="Children gathered on the floor for story time with a costumed character">
-                    <img class="collage-small" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0414.JPG/:/rs=w:600" alt="Children making crafts at a table in the library">
-                    <div class="collage-badge">
-                        <img src="images/book-friend.svg" alt="" title="Hi, I'm Booker!" width="320" height="260">
-                        <span class="name-ribbon" aria-hidden="true">Booker</span>
+                <!-- The Friends logo, brought to life: three friends above an open book -->
+                <div class="hero-friends">
+                    <img class="friend friend-left" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0414.JPG/:/rs=w:500" alt="A smiling boy at a craft table in the library">
+                    <img class="friend friend-center" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:700" alt="Children at story time with a costumed character">
+                    <img class="friend friend-right" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/library%20kids.jpg/:/rs=w:500" alt="A presenter beside a giant pink unicorn plush">
+
+                    <div class="hero-booker">
+                        <svg class="booker" viewBox="-18 62 364 222" role="img" aria-labelledby="booker-title">
+                            <title id="booker-title">A smiling open book waving hello, like the book in the Friends logo</title>
+                            <ellipse cx="160" cy="268" rx="130" ry="10" fill="#135897" opacity="0.14"/>
+                            <path d="M18 88 L18 226 C70 212 120 216 160 236 C200 216 250 212 302 226 L302 88 Z" fill="#b32b39"/>
+                            <g fill="none" stroke="#135897" stroke-width="6" stroke-linecap="round">
+                                <path d="M18 172 Q-2 186 0 206"/>
+                            </g>
+                            <circle cx="0" cy="212" r="9" fill="#ffffff" stroke="#135897" stroke-width="4"/>
+                            <!-- The waving arm, animated in style.css -->
+                            <g class="booker-wave">
+                                <path d="M302 150 Q322 132 322 108" fill="none" stroke="#135897" stroke-width="6" stroke-linecap="round"/>
+                                <circle cx="322" cy="100" r="10" fill="#ffffff" stroke="#135897" stroke-width="4"/>
+                                <g fill="none" stroke="#79a048" stroke-width="3" stroke-linecap="round">
+                                    <path d="M305 84 Q309 76 317 74"/>
+                                    <path d="M335 86 Q339 92 337 100"/>
+                                </g>
+                            </g>
+                            <path d="M160 90 C120 70 64 70 30 82 L30 214 C64 202 120 204 160 224 Z" fill="#ffffff" stroke="#135897" stroke-width="6" stroke-linejoin="round"/>
+                            <path d="M160 90 C200 70 256 70 290 82 L290 214 C256 202 200 204 160 224 Z" fill="#ffffff" stroke="#135897" stroke-width="6" stroke-linejoin="round"/>
+                            <g stroke="#135897" stroke-width="4" stroke-linecap="round" opacity="0.16">
+                                <path d="M54 102 C82 95 112 95 138 104"/>
+                                <path d="M182 104 C208 95 238 95 266 102"/>
+                                <path d="M54 192 C80 186 108 186 134 194"/>
+                                <path d="M186 194 C212 186 240 186 266 192"/>
+                            </g>
+                            <g fill="none" stroke="#1f2933" stroke-width="4" stroke-linecap="round">
+                                <path d="M94 122 Q108 113 122 121"/>
+                                <path d="M198 121 Q212 113 226 122"/>
+                            </g>
+                            <circle cx="108" cy="142" r="11" fill="#1f2933"/>
+                            <circle cx="112" cy="137" r="4" fill="#ffffff"/>
+                            <circle cx="212" cy="142" r="11" fill="#1f2933"/>
+                            <circle cx="216" cy="137" r="4" fill="#ffffff"/>
+                            <ellipse cx="86" cy="168" rx="13" ry="7" fill="#b32b39" opacity="0.28"/>
+                            <ellipse cx="234" cy="168" rx="13" ry="7" fill="#b32b39" opacity="0.28"/>
+                            <path d="M136 163 Q160 200 184 163 Q160 172 136 163 Z" fill="#1f2933" stroke="#1f2933" stroke-width="3" stroke-linejoin="round"/>
+                            <path d="M150 177 Q160 186 170 177 Q160 172 150 177 Z" fill="#e8777f"/>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -120,28 +159,31 @@
                     <p>Our members fund projects that go beyond the library's everyday budget.</p>
                 </div>
             <div class="feature-grid">
-                <div class="feature-item">
+                <a class="feature-item" href="about.html#technology">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12"/><path d="M21 7l-9 5-9-5"/></svg></span>
                     <h3>Technology projects</h3>
                     <p>3D printing and technology grants to support the library.</p>
-                </div>
-                <div class="feature-item">
+                    <span class="feature-more">Learn more<span class="visually-hidden"> about technology projects</span></span>
+                </a>
+                <a class="feature-item" href="about.html#book-donations">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
                     <h3>Book donations and memoriams</h3>
                     <p>Accepting and facilitating book donations and adoptions.</p>
-                </div>
-                <div class="feature-item">
+                    <span class="feature-more">Learn more<span class="visually-hidden"> about book donations and memoriams</span></span>
+                </a>
+                <a class="feature-item" href="about.html#genealogy">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M12 7.5V14M6 16.5V14h12v2.5"/></svg></span>
                     <h3>Genealogy projects</h3>
                     <p>Helping research the history of The Colony and its residents.</p>
-                </div>
-                <div class="feature-item">
+                    <span class="feature-more">Learn more<span class="visually-hidden"> about genealogy projects</span></span>
+                </a>
+                <a class="feature-item" href="about.html#little-free-libraries">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-6h6v6"/></svg></span>
                     <h3>Little Free Libraries</h3>
                     <p>Working with Little Free Library to promote reading and community outreach.</p>
-                </div>
+                    <span class="feature-more">Learn more<span class="visually-hidden"> about little free libraries</span></span>
+                </a>
             </div>
-                <p class="more-link"><a href="about.html">More about the Friends</a></p>
             </div>
         </section>
 
@@ -241,7 +283,7 @@
         <section class="band band-dark join-band">
             <div class="wrap join-band-inner">
                 <div class="join-band-mascot">
-                    <img src="images/book-friend.svg" alt="" title="Hi, I'm Booker!" width="320" height="260">
+                    <img src="images/book-friend.svg" alt="" width="320" height="260">
                 </div>
                 <div class="join-band-text">
                     <h2>Become a Friend for $15 a year</h2>
@@ -273,17 +315,27 @@
 
             <div class="footer-contact">
                 <h2>Get in touch</h2>
+                <address>
+                    The Colony Public Library<br>
+                    6800 Main St, The Colony, TX
+                </address>
                 <ul>
                     <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
-                    <li><a href="https://www.facebook.com/FOTCPL/">Facebook</a></li>
-                    <li><a href="https://www.instagram.com/fotcpl/">Instagram</a></li>
+                    <li><a href="contact.html">All contact options</a></li>
                 </ul>
             </div>
 
-            <div class="footer-kroger">
-                <h2>Shop at Kroger?</h2>
-                <p>Add your Kroger Shopper Card to Community Rewards and choose the Friends, organization number <strong>NE251</strong>.</p>
-                <a href="https://www.krogercommunityrewards.com">Enroll in Kroger Community Rewards</a>
+            <div class="footer-support">
+                <h2>Support the Friends</h2>
+                <ul>
+                    <li><a href="join.html">Join or renew</a></li>
+                    <li><a href="https://www.krogercommunityrewards.com">Kroger Rewards</a> <span class="footer-note">(NE251)</span></li>
+                    <li><a href="https://www.northtexasgivingday.org/fotcpl">North Texas Giving Day</a></li>
+                </ul>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com/FOTCPL/" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                    <a href="https://www.instagram.com/fotcpl/" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+                </div>
             </div>
         </div>
 
