@@ -2350,8 +2350,13 @@ a.feature-item:hover .feature-more {
     margin: 0;
 }
 
-.footer-privacy {
+.footer-legal {
+    display: flex;
+    gap: 20px;
     margin-right: auto;   /* pushes "Made with love" to the far right */
+}
+
+.footer-legal a {
     padding: 4px 0;
 }
 
@@ -2809,6 +2814,127 @@ a.feature-item:hover .feature-more {
         opacity: 0;
         transform: translateY(8px);
     }
+}
+
+/* ===== Join: compare the levels side by side ===== */
+.compare {
+    margin-top: 24px;
+}
+
+.compare summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background-color: var(--white);
+    box-shadow: inset 0 0 0 2px var(--blue);
+    color: var(--blue-dark);
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.15s ease;
+}
+
+.compare summary::-webkit-details-marker {
+    display: none;
+}
+
+.compare summary:hover {
+    background-color: rgba(19, 88, 151, 0.08);
+}
+
+/* A chevron that flips when the table opens */
+.compare summary::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border: solid currentColor;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.compare[open] summary::after {
+    margin-top: 4px;
+    transform: rotate(-135deg);
+}
+
+.compare-scroll {
+    margin-top: 16px;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--white);
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.compare-table th,
+.compare-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.compare-table thead th {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--blue-dark);
+    vertical-align: bottom;
+}
+
+.compare-price {
+    display: block;
+    white-space: nowrap;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.compare-table tbody th {
+    font-weight: 400;
+    text-align: left;
+    color: var(--ink);
+}
+
+.compare-table tbody th,
+.compare-table thead td {
+    background-color: var(--white);
+}
+
+.compare-table tbody tr:nth-child(even) > * {
+    background-color: #f6f9fc;
+}
+
+/* Only shown on phones, where the four-level table scrolls sideways */
+.compare-hint {
+    display: none;
+}
+
+.compare-table tbody tr:last-child > * {
+    border-bottom: 0;
+}
+
+.compare-yes {
+    width: 20px;
+    height: 20px;
+    color: #4f7329;
+    stroke-width: 3;
+    vertical-align: middle;
+}
+
+.compare-no {
+    color: #6b7785;
 }
 
 /* ===== Join: frequently asked questions ===== */
@@ -3650,7 +3776,8 @@ a.feature-item:hover .feature-more {
         text-align: center;
     }
 
-    .footer-privacy {
+    .footer-legal {
+        justify-content: center;
         margin-right: 0;
     }
 
@@ -3733,6 +3860,40 @@ a.feature-item:hover .feature-more {
 
     .tab {
         padding: 10px 18px;
+    }
+
+    .compare-table {
+        font-size: 0.85rem;
+    }
+
+    .compare-table th,
+    .compare-table td {
+        padding: 10px 8px;
+    }
+
+    .compare-table thead th {
+        font-size: 0.95rem;
+    }
+
+    .compare-table.wide {
+        min-width: 520px;
+    }
+
+    .compare-hint {
+        display: block;
+        margin: 12px 0 0;
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+    }
+
+    /* The benefit names stay in view while the table scrolls */
+    .compare-table.wide tbody th,
+    .compare-table.wide thead td {
+        position: sticky;
+        left: 0;
+        z-index: 1;
+        min-width: 120px;
+        box-shadow: 1px 0 0 var(--line);
     }
 
     /* Business Friends become a simple list: logo, then name */

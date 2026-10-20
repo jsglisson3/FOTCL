@@ -7,11 +7,12 @@ A volunteer-built redesign of fotcpl.org. Plain HTML, CSS and a little JavaScrip
 | File | What it is |
 | --- | --- |
 | `index.html` | Home page |
-| `about.html`, `join.html`, `newsletters.html`, `gallery.html`, `contact.html`, `privacy.html` | The other pages |
+| `about.html`, `join.html`, `newsletters.html`, `gallery.html`, `contact.html`, `privacy.html`, `accessibility.html` | The other pages |
 | `404.html` | "Page not found" page |
 | `style.css` | All the styling. Brand colors are at the top in `:root` |
 | `script.js` | Phone menu, header shadow, gallery viewer, video players, copy buttons, membership tabs and the library's "Open now" notes |
-| `images/` | Logo, smiling book drawing, tab icon |
+| `images/` | Logo, smiling book drawing, tab and home-screen icons, share image |
+| `ROADMAP.md` | Everything left to improve, in chunks |
 | `fonts/` | Public Sans (text) and Literata (headings), hosted with the site. Both are free under the SIL Open Font License (license files included) |
 | `sitemap.xml`, `robots.txt` | Help search engines find the pages once the site is live |
 

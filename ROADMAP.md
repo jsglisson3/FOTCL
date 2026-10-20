@@ -14,6 +14,10 @@ Check items off (`[x]`) as they're done.
 - [x] Home-screen icon for phones and a backup tab icon for older browsers
 - [x] Photos come in several sizes, so phones and laptops download only what they need (gallery photos are less than half the size on a laptop)
 - [x] Photo captions show on touchscreens, not only on mouse hover
+- [x] "Already a Friend? Renew online" link in the join banner
+- [x] Join page: compare the membership levels side by side
+- [x] Branded preview image for when the site is shared on Facebook or in a text (works once the site is live)
+- [x] Accessibility page, linked from every footer
 
 ## Chunk A: Quick checks for Jeremy (no code)
 
@@ -24,13 +28,22 @@ Check items off (`[x]`) as they're done.
 
 ## Chunk B: Before showing the board
 
-- [ ] Confirm the facts with the Friends: prices, emails, bylaws date, Privacy page wording
+- [ ] Confirm the facts with the Friends: prices, emails, bylaws date, Privacy and Accessibility page wording
 - [ ] Ask if the board wants a "Meet the Board" section (only with each person's permission)
 - [ ] Ask if they want a one-time donation option beside memberships (Donorbox can do both)
 - [ ] Check if Donorbox can open with the chosen level already filled in, so each "Join as a ..." link skips a step
 - [ ] Ask whether there's a newer newsletter than Fall/Summer 2025
 
-## Chunk C: Launch prep (after the board approves)
+## Chunk C: Content from the Friends (biggest boost to trust)
+
+- [ ] Real impact numbers ("your membership helped buy ...", books donated, money raised)
+- [ ] The annual event: its name and when it happens (Supporter and Patron levels include tickets)
+- [ ] The book sale: when and where (members get 10% off)
+- [ ] Real quotes from members, only with their permission
+- [ ] Volunteer opportunities: what people can actually help with
+- [ ] A printable membership form for people who join by check (the board decides what it asks for)
+
+## Chunk D: Launch prep (after the board approves)
 
 - [ ] Move the photos, partner logos and bylaws PDF off GoDaddy into `images/` and `files/`
 - [ ] Then: add width and height to each photo, and make smaller versions for phones
@@ -40,12 +53,18 @@ Check items off (`[x]`) as they're done.
 - [ ] Connect fotcpl.org in GitHub Pages, then add it to Google Search Console with the sitemap
 - [ ] Test the old-address redirects on the live site (the list is in `404.html`)
 - [ ] On fotcpl.org, switch `404.html` to addresses starting with `/` (like `/style.css`), so the page keeps its styling for any mistyped address
+- [ ] Share a page on Facebook and check the preview image appears
 
-## Chunk D: Nice-to-haves later
+## Chunk E: Learning projects
+
+- [ ] Automatic checks on GitHub: re-run the HTML and accessibility tests on every commit
+- [ ] Library events that load onto the home page automatically and refresh every day
+- [ ] A flyer or poster with a QR code for the library's front desk, linking to the Join page
+
+## Chunk F: Nice-to-haves later
 
 - [ ] A contact form (needs a free form service account, chosen by the board)
 - [ ] An email newsletter sign-up (for example Mailchimp, if the Friends use one)
 - [ ] Privacy-friendly visitor counts (only if the board wants them; update the Privacy page too)
 - [ ] A Terms page, if the board wants to keep the one from the old site
 - [ ] Spanish version of the key pages
-- [ ] A "Library events" list pulled from the library's calendar
