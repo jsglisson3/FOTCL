@@ -17,6 +17,10 @@
     <meta property="og:title" content="Newsletters | Friends of The Colony Public Library">
     <meta property="og:description" content="Read current and past newsletters from Friends of The Colony Public Library.">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Friends of The Colony Public Library">
+    <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:1200,h:630,cg:true">
+    <meta property="og:image:alt" content="Children at story time with a costumed character at The Colony Public Library">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://img1.wsimg.com">
@@ -36,12 +40,12 @@
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <!-- ===== Draft notice: remove once the board approves the site ===== -->
-    <div class="draft-banner">
+    <aside class="draft-banner" aria-label="Draft notice">
         <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
-    </div>
+    </aside>
 
     <!-- ===== Info bar ===== -->
-    <div class="topbar">
+    <nav class="topbar" aria-label="Contact and social links">
         <div class="topbar-inner">
             <a class="topbar-link" href="mailto:info@fotcpl.org">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -58,7 +62,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </nav>
 
     <!-- ===== Site header ===== -->
     <header class="site-header">
@@ -96,13 +100,13 @@
             <div class="wrap narrow">
                 <div class="current-edition">
                     <div>
-                        <p class="kicker">Current edition</p>
+                        <p class="kicker">Current Edition</p>
                         <h2>Fall/Summer 2025</h2>
                     </div>
-                    <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the newsletter</a>
+                    <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the Newsletter</a>
                 </div>
 
-                <h2>Past editions</h2>
+                <h2>Past Editions</h2>
                 <ul class="edition-list">
                     <li><span>Spring 2024</span> <a href="https://drive.google.com/file/d/1uhjwmdLAmmwCYO8faxuGfRiGjXI7W4Y5/view">Read<span class="visually-hidden"> Spring 2024</span></a></li>
                     <li><span>Fall 2023</span> <a href="https://drive.google.com/file/d/18XxtM5APs7OcWTberMKBUJpTNLZ5GoJG/view?usp=sharing">Read<span class="visually-hidden"> Fall 2023</span></a></li>
@@ -123,10 +127,15 @@
                     <img src="images/book-friend.svg" alt="" width="320" height="260">
                 </div>
                 <div class="join-band-text">
-                    <h2>Become a Friend for $15 a year</h2>
-                    <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
+                    <h2>Become a Friend for $15 a Year</h2>
+                    <p>That's about $1.25 a month to support your library.</p>
+                    <ul class="join-band-benefits">
+                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Quarterly newsletter</li>
+                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Private event invitations</li>
+                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 10% off FOTCPL books and sale items</li>
+                    </ul>
                 </div>
-                <a class="button button-light" href="join.html">See membership levels</a>
+                <a class="button button-light" href="join.html">Become a Friend</a>
             </div>
         </section>
     </main>
@@ -136,7 +145,7 @@
         <div class="footer-inner">
             <div class="footer-about">
                 <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
-                <p>A nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+                <p>A 501(c)(3) nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
             </div>
 
             <nav class="footer-links" aria-label="Footer">
@@ -145,27 +154,27 @@
                     <li><a href="about.html">About the Friends</a></li>
                     <li><a href="join.html">Become a Friend</a></li>
                     <li><a href="newsletters.html">Newsletters</a></li>
-                    <li><a href="gallery.html">Photos and videos</a></li>
+                    <li><a href="gallery.html">Photos and Videos</a></li>
                     <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
                 </ul>
             </nav>
 
             <div class="footer-contact">
-                <h2>Get in touch</h2>
+                <h2>Get in Touch</h2>
                 <address>
                     The Colony Public Library<br>
-                    6800 Main St, The Colony, TX
+                    6800 Main St., The Colony, TX
                 </address>
                 <ul>
                     <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
-                    <li><a href="contact.html">All contact options</a></li>
+                    <li><a href="contact.html">All Contact Options</a></li>
                 </ul>
             </div>
 
             <div class="footer-support">
                 <h2>Support the Friends</h2>
                 <ul>
-                    <li><a href="join.html">Join or renew</a></li>
+                    <li><a href="join.html">Join or Renew</a></li>
                     <li><a href="https://www.krogercommunityrewards.com">Kroger Rewards</a> <span class="footer-note">(NE251)</span></li>
                     <li><a href="https://www.northtexasgivingday.org/fotcpl">North Texas Giving Day</a></li>
                 </ul>

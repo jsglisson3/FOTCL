@@ -30,12 +30,17 @@ document.addEventListener("keydown", (event) => {
 
 // ===== Header shadow =====
 // Adds a soft shadow once you scroll down, so the header lifts off the page.
-function updateShadow() {
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
-}
+// An invisible marker sits at the very top of the page; when it scrolls out
+// of view, the shadow turns on. (Only the shadow changes, never the header's
+// size, so the page never jumps.)
+const topMarker = document.createElement("div");
+topMarker.setAttribute("aria-hidden", "true");
+topMarker.style.cssText = "position:absolute;top:0;left:0;width:1px;height:1px;";
+document.body.prepend(topMarker);
 
-window.addEventListener("scroll", updateShadow, { passive: true });
-updateShadow();
+new IntersectionObserver(([entry]) => {
+    header.classList.toggle("is-scrolled", !entry.isIntersecting);
+}).observe(topMarker);
 
 // ===== Larger photo view (Gallery page) =====
 // Clicking a photo opens it big in a pop-up. Use the arrows (or the

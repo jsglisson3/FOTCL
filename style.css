@@ -275,6 +275,23 @@ p {
     text-decoration: underline;
 }
 
+/* Icon-only links get a comfortable tap area */
+.topbar-social a[aria-label] {
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.topbar-social a[aria-label]:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.topbar-social {
+    gap: 8px;
+}
+
 .topbar :focus-visible {
     outline-color: var(--white);
 }
@@ -321,20 +338,6 @@ p {
 .brand img {
     height: 60px;
     width: auto;
-    transition: height 0.2s ease;
-}
-
-.header-inner {
-    transition: padding 0.2s ease;
-}
-
-.is-scrolled .brand img {
-    height: 50px;
-}
-
-.is-scrolled .header-inner {
-    padding-top: 8px;
-    padding-bottom: 8px;
 }
 
 /* ===== Navigation ===== */
@@ -417,6 +420,16 @@ p {
 .more-link {
     margin: 40px 0 0;
     font-weight: 700;
+}
+
+/* Standalone links get at least a 24px-tall tap area (WCAG 2.2) */
+.more-link a,
+.visit-card p > a,
+.help-item > a,
+.tier-link,
+.feature-more {
+    display: inline-block;
+    padding: 4px 0;
 }
 
 /* Two columns side by side */
@@ -962,7 +975,6 @@ a.feature-item:hover .feature-more {
 }
 
 .join-band-inner p {
-    margin: 0;
     max-width: 40em;
 }
 
@@ -972,6 +984,34 @@ a.feature-item:hover .feature-more {
 
 .join-band-text {
     flex: 1;
+}
+
+.join-band-text p {
+    margin: 0 0 12px;
+}
+
+.join-band-benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    color: var(--white);
+    font-weight: 700;
+}
+
+.join-band-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.join-band-benefits .icon {
+    width: 18px;
+    height: 18px;
+    color: #b9d58f;   /* light green that's easy to see on dark blue */
+    stroke-width: 3;
 }
 
 /* The book in a white circle beside the join message */
@@ -1294,6 +1334,8 @@ a.feature-item:hover .feature-more {
 }
 
 .tier {
+    display: flex;
+    flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     padding: 28px;
     background-color: var(--white);
@@ -1338,8 +1380,68 @@ a.feature-item:hover .feature-more {
     font-size: 0.95rem;
 }
 
-.tier p:last-child {
-    margin-bottom: 0;
+.tier-link {
+    margin-top: auto;   /* keeps every link lined up at the bottom of its card */
+    padding-top: 16px;
+    font-weight: 700;
+}
+
+/* ===== Join: benefits ===== */
+.benefit-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.benefit {
+    padding: 28px 24px;
+    border-radius: var(--radius);
+    background-color: var(--tint);
+    text-align: center;
+}
+
+.benefit .icon-badge {
+    width: 60px;
+    height: 60px;
+    background-color: var(--white);
+}
+
+.benefit .icon-badge .icon {
+    width: 26px;
+    height: 26px;
+}
+
+.benefit h3 {
+    font-size: 1.15rem;
+}
+
+.benefit p {
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+.button-row.centered {
+    justify-content: center;
+}
+
+.trust-line {
+    margin: 20px 0 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    text-align: center;
+}
+
+/* The heart sits inline with the words, so it stays put when the line wraps */
+.trust-line .icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: -2px;
+    color: var(--red);
 }
 
 /* ===== Join: how to join ===== */
@@ -1382,9 +1484,18 @@ a.feature-item:hover .feature-more {
     font-size: 1.15rem;
 }
 
-.steps-note {
-    margin: 24px 0 0;
-    color: var(--ink-soft);
+/* Official membership note, worded exactly as on fotcpl.org */
+.official-note {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-left: 4px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background-color: var(--white);
+}
+
+.official-note p {
+    margin: 0;
+    color: var(--ink);
 }
 
 /* ===== Videos ===== */
@@ -1648,7 +1759,13 @@ a.feature-item:hover .feature-more {
 }
 
 .site-footer li + li {
-    margin-top: 8px;
+    margin-top: 4px;
+}
+
+/* Bigger tap areas for footer links */
+.site-footer li a {
+    display: inline-block;
+    padding: 4px 0;
 }
 
 .site-footer a {
@@ -1704,7 +1821,8 @@ a.feature-item:hover .feature-more {
 /* ===== Medium screens ===== */
 @media (max-width: 960px) {
     .feature-grid,
-    .tier-grid {
+    .tier-grid,
+    .benefit-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -1738,8 +1856,9 @@ a.feature-item:hover .feature-more {
 }
 
 /* ===== Phones ===== */
-@media (max-width: 760px) {
-    /* Phone menu: show the "Menu" button, hide the links until it's tapped.
+/* ===== Phones and tablets: the menu folds into a "Menu" button ===== */
+@media (max-width: 900px) {
+    /* Menu button: show the "Menu" button, hide the links until it's tapped.
        Only when JavaScript is running, so the links never get stuck hidden. */
     .js .menu-toggle {
         display: inline-flex;
@@ -1832,6 +1951,9 @@ a.feature-item:hover .feature-more {
         margin-top: 12px;
         text-align: center;
     }
+}
+
+@media (max-width: 760px) {
 
     .brand img {
         height: 48px;
@@ -1866,7 +1988,8 @@ a.feature-item:hover .feature-more {
         margin-right: auto;
     }
 
-    .hero .button-row {
+    .hero .button-row,
+    .hero-note {
         justify-content: center;
     }
 
@@ -1916,6 +2039,7 @@ a.feature-item:hover .feature-more {
     .feature-grid,
     .tier-grid,
     .tier-grid.three,
+    .benefit-grid,
     .email-cards,
     .help-links,
     .footer-inner {

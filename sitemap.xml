@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- List of pages for search engines. Assumes the site will live at fotcpl.org. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://fotcpl.org/</loc></url>
+  <url><loc>https://fotcpl.org/about.html</loc></url>
+  <url><loc>https://fotcpl.org/join.html</loc></url>
+  <url><loc>https://fotcpl.org/newsletters.html</loc></url>
+  <url><loc>https://fotcpl.org/gallery.html</loc></url>
+  <url><loc>https://fotcpl.org/contact.html</loc></url>
+  <url><loc>https://fotcpl.org/privacy.html</loc></url>
+</urlset>

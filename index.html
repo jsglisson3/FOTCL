@@ -17,6 +17,10 @@
     <meta property="og:title" content="Friends of The Colony Public Library">
     <meta property="og:description" content="Friends of The Colony Public Library raises money and volunteers for The Colony Public Library in The Colony, Texas.">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Friends of The Colony Public Library">
+    <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:1200,h:630,cg:true">
+    <meta property="og:image:alt" content="Children at story time with a costumed character at The Colony Public Library">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://img1.wsimg.com">
@@ -29,6 +33,30 @@
     <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
     <script>document.documentElement.classList.add("js");</script>
     <script src="script.js" defer></script>
+    <!-- Tells search engines who the Friends are (shows in Google's info panels) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Friends of The Colony Public Library",
+        "alternateName": "FOTCPL",
+        "url": "https://fotcpl.org/",
+        "logo": "https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/Friends%20of%20The%20Colony%20Public%20Library%20Final%20Log.png",
+        "description": "A 501(c)(3) nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.",
+        "email": "info@fotcpl.org",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "6800 Main St",
+            "addressLocality": "The Colony",
+            "addressRegion": "TX",
+            "addressCountry": "US"
+        },
+        "sameAs": [
+            "https://www.facebook.com/FOTCPL/",
+            "https://www.instagram.com/fotcpl/"
+        ]
+    }
+    </script>
 </head>
 <body>
 
@@ -36,12 +64,12 @@
     <a class="skip-link" href="#main">Skip to main content</a>
 
     <!-- ===== Draft notice: remove once the board approves the site ===== -->
-    <div class="draft-banner">
+    <aside class="draft-banner" aria-label="Draft notice">
         <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
-    </div>
+    </aside>
 
     <!-- ===== Info bar ===== -->
-    <div class="topbar">
+    <nav class="topbar" aria-label="Contact and social links">
         <div class="topbar-inner">
             <a class="topbar-link" href="mailto:info@fotcpl.org">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -58,7 +86,7 @@
                 </a>
             </div>
         </div>
-    </div>
+    </nav>
 
     <!-- ===== Site header ===== -->
     <header class="site-header">
@@ -88,10 +116,10 @@
             <div class="wrap hero-inner">
                 <div class="hero-text">
                     <h1>Supporting The Colony Public Library</h1>
-                    <p class="lead">We're a nonprofit that raises money and volunteers for our library, a cultural and educational asset for The Colony and Denton County.</p>
+                    <p class="lead">We're a nonprofit dedicated to supporting, enhancing and promoting the work of our library through fundraising and volunteer activities.</p>
                     <div class="button-row">
                         <a class="button" href="join.html">Become a Friend</a>
-                        <a class="button button-secondary" href="about.html">What we do</a>
+                        <a class="button button-secondary" href="about.html">What We Do</a>
                     </div>
                     <p class="hero-note"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Memberships start at $15 a year.</p>
                 </div>
@@ -149,41 +177,41 @@
         <section class="events-strip">
             <div class="wrap events-strip-inner">
                 <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-                <p><strong>Happening this week at the library:</strong> story times, crafts, book clubs and more.</p>
-                <a class="button button-secondary" href="https://www.thecolonytx.gov/Calendar.aspx?CID=24">See the library's events calendar</a>
+                <p><strong>Happening this week at the library:</strong> story times, programs and more.</p>
+                <a class="button button-secondary" href="https://www.thecolonytx.gov/Calendar.aspx?CID=24">See the Library's Events Calendar</a>
             </div>
         </section>
 
         <section class="band">
             <div class="wrap">
                 <div class="section-head">
-                    <h2>What we do</h2>
-                    <p>Our members fund projects that go beyond the library's everyday budget.</p>
+                    <h2>What We Do</h2>
+                    <p>Here's how the Friends support The Colony Public Library.</p>
                 </div>
             <div class="feature-grid">
                 <a class="feature-item" href="about.html#technology">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12"/><path d="M21 7l-9 5-9-5"/></svg></span>
-                    <h3>Technology projects</h3>
+                    <h3>Technology Projects</h3>
                     <p>3D printing and technology grants to support the library.</p>
-                    <span class="feature-more">Learn more<span class="visually-hidden"> about technology projects</span></span>
+                    <span class="feature-more">Learn More<span class="visually-hidden"> about technology projects</span></span>
                 </a>
                 <a class="feature-item" href="about.html#book-donations">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-                    <h3>Book donations and memoriams</h3>
+                    <h3>Book Donations and Memoriams</h3>
                     <p>Accepting and facilitating book donations and adoptions.</p>
-                    <span class="feature-more">Learn more<span class="visually-hidden"> about book donations and memoriams</span></span>
+                    <span class="feature-more">Learn More<span class="visually-hidden"> about book donations and memoriams</span></span>
                 </a>
                 <a class="feature-item" href="about.html#genealogy">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M12 7.5V14M6 16.5V14h12v2.5"/></svg></span>
-                    <h3>Genealogy projects</h3>
+                    <h3>Genealogy Projects</h3>
                     <p>Helping research the history of The Colony and its residents.</p>
-                    <span class="feature-more">Learn more<span class="visually-hidden"> about genealogy projects</span></span>
+                    <span class="feature-more">Learn More<span class="visually-hidden"> about genealogy projects</span></span>
                 </a>
                 <a class="feature-item" href="about.html#little-free-libraries">
                     <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-6h6v6"/></svg></span>
                     <h3>Little Free Libraries</h3>
                     <p>Working with Little Free Library to promote reading and community outreach.</p>
-                    <span class="feature-more">Learn more<span class="visually-hidden"> about little free libraries</span></span>
+                    <span class="feature-more">Learn More<span class="visually-hidden"> about little free libraries</span></span>
                 </a>
             </div>
             </div>
@@ -192,8 +220,8 @@
         <section class="band band-tint">
             <div class="wrap">
                 <div class="section-head">
-                    <h2>Moments from the library</h2>
-                    <p>Story times, crafts, fishing lessons and Little Free Libraries, all with help from the Friends.</p>
+                    <h2>Moments from the Library</h2>
+                    <p>Story times, crafts, fishing lessons and Little Free Libraries at The Colony Public Library.</p>
                 </div>
                 <div class="mosaic">
                     <a class="photo photo-large" href="gallery.html" data-caption="Story time at the library">
@@ -217,18 +245,18 @@
                         <span class="photo-caption" aria-hidden="true">Technology at the library</span>
                     </a>
                 </div>
-                <p class="more-link"><a href="gallery.html">See all photos and videos</a></p>
+                <p class="more-link"><a href="gallery.html">See All Photos and Videos</a></p>
             </div>
         </section>
 
         <section class="band">
             <div class="wrap split">
                 <div>
-                    <h2>The Friends newsletter</h2>
-                    <p>News from the Friends and the library, every quarter. The <strong>Fall/Summer 2025</strong> edition is out now.</p>
+                    <h2>The Friends Newsletter</h2>
+                    <p>News from the Friends and the library every quarter. The <strong>Fall/Summer 2025</strong> edition is out now.</p>
                     <div class="button-row">
-                        <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the latest edition</a>
-                        <a class="button button-secondary" href="newsletters.html">All editions</a>
+                        <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the Latest Edition</a>
+                        <a class="button button-secondary" href="newsletters.html">All Editions</a>
                     </div>
                     <p class="follow">Follow the Friends:
                         <a href="https://www.facebook.com/FOTCPL/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
@@ -236,7 +264,7 @@
                     </p>
                 </div>
                 <div class="panel">
-                    <h3>Recent editions</h3>
+                    <h3>Recent Editions</h3>
                     <ul class="edition-list">
                     <li><span>Spring 2024</span> <a href="https://drive.google.com/file/d/1uhjwmdLAmmwCYO8faxuGfRiGjXI7W4Y5/view">Read<span class="visually-hidden"> Spring 2024</span></a></li>
                     <li><span>Fall 2023</span> <a href="https://drive.google.com/file/d/18XxtM5APs7OcWTberMKBUJpTNLZ5GoJG/view?usp=sharing">Read<span class="visually-hidden"> Fall 2023</span></a></li>
@@ -249,13 +277,13 @@
         <section class="band band-tint">
             <div class="wrap">
                 <div class="section-head">
-                    <h2>More ways to help</h2>
+                    <h2>More Ways to Help</h2>
                 </div>
                 <div class="help-grid">
                     <div class="help-item">
                         <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
                         <h3>Shop at Kroger</h3>
-                        <p>Link your Kroger Shopper Card to Community Rewards and choose organization number <strong>NE251</strong>.</p>
+                        <p>Link your Kroger Shopper Card in Kroger Community Rewards and enroll with organization number <strong>NE251</strong>.</p>
                         <a href="https://www.krogercommunityrewards.com">Enroll at Kroger</a>
                     </div>
                     <div class="help-item">
@@ -266,8 +294,8 @@
                     </div>
                     <div class="help-item">
                         <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
-                        <h3>Donate a book</h3>
-                        <p>Give a book to the library, or adopt one in memory or honor of someone special.</p>
+                        <h3>Donate a Book</h3>
+                        <p>Give a book to the library or adopt one in memory or honor of someone special.</p>
                         <a href="mailto:info@fotcpl.org">Email us about a donation</a>
                     </div>
                 </div>
@@ -276,7 +304,7 @@
 
         <section class="band partners">
             <div class="wrap">
-                <h2 class="partners-title">Community partners</h2>
+                <h2 class="partners-title">Community Partners</h2>
                 <ul class="logo-row partner-logos">
                     <li><a href="https://www.thecolonytx.gov/404/Library"><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20public%20library.png/:/rs=w:400" alt="The Colony Public Library" loading="lazy"></a></li>
                     <li><a href="https://www.thecolonychamber.org/"><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20chamber.png/:/rs=w:400" alt="The Colony Chamber of Commerce" loading="lazy"></a></li>
@@ -293,10 +321,15 @@
                     <img src="images/book-friend.svg" alt="" width="320" height="260">
                 </div>
                 <div class="join-band-text">
-                    <h2>Become a Friend for $15 a year</h2>
-                    <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
+                    <h2>Become a Friend for $15 a Year</h2>
+                    <p>That's about $1.25 a month to support your library.</p>
+                    <ul class="join-band-benefits">
+                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Quarterly newsletter</li>
+                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Private event invitations</li>
+                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 10% off FOTCPL books and sale items</li>
+                    </ul>
                 </div>
-                <a class="button button-light" href="join.html">See membership levels</a>
+                <a class="button button-light" href="join.html">Become a Friend</a>
             </div>
         </section>
     </main>
@@ -306,7 +339,7 @@
         <div class="footer-inner">
             <div class="footer-about">
                 <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
-                <p>A nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+                <p>A 501(c)(3) nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
             </div>
 
             <nav class="footer-links" aria-label="Footer">
@@ -315,27 +348,27 @@
                     <li><a href="about.html">About the Friends</a></li>
                     <li><a href="join.html">Become a Friend</a></li>
                     <li><a href="newsletters.html">Newsletters</a></li>
-                    <li><a href="gallery.html">Photos and videos</a></li>
+                    <li><a href="gallery.html">Photos and Videos</a></li>
                     <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
                 </ul>
             </nav>
 
             <div class="footer-contact">
-                <h2>Get in touch</h2>
+                <h2>Get in Touch</h2>
                 <address>
                     The Colony Public Library<br>
-                    6800 Main St, The Colony, TX
+                    6800 Main St., The Colony, TX
                 </address>
                 <ul>
                     <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
-                    <li><a href="contact.html">All contact options</a></li>
+                    <li><a href="contact.html">All Contact Options</a></li>
                 </ul>
             </div>
 
             <div class="footer-support">
                 <h2>Support the Friends</h2>
                 <ul>
-                    <li><a href="join.html">Join or renew</a></li>
+                    <li><a href="join.html">Join or Renew</a></li>
                     <li><a href="https://www.krogercommunityrewards.com">Kroger Rewards</a> <span class="footer-note">(NE251)</span></li>
                     <li><a href="https://www.northtexasgivingday.org/fotcpl">North Texas Giving Day</a></li>
                 </ul>

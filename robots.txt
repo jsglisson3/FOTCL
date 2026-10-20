@@ -1,0 +1,6 @@
+# Search engine rules. While the site is a draft, every page also carries
+# a "noindex" tag, so nothing gets listed until that tag is removed.
+User-agent: *
+Allow: /
+
+Sitemap: https://fotcpl.org/sitemap.xml
