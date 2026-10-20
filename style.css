@@ -4348,3 +4348,21 @@ code {
         transform: none;
     }
 }
+
+/* ===== Mission: key words get a highlighter stroke =====
+   A soft green band under the words, not a thin line, so they don't look like links */
+.mission-band .mission p {
+    color: var(--ink-soft);   /* the rest of the sentence is softer, so the key words stand out */
+}
+
+.mission .mark {
+    font-weight: inherit;   /* the heading font comes in one weight, so color does the work */
+    color: var(--blue-dark);
+    background-image: linear-gradient(rgba(121, 160, 72, 0.45), rgba(121, 160, 72, 0.45));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 100% 0.32em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0 0.08em;
+}
