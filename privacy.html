@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy | Friends of The Colony Public Library</title>
+    <meta name="description" content="How the Friends of The Colony Public Library website handles your information.">
+    <meta name="theme-color" content="#0d3d69">
+
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="Privacy | Friends of The Colony Public Library">
+    <meta property="og:description" content="How the Friends of The Colony Public Library website handles your information.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
+    <script>document.documentElement.classList.add("js");</script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Lets keyboard users jump past the menu -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <div class="draft-banner">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </div>
+
+    <!-- ===== Info bar ===== -->
+    <div class="topbar">
+        <div class="topbar-inner">
+            <a class="topbar-link" href="mailto:info@fotcpl.org">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span>info@fotcpl.org</span>
+            </a>
+
+            <div class="topbar-social">
+                <a class="topbar-link library-link" href="https://www.thecolonytx.gov/404/Library">Visit The Colony Public Library</a>
+                <a class="topbar-link" href="https://www.facebook.com/FOTCPL/" aria-label="Facebook">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a class="topbar-link" href="https://www.instagram.com/fotcpl/" aria-label="Instagram">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Site header ===== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="index.html">
+                <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
+            </a>
+
+            <!-- Only shows on phones -->
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+                <span class="menu-bars" aria-hidden="true"></span>
+                Menu
+            </button>
+
+            <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+                <a href="about.html">About</a>
+                <a href="newsletters.html">Newsletters</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+                <a class="button" href="join.html">Become a Friend</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>Privacy</h1>
+                <p class="lead">A plain-language summary of what this website does with your information.</p>
+            </div>
+            <img class="peek" src="images/book-friend.svg" alt="" title="Hi, I'm Booker!" width="320" height="260">
+        </section>
+
+        <section class="band">
+            <div class="wrap narrow prose">
+                <p class="note">Draft for the Friends board to review and approve.</p>
+
+                <h2>What we collect</h2>
+                <p>This website doesn't use cookies, analytics or advertising trackers, and it doesn't ask you to create an account. That's why you won't see a cookie banner.</p>
+
+                <h2>Services we link to or show</h2>
+                <ul>
+                    <li><strong>Membership and donations</strong> are handled by <a href="https://donorbox.org/">Donorbox</a> on its own website, under its own privacy policy.</li>
+                    <li><strong>Videos</strong> are shown from YouTube in privacy-enhanced mode, which doesn't store viewing information until you play a video.</li>
+                    <li><strong>Fonts</strong> are loaded from Google Fonts, which receives basic technical information such as your browser type.</li>
+                    <li><strong>Newsletters</strong> open in Google Drive.</li>
+                </ul>
+
+                <h2>Email</h2>
+                <p>If you email us, we use your message and address only to reply. We don't sell or share them.</p>
+
+                <h2>Questions</h2>
+                <p>Email <a href="mailto:info@fotcpl.org">info@fotcpl.org</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Site footer ===== -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
+                <p>A nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+            </div>
+
+            <nav class="footer-links" aria-label="Footer">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="about.html">About the Friends</a></li>
+                    <li><a href="join.html">Become a Friend</a></li>
+                    <li><a href="newsletters.html">Newsletters</a></li>
+                    <li><a href="gallery.html">Photos and videos</a></li>
+                    <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h2>Get in touch</h2>
+                <ul>
+                    <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
+                    <li><a href="https://www.facebook.com/FOTCPL/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/fotcpl/">Instagram</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-kroger">
+                <h2>Shop at Kroger?</h2>
+                <p>Add your Kroger Shopper Card to Community Rewards and choose the Friends, organization number <strong>NE251</strong>.</p>
+                <a href="https://www.krogercommunityrewards.com">Enroll in Kroger Community Rewards</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Friends of The Colony Public Library <span aria-hidden="true">&middot;</span> <a href="privacy.html">Privacy</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

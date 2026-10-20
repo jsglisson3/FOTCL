@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friends of The Colony Public Library</title>
     <meta name="description" content="Friends of The Colony Public Library raises money and volunteers for The Colony Public Library in The Colony, Texas.">
+    <meta name="theme-color" content="#0d3d69">
 
     <!-- Draft: asks search engines not to list this site until the board approves it -->
     <meta name="robots" content="noindex, nofollow">
@@ -92,9 +93,23 @@
                         <a class="button button-secondary" href="about.html">What we do</a>
                     </div>
                 </div>
-                <div class="hero-art">
-                    <img src="images/book-friend.svg" alt="" width="320" height="260">
+                <div class="hero-collage">
+                    <img class="collage-main" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:1000" alt="Children gathered on the floor for story time with a costumed character">
+                    <img class="collage-small" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0414.JPG/:/rs=w:600" alt="Children making crafts at a table in the library">
+                    <div class="collage-badge">
+                        <img src="images/book-friend.svg" alt="" title="Hi, I'm Booker!" width="320" height="260">
+                        <span class="name-ribbon" aria-hidden="true">Booker</span>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- ===== Happening now: points to the library's own calendar ===== -->
+        <section class="events-strip">
+            <div class="wrap events-strip-inner">
+                <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+                <p><strong>Happening this week at the library:</strong> story times, crafts, book clubs and more.</p>
+                <a class="button button-secondary" href="https://www.thecolonytx.gov/Calendar.aspx?CID=24">See the library's events calendar</a>
             </div>
         </section>
 
@@ -166,6 +181,10 @@
                         <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the latest edition</a>
                         <a class="button button-secondary" href="newsletters.html">All editions</a>
                     </div>
+                    <p class="follow">Follow the Friends:
+                        <a href="https://www.facebook.com/FOTCPL/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
+                        <a href="https://www.instagram.com/fotcpl/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram</a>
+                    </p>
                 </div>
                 <div class="panel">
                     <h3>Recent editions</h3>
@@ -206,10 +225,25 @@
             </div>
         </section>
 
+        <section class="band partners">
+            <div class="wrap">
+                <h2 class="partners-title">Community partners</h2>
+                <ul class="logo-row partner-logos">
+                    <li><a href="https://www.thecolonytx.gov/404/Library"><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20public%20library.png/:/rs=w:400" alt="The Colony Public Library" loading="lazy"></a></li>
+                    <li><a href="https://www.thecolonychamber.org/"><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20chamber.png/:/rs=w:400" alt="The Colony Chamber of Commerce" loading="lazy"></a></li>
+                    <li><a href="https://www.visitthecolonytx.com/"><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/visit%20the%20colony%20texas.png/:/rs=w:400" alt="Visit The Colony, Texas" loading="lazy"></a></li>
+                    <li><a href="https://www.northtexasgivingday.org/fotcpl"><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/NTX%20Giving%20Day%20Logo.png/:/rs=w:400" alt="North Texas Giving Day" loading="lazy"></a></li>
+                </ul>
+            </div>
+        </section>
+
         <!-- ===== Join band (repeats on most pages) ===== -->
         <section class="band band-dark join-band">
             <div class="wrap join-band-inner">
-                <div>
+                <div class="join-band-mascot">
+                    <img src="images/book-friend.svg" alt="" title="Hi, I'm Booker!" width="320" height="260">
+                </div>
+                <div class="join-band-text">
                     <h2>Become a Friend for $15 a year</h2>
                     <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
                 </div>
@@ -254,7 +288,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 Friends of The Colony Public Library</p>
+            <p>&copy; 2026 Friends of The Colony Public Library <span aria-hidden="true">&middot;</span> <a href="privacy.html">Privacy</a></p>
         </div>
     </footer>
 

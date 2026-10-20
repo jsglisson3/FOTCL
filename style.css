@@ -356,7 +356,7 @@ p {
    Each section stretches edge to edge. ".wrap" keeps the
    content inside at a comfortable width. */
 .band {
-    padding: clamp(56px, 8vw, 96px) 24px;
+    padding: clamp(52px, 7vw, 84px) 24px;
 }
 
 .band-tint {
@@ -431,28 +431,168 @@ p {
     margin-bottom: 32px;
 }
 
-/* The smiling book sits on a soft white circle */
-.hero-art {
+/* Photo collage: a large photo, a smaller one overlapping it,
+   and the smiling book in a white circle as a friendly badge */
+.hero-collage {
     position: relative;
-    justify-self: center;
-    width: min(100%, 420px);
+    padding: 0 0 56px 56px;
+}
+
+.collage-main {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.18);
+}
+
+.collage-small {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 46%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 6px solid var(--white);
+    box-shadow: 0 12px 30px rgba(13, 61, 105, 0.2);
+}
+
+.collage-badge {
+    position: absolute;
+    right: -20px;
+    bottom: 8px;
+    width: 34%;
     aspect-ratio: 1;
     display: grid;
     place-items: center;
-}
-
-.hero-art::before {
-    content: "";
-    position: absolute;
-    inset: 0;
     border-radius: 50%;
     background-color: var(--white);
-    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.1);
+    box-shadow: 0 12px 30px rgba(13, 61, 105, 0.2);
 }
 
-.hero-art img {
-    position: relative;   /* sits above the circle */
+.collage-badge img {
     width: 78%;
+}
+
+/* Booker's name on a red ribbon across the bottom of his badge */
+.name-ribbon {
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    padding: 5px 30px 6px;
+    background-color: var(--red);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+    white-space: nowrap;
+    /* notched ribbon ends */
+    clip-path: polygon(0 0, 100% 0, 91% 50%, 100% 100%, 0 100%, 9% 50%);
+}
+
+.booker-404 {
+    position: relative;
+    width: 240px;
+    margin: 0 auto 40px;
+}
+
+
+/* ===== Happening now strip ===== */
+.events-strip {
+    padding: 20px 24px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--line);
+}
+
+.events-strip-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px 20px;
+    flex-wrap: wrap;
+}
+
+.events-strip .icon-badge {
+    margin: 0;
+    width: 44px;
+    height: 44px;
+}
+
+.events-strip p {
+    flex: 1 1 320px;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Facebook / Instagram links under the newsletter */
+.follow {
+    margin: 28px 0 0;
+    color: var(--ink-soft);
+}
+
+.follow a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    font-weight: 700;
+}
+
+/* ===== Community partners ===== */
+.partners {
+    padding-top: 48px;
+    padding-bottom: 56px;
+    text-align: center;
+}
+
+.partners-title {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+}
+
+.partner-logos {
+    justify-content: center;
+}
+
+.partner-logos li {
+    width: 180px;
+    height: 100px;
+}
+
+.partner-logos a {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.partner-logos img {
+    max-height: 70px;
+    max-width: 100%;
+}
+
+/* ===== Plain text pages (Privacy) ===== */
+.prose h2 {
+    font-size: 1.5rem;
+    margin-top: 40px;
+}
+
+.prose li {
+    margin-bottom: 10px;
+}
+
+.note {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background-color: #fff3cd;
+    color: #5c4400;
+    font-weight: 700;
 }
 
 /* ===== What we do ===== */
@@ -628,8 +768,29 @@ p {
     flex-shrink: 0;
 }
 
+.join-band-text {
+    flex: 1;
+}
+
+/* The book in a white circle beside the join message */
+.join-band-mascot {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background-color: var(--white);
+}
+
+.join-band-mascot img {
+    width: 78%;
+}
+
 /* ===== Inner page header ===== */
 .page-header {
+    position: relative;
+    overflow: hidden;   /* hides the bottom of the peeking book */
     padding-top: clamp(48px, 6vw, 80px);
     padding-bottom: clamp(48px, 6vw, 80px);
     text-align: center;
@@ -643,19 +804,198 @@ p {
     margin-bottom: 0;
 }
 
-/* ===== About: mission quote ===== */
+/* The smiling book peeks up from the bottom corner */
+.peek {
+    position: absolute;
+    right: clamp(16px, 6vw, 96px);
+    bottom: -34px;
+    width: clamp(90px, 11vw, 150px);
+    transform: rotate(-8deg);
+    pointer-events: none;
+}
+
+/* ===== About page ===== */
+.about-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: center;
+}
+
+.about-hero-photo {
+    position: relative;
+}
+
+/* A green block offset behind the photo, like a mat in a frame */
+.about-hero-photo::before {
+    content: "";
+    position: absolute;
+    inset: 24px -24px -24px 24px;
+    border-radius: 20px;
+    background-color: rgba(121, 160, 72, 0.25);
+}
+
+.about-hero-photo img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.18);
+}
+
+/* Mission: a refined quote inside the opening section */
+.about-hero {
+    padding-top: clamp(40px, 5vw, 64px);
+    padding-bottom: clamp(48px, 6vw, 72px);
+}
+
+.about-hero h1 {
+    margin-bottom: 28px;
+}
+
 .mission {
+    margin: 0 0 32px;
+}
+
+.mission-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    color: #4f7329;   /* deep green */
+}
+
+/* A short line in the logo's three colors */
+.tri-rule {
+    width: 48px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(
+        to right,
+        var(--green) 0 33.33%,
+        var(--blue) 33.33% 66.66%,
+        var(--red) 66.66% 100%
+    );
+}
+
+.mission blockquote {
     margin: 0;
-    padding-left: 28px;
-    border-left: 4px solid var(--green);
 }
 
 .mission p {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
     line-height: 1.5;
     color: var(--blue-dark);
+}
+
+/* What we do: photo and words side by side, switching sides each row */
+.story-rows {
+    display: grid;
+    gap: clamp(40px, 6vw, 72px);
+}
+
+.story-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: center;
+}
+
+.story-row:nth-child(even) .story-photo {
+    order: 2;   /* photo on the right for every other row */
+}
+
+.story-photo {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: var(--radius);
+}
+
+.story-text h3 {
+    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+}
+
+.story-text p {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 28em;
+}
+
+/* Business Friends */
+.business-band {
+    text-align: center;
+}
+
+.business-band .lead {
+    margin-bottom: 32px;
+}
+
+.business-logos {
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.business-logos li {
+    width: 200px;
+    height: auto;
+    padding: 20px 16px 16px;
+    gap: 12px;
+    align-content: start;
+}
+
+.business-logos img {
+    height: 70px;
+    max-height: none;
+    object-fit: contain;
+}
+
+.business-logos span {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    line-height: 1.3;
+}
+
+/* Bylaws: a document card */
+.doc-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 24px;
+    padding: 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.doc-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.doc-card p {
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+.doc-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    color: var(--blue);
+    background-color: var(--tint);
+}
+
+.doc-icon .icon {
+    width: 30px;
+    height: 30px;
 }
 
 /* ===== Lists ===== */
@@ -824,21 +1164,175 @@ p {
 }
 
 /* ===== Contact ===== */
-.contact-grid {
+.contact-layout {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+}
+
+.contact-main h2 {
+    font-size: 1.6rem;
+}
+
+.contact-subhead {
+    margin-top: 48px;
+}
+
+/* Big clickable email cards */
+.email-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-.contact-card {
+.email-card {
+    display: flex;
+    flex-direction: column;
     padding: 28px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-.contact-card a {
+.email-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 10px 28px rgba(13, 61, 105, 0.1);
+    transform: translateY(-2px);
+}
+
+.email-card-title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--blue-dark);
+}
+
+.email-card-text {
+    margin: 4px 0 16px;
+    color: var(--ink-soft);
+}
+
+.email-card-address {
+    margin-top: auto;   /* sits at the bottom of the card */
     font-weight: 700;
-    overflow-wrap: anywhere;   /* long email addresses wrap instead of overflowing */
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+}
+
+/* Quick links */
+.help-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.help-links a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    background-color: var(--tint);
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+}
+
+.help-links a:hover {
+    background-color: #e1eaf3;
+}
+
+.help-links .icon-badge {
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--white);
+}
+
+.help-links .icon-badge .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Side column */
+.contact-side {
+    display: grid;
+    gap: 20px;
+}
+
+.visit-card {
+    padding: 28px;
+    border-radius: var(--radius);
+    background-color: var(--tint);
+}
+
+.visit-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.visit-card p {
+    color: var(--ink-soft);
+}
+
+.visit-card address {
+    margin-bottom: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.visit-card a {
+    font-weight: 700;
+}
+
+.visit-phone {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.social-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.social-buttons .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background-color: var(--white);
+}
+
+.library-note {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.library-note .icon-badge {
+    flex-shrink: 0;
+}
+
+.library-note h2 {
+    font-size: 1.5rem;
+}
+
+.library-note p {
+    margin: 0;
 }
 
 /* ===== 404 page ===== */
@@ -846,8 +1340,8 @@ p {
     text-align: center;
 }
 
-.not-found img {
-    margin: 0 auto 24px;
+.not-found .booker-404 img {
+    margin: 0 auto;
 }
 
 .not-found .button-row {
@@ -925,9 +1419,12 @@ p {
 /* ===== Medium screens ===== */
 @media (max-width: 960px) {
     .feature-grid,
-    .tier-grid,
-    .contact-grid {
+    .tier-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-layout {
+        grid-template-columns: 1fr;
     }
 
     .help-grid {
@@ -1061,9 +1558,18 @@ p {
         text-align: center;
     }
 
-    .hero-art {
-        grid-row: 1;   /* book above the words on phones */
-        width: min(70%, 260px);
+    .hero-collage {
+        grid-row: 1;   /* photos above the words on phones */
+        padding: 0 0 40px 32px;
+    }
+
+    .collage-badge {
+        right: -8px;
+    }
+
+
+    .hero-collage {
+        margin-bottom: 24px;
     }
 
     .hero .lead {
@@ -1084,6 +1590,33 @@ p {
         grid-template-columns: 1fr;
     }
 
+    .about-hero-inner,
+    .story-row {
+        grid-template-columns: 1fr;
+    }
+
+    .story-row:nth-child(even) .story-photo {
+        order: 0;   /* photo always on top on phones */
+    }
+
+    .about-hero-photo::before {
+        inset: 16px -12px -16px 12px;
+    }
+
+    .doc-card {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .join-band-mascot {
+        width: 72px;
+        height: 72px;
+    }
+
+    .page-header {
+        padding-bottom: 88px;   /* room for the peeking book */
+    }
+
     .current-edition,
     .panel {
         padding: 24px;
@@ -1094,7 +1627,8 @@ p {
     .feature-grid,
     .tier-grid,
     .tier-grid.three,
-    .contact-grid,
+    .email-cards,
+    .help-links,
     .footer-inner {
         grid-template-columns: 1fr;
     }
