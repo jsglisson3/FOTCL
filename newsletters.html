@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newsletters | Friends of The Colony Public Library</title>
+    <meta name="description" content="Read current and past newsletters from Friends of The Colony Public Library.">
 
-    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="Newsletters | Friends of The Colony Public Library">
+    <meta property="og:description" content="Read current and past newsletters from Friends of The Colony Public Library.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,6 +32,11 @@
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <div class="draft-banner">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </div>
 
     <!-- ===== Info bar ===== -->
     <div class="topbar">
@@ -65,31 +82,46 @@
     </header>
 
     <main id="main">
-        <section class="page-title">
-            <h1>Newsletters</h1>
-            <p class="lead">Members get every new edition in their inbox. <a href="join.html">Become a Friend</a> to subscribe.</p>
-        </section>
-
-        <section>
-            <h2>Current edition</h2>
-            <div class="card feature">
-                <h3>Fall/Summer 2025</h3>
-                <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the newsletter</a>
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>Newsletters</h1>
+                <p class="lead">Members get every new edition in their inbox. <a href="join.html">Become a Friend</a> to subscribe.</p>
             </div>
         </section>
 
-        <section>
-            <h2>Past editions</h2>
-            <ul class="edition-list">
-                <li><span>Spring 2024</span> <a href="https://drive.google.com/file/d/1uhjwmdLAmmwCYO8faxuGfRiGjXI7W4Y5/view">Read<span class="visually-hidden"> Spring 2024</span></a></li>
-                <li><span>Fall 2023</span> <a href="https://drive.google.com/file/d/18XxtM5APs7OcWTberMKBUJpTNLZ5GoJG/view?usp=sharing">Read<span class="visually-hidden"> Fall 2023</span></a></li>
-                <li><span>Spring 2023</span> <a href="https://drive.google.com/file/d/1TmdzlfOMfaEbMUuW-HgylOlRQO4sABIV/view?usp=drive_link">Read<span class="visually-hidden"> Spring 2023</span></a></li>
-                <li><span>Summer 2022</span> <a href="https://drive.google.com/file/d/1rfzRU-IPmn8ZqfqraFWhQElcy-02LP0U/view?usp=sharing">Read<span class="visually-hidden"> Summer 2022</span></a></li>
-                <li><span>Spring 2022</span> <a href="https://drive.google.com/file/d/1J8nC9-qL8prnP6fTX8mFjLNw3sT9G5K3/view?usp=sharing">Read<span class="visually-hidden"> Spring 2022</span></a></li>
-                <li><span>Winter-Spring 2021</span> <a href="https://drive.google.com/file/d/1aWPp2OJNeNpQlAMbBoxEOBsLI_xjPKqJ/view?usp=sharing">Read<span class="visually-hidden"> Winter-Spring 2021</span></a></li>
-                <li><span>Fall 2019</span> <a href="https://drive.google.com/file/d/1rXMyKXVJldXPos-5_a6nZWCOlBbL59nG/view?usp=sharing">Read<span class="visually-hidden"> Fall 2019</span></a></li>
-                <li><span>Spring 2019</span> <a href="https://drive.google.com/file/d/0B1Ki-IzsODEKR3o3YmlZZy14VjRTS1c0ZkU0ejhDOUJqSDVn/view?usp=sharing&amp;resourcekey=0-k-pxTK2mSWMbmW9Lw65jkA">Read<span class="visually-hidden"> Spring 2019</span></a></li>
-            </ul>
+        <section class="band">
+            <div class="wrap narrow">
+                <div class="current-edition">
+                    <div>
+                        <p class="kicker">Current edition</p>
+                        <h2>Fall/Summer 2025</h2>
+                    </div>
+                    <a class="button" href="https://drive.google.com/file/d/1GedCenfs_JHSmPewjI02k61Ts4Y0SgpV/view?usp=drive_link">Read the newsletter</a>
+                </div>
+
+                <h2>Past editions</h2>
+                <ul class="edition-list">
+                    <li><span>Spring 2024</span> <a href="https://drive.google.com/file/d/1uhjwmdLAmmwCYO8faxuGfRiGjXI7W4Y5/view">Read<span class="visually-hidden"> Spring 2024</span></a></li>
+                    <li><span>Fall 2023</span> <a href="https://drive.google.com/file/d/18XxtM5APs7OcWTberMKBUJpTNLZ5GoJG/view?usp=sharing">Read<span class="visually-hidden"> Fall 2023</span></a></li>
+                    <li><span>Spring 2023</span> <a href="https://drive.google.com/file/d/1TmdzlfOMfaEbMUuW-HgylOlRQO4sABIV/view?usp=drive_link">Read<span class="visually-hidden"> Spring 2023</span></a></li>
+                    <li><span>Summer 2022</span> <a href="https://drive.google.com/file/d/1rfzRU-IPmn8ZqfqraFWhQElcy-02LP0U/view?usp=sharing">Read<span class="visually-hidden"> Summer 2022</span></a></li>
+                    <li><span>Spring 2022</span> <a href="https://drive.google.com/file/d/1J8nC9-qL8prnP6fTX8mFjLNw3sT9G5K3/view?usp=sharing">Read<span class="visually-hidden"> Spring 2022</span></a></li>
+                    <li><span>Winter-Spring 2021</span> <a href="https://drive.google.com/file/d/1aWPp2OJNeNpQlAMbBoxEOBsLI_xjPKqJ/view?usp=sharing">Read<span class="visually-hidden"> Winter-Spring 2021</span></a></li>
+                    <li><span>Fall 2019</span> <a href="https://drive.google.com/file/d/1rXMyKXVJldXPos-5_a6nZWCOlBbL59nG/view?usp=sharing">Read<span class="visually-hidden"> Fall 2019</span></a></li>
+                    <li><span>Spring 2019</span> <a href="https://drive.google.com/file/d/0B1Ki-IzsODEKR3o3YmlZZy14VjRTS1c0ZkU0ejhDOUJqSDVn/view?usp=sharing&amp;resourcekey=0-k-pxTK2mSWMbmW9Lw65jkA">Read<span class="visually-hidden"> Spring 2019</span></a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ===== Join band (repeats on most pages) ===== -->
+        <section class="band band-dark join-band">
+            <div class="wrap join-band-inner">
+                <div>
+                    <h2>Become a Friend for $15 a year</h2>
+                    <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
+                </div>
+                <a class="button button-light" href="join.html">See membership levels</a>
+            </div>
         </section>
     </main>
 

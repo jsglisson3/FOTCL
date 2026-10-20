@@ -1,16 +1,29 @@
-/* ===== Brand colors (sampled from the logo) =====
-   Defined once here, then reused everywhere with var(--name).
-   Change a color here and it updates across the whole site. */
+/* =========================================================
+   Friends of The Colony Public Library
+   ========================================================= */
+
+/* ===== Design tokens =====
+   Colors are sampled from the logo. Defined once here, then reused
+   everywhere with var(--name). Change one and the whole site updates. */
 :root {
     --blue: #135897;
     --blue-dark: #0d3d69;
+    --blue-deep: #0a2f52;
     --red: #b32b39;
     --red-dark: #921f2c;
     --green: #79a048;
     --ink: #1f2933;
-    --paper: #f6f8fb;
+    --ink-soft: #4a5866;
+    --tint: #eef3f8;
+    --line: rgba(19, 88, 151, 0.14);
     --white: #ffffff;
-    --page-width: 1100px;
+
+    --font-heading: "Literata", Georgia, serif;
+    --font-body: "Atkinson Hyperlegible", Arial, sans-serif;
+
+    --page-width: 1160px;
+    --text-width: 760px;
+    --radius: 12px;
 }
 
 /* ===== Base styles ===== */
@@ -20,13 +33,17 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-padding-top: 100px;   /* so the sticky header doesn't cover headings you jump to */
+}
+
 body {
     margin: 0;
-    font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+    font-family: var(--font-body);
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--ink);
-    background-color: var(--paper);
+    background-color: var(--white);
 }
 
 img {
@@ -37,6 +54,48 @@ img {
 
 a {
     color: var(--blue);
+    text-underline-offset: 3px;
+}
+
+a:hover {
+    text-decoration-thickness: 2px;
+}
+
+/* Headings: a bookish serif, with sizes that grow on bigger screens.
+   clamp(smallest, preferred, largest) */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--blue-dark);
+    text-wrap: balance;   /* evens out line lengths in headings */
+}
+
+h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.4rem);
+    margin: 0 0 16px;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    margin: 0 0 16px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 0 0 8px;
+}
+
+p {
+    margin: 0 0 16px;
+}
+
+.lead {
+    font-size: 1.25rem;
+    color: var(--ink-soft);
 }
 
 /* A clear outline for anyone using the keyboard */
@@ -60,25 +119,66 @@ a {
     top: 16px;
 }
 
-/* Red pill button, used in the menu and the welcome section */
+/* Hidden on screen, but read aloud by screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ===== Buttons ===== */
 .button {
     display: inline-block;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
     color: var(--white);
     background-color: var(--red);
-    font-weight: 700;
-    text-decoration: none;
-    padding: 10px 22px;
-    border-radius: 999px;
+    transition: background-color 0.15s ease, transform 0.15s ease;
 }
 
 .button:hover {
     background-color: var(--red-dark);
+    transform: translateY(-1px);
 }
 
-/* Line-drawn icons (email, Facebook, Instagram) */
+/* Outlined button for less important actions */
+.button-secondary {
+    color: var(--blue-dark);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px var(--blue);
+}
+
+.button-secondary:hover {
+    background-color: rgba(19, 88, 151, 0.08);
+}
+
+/* White button for dark backgrounds */
+.button-light {
+    color: var(--blue-dark);
+    background-color: var(--white);
+}
+
+.button-light:hover {
+    background-color: var(--tint);
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Line-drawn icons */
 .icon {
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
     fill: none;
     stroke: currentColor;   /* takes the color of the text around it */
     stroke-width: 2;
@@ -86,9 +186,54 @@ a {
     stroke-linejoin: round;
 }
 
+/* An icon in a soft colored circle. Colors cycle with the logo's three. */
+.icon-badge {
+    display: inline-grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    color: var(--blue);
+    background-color: rgba(19, 88, 151, 0.1);
+}
+
+.icon-badge .icon {
+    width: 24px;
+    height: 24px;
+}
+
+:nth-child(3n + 1) > .icon-badge {
+    color: #5c8133;   /* a darker green, so the line stays easy to see */
+    background-color: rgba(121, 160, 72, 0.15);
+}
+
+:nth-child(3n + 3) > .icon-badge {
+    color: var(--red);
+    background-color: rgba(179, 43, 57, 0.1);
+}
+
+/* ===== Draft notice ===== */
+.draft-banner {
+    background-color: #fff3cd;
+    color: #5c4400;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 8px 24px;
+}
+
+.draft-banner p {
+    margin: 0;
+}
+
+.draft-banner a {
+    color: inherit;
+    font-weight: 700;
+}
+
 /* ===== Info bar ===== */
 .topbar {
-    background-color: var(--blue-dark);
+    background-color: var(--blue-deep);
     color: var(--white);
     font-size: 0.9rem;
 }
@@ -132,7 +277,7 @@ a {
     top: 0;
     z-index: 10;
     background-color: var(--white);
-    box-shadow: 0 1px 0 rgba(19, 88, 151, 0.15);
+    box-shadow: 0 1px 0 var(--line);
     transition: box-shadow 0.2s ease;
 }
 
@@ -185,7 +330,8 @@ a {
     border-bottom: 3px solid transparent;
 }
 
-.main-nav a:hover {
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
     border-bottom-color: var(--blue);
 }
 
@@ -197,167 +343,345 @@ a {
     border-bottom: none;
 }
 
+.main-nav a.button[aria-current="page"] {
+    background-color: var(--red-dark);
+}
+
 /* The "Menu" button is hidden on big screens */
 .menu-toggle {
     display: none;
 }
 
-/* ===== Main content ===== */
-main {
-    max-width: 900px;
-    margin: 40px auto;
-    padding: 24px 32px;
+/* ===== Bands: full-width sections =====
+   Each section stretches edge to edge. ".wrap" keeps the
+   content inside at a comfortable width. */
+.band {
+    padding: clamp(56px, 8vw, 96px) 24px;
+}
+
+.band-tint {
+    background-color: var(--tint);
+}
+
+.band-dark {
+    background-color: var(--blue-dark);
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.band-dark h2 {
+    color: var(--white);
+}
+
+.wrap {
+    max-width: var(--page-width);
+    margin: 0 auto;
+}
+
+.wrap.narrow {
+    max-width: var(--text-width);
+}
+
+/* Heading + short intro above a group of items */
+.section-head {
+    max-width: var(--text-width);
+    margin-bottom: 40px;
+}
+
+.section-head p {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+}
+
+.more-link {
+    margin: 40px 0 0;
+    font-weight: 700;
+}
+
+/* Two columns side by side */
+.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px, 6vw, 80px);
+    align-items: center;
+}
+
+/* A white box that sits on a tinted band */
+.panel {
+    padding: 28px 32px;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 2px rgba(13, 61, 105, 0.06), 0 8px 24px rgba(13, 61, 105, 0.06);
+}
+
+/* ===== Home: hero ===== */
+.hero {
+    padding-top: clamp(48px, 7vw, 88px);
+    padding-bottom: clamp(48px, 7vw, 88px);
+}
+
+.hero-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: center;
+}
+
+.hero .lead {
+    max-width: 34em;
+    margin-bottom: 32px;
+}
+
+/* The smiling book sits on a soft white circle */
+.hero-art {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 420px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+}
+
+.hero-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: var(--white);
+    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.1);
+}
+
+.hero-art img {
+    position: relative;   /* sits above the circle */
+    width: 78%;
+}
+
+/* ===== What we do ===== */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 32px;
+}
+
+.feature-item p {
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+/* ===== More ways to help ===== */
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.help-item {
+    padding: 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.help-item p {
+    color: var(--ink-soft);
+}
+
+.help-item a {
+    font-weight: 700;
+}
+
+.band-tint .help-item {
     background-color: var(--white);
 }
 
-main h1,
-main h2 {
-    color: var(--blue-dark);
-    line-height: 1.2;
+/* ===== Photos ===== */
+.photo {
+    display: block;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background-color: var(--tint);
 }
 
-main h1 {
-    font-size: 2.5rem;
-    margin: 0 0 12px;
-}
-
-section {
-    padding: 16px 0;
-    scroll-margin-top: 110px;   /* so the sticky header doesn't cover headings */
-}
-
-/* Welcome section: words on the left, smiling book on the right */
-.hero {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    align-items: center;
-    gap: 32px;
-    padding: 24px 0 40px;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin: 0 0 24px;
-}
-
-.hero-art {
+.photo img {
     width: 100%;
-    max-width: 320px;
-    justify-self: center;
+    height: 100%;
+    object-fit: cover;   /* fills the box without stretching */
+    transition: transform 0.4s ease;
 }
 
-/* ===== Shared page pieces ===== */
-
-/* A line between sections */
-main > section + section {
-    border-top: 1px solid rgba(19, 88, 151, 0.12);
-    padding-top: 32px;
+.photo:hover img {
+    transform: scale(1.04);
 }
 
-.lead {
-    font-size: 1.2rem;
-}
-
-.page-title {
-    padding-bottom: 24px;
-}
-
-.button-row {
-    display: flex;
-    flex-wrap: wrap;
+/* Home: one large photo with four smaller ones beside it */
+.mosaic {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 200px;
     gap: 12px;
 }
 
-/* Outlined button for less important actions */
-.button-secondary {
-    color: var(--blue-dark);
-    background-color: transparent;
-    box-shadow: inset 0 0 0 2px var(--blue);
+.photo-large {
+    grid-column: span 2;
+    grid-row: span 2;
 }
 
-.button-secondary:hover {
-    background-color: rgba(19, 88, 151, 0.08);
-}
-
-/* Highlights the page you're on in the menu */
-.main-nav a[aria-current="page"] {
-    border-bottom-color: var(--blue);
-}
-
-.main-nav a.button[aria-current="page"] {
-    background-color: var(--red-dark);
-}
-
-/* Cards: the top border cycles green, blue, red like the logo */
-.card-grid {
+/* Gallery page: an even grid of photos */
+.photo-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);   /* two across: four cards make a neat 2 x 2 */
-    gap: 16px;
-    margin: 20px 0;
-}
-
-.card-grid.three {
     grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
 }
 
-.card {
-    padding: 20px;
-    background-color: var(--paper);
-    border-radius: 10px;
-    border-top: 4px solid var(--blue);
+.photo-grid .photo {
+    aspect-ratio: 4 / 3;
 }
 
-.card:nth-child(3n + 1) {
-    border-top-color: var(--green);
+/* Larger photo view */
+.lightbox {
+    max-width: min(92vw, 1100px);
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background-color: var(--white);
+    overflow: visible;
 }
 
-.card:nth-child(3n + 3) {
-    border-top-color: var(--red);
+.lightbox::backdrop {
+    background-color: rgba(10, 47, 82, 0.85);
 }
 
-.card h3 {
-    margin: 0 0 6px;
-    font-size: 1.1rem;
-    color: var(--blue-dark);
+.lightbox img {
+    max-height: 78vh;
+    width: auto;
+    margin: 0 auto;
+    border-radius: var(--radius) var(--radius) 0 0;
 }
 
-.card p {
+.lightbox-caption {
     margin: 0;
-}
-
-/* Membership prices */
-.tier .price {
-    margin-bottom: 8px;
-    font-size: 1.6rem;
+    padding: 14px 20px;
     font-weight: 700;
     color: var(--blue-dark);
 }
 
-.tier .price small {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 400;
-    color: var(--ink);
+.lightbox-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    line-height: 1;
+    color: var(--blue-dark);
+    background-color: var(--white);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
-/* Lists with check marks instead of dots */
+/* Business Friends logos */
+.logo-row {
+    list-style: none;
+    margin: 24px 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-row li {
+    display: grid;
+    place-items: center;
+    width: 140px;
+    height: 90px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--white);
+}
+
+.logo-row img {
+    max-height: 64px;
+    width: auto;
+}
+
+/* ===== Join band ===== */
+.join-band {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.join-band-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.join-band-inner p {
+    margin: 0;
+    max-width: 40em;
+}
+
+.join-band .button {
+    flex-shrink: 0;
+}
+
+/* ===== Inner page header ===== */
+.page-header {
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(48px, 6vw, 80px);
+    text-align: center;
+}
+
+.page-header .lead {
+    margin: 0 auto 24px;
+}
+
+.page-header .lead:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== About: mission quote ===== */
+.mission {
+    margin: 0;
+    padding-left: 28px;
+    border-left: 4px solid var(--green);
+}
+
+.mission p {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+    line-height: 1.5;
+    color: var(--blue-dark);
+}
+
+/* ===== Lists ===== */
+
+/* Check marks instead of dots */
 .check-list {
     list-style: none;
     padding: 0;
-    margin: 0 0 24px;
+    margin: 0;
 }
 
 .check-list li {
     position: relative;
-    padding-left: 32px;
-    margin-bottom: 8px;
+    padding: 10px 0 10px 36px;
+    border-bottom: 1px solid var(--line);
+}
+
+.check-list li:last-child {
+    border-bottom: none;
 }
 
 .check-list li::before {
     content: "";
     position: absolute;
-    left: 4px;
-    top: 0.35em;
+    left: 6px;
+    top: 15px;
     width: 7px;
     height: 13px;
     border: solid var(--green);
@@ -365,21 +689,7 @@ main > section + section {
     transform: rotate(45deg);
 }
 
-/* Current newsletter */
-.feature {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.feature h3 {
-    margin: 0;
-    font-size: 1.4rem;
-}
-
-/* Past newsletters */
+/* Newsletter editions */
 .edition-list {
     list-style: none;
     padding: 0;
@@ -390,29 +700,100 @@ main > section + section {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(19, 88, 151, 0.12);
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.edition-list li:last-child {
+    border-bottom: none;
 }
 
 .edition-list a {
     font-weight: 700;
 }
 
-/* Hidden on screen, but read aloud by screen readers */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+.current-edition {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+    margin-bottom: 64px;
+    padding: 32px;
+    background-color: var(--tint);
+    border-radius: var(--radius);
+    border-left: 6px solid var(--blue);
 }
 
-/* Videos */
+.current-edition h2 {
+    margin: 0;
+}
+
+.kicker {
+    margin: 0 0 4px;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+
+/* ===== Membership levels ===== */
+.tier-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.tier-grid.three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tier {
+    padding: 28px;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--blue);
+}
+
+.tier:nth-child(3n + 1) {
+    border-top-color: var(--green);
+}
+
+.tier:nth-child(3n + 3) {
+    border-top-color: var(--red);
+}
+
+.tier h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-transform: none;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+}
+
+.tier .price {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--blue-dark);
+}
+
+.tier .per {
+    margin-bottom: 16px;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+
+.tier p:last-child {
+    margin-bottom: 0;
+}
+
+/* ===== Videos ===== */
 .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 32px;
 }
 
 .video {
@@ -424,30 +805,65 @@ main > section + section {
     width: 100%;
     aspect-ratio: 16 / 9;   /* keeps the video the right shape at any width */
     border: 0;
-    border-radius: 10px;
-    background-color: var(--paper);
+    border-radius: var(--radius);
+    background-color: var(--tint);
 }
 
 .video figcaption {
-    margin-top: 10px;
+    margin-top: 14px;
+    color: var(--ink-soft);
 }
 
 .video figcaption strong {
     display: block;
+    margin-bottom: 2px;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
     color: var(--blue-dark);
+}
+
+/* ===== Contact ===== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.contact-card {
+    padding: 28px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.contact-card a {
+    font-weight: 700;
+    overflow-wrap: anywhere;   /* long email addresses wrap instead of overflowing */
+}
+
+/* ===== 404 page ===== */
+.not-found {
+    text-align: center;
+}
+
+.not-found img {
+    margin: 0 auto 24px;
+}
+
+.not-found .button-row {
+    justify-content: center;
 }
 
 /* ===== Footer ===== */
 .site-footer {
-    margin-top: 64px;
-    background-color: var(--blue-dark);
+    background-color: var(--blue-deep);
     color: rgba(255, 255, 255, 0.85);
 }
 
 .footer-inner {
     max-width: var(--page-width);
     margin: 0 auto;
-    padding: 56px 24px 40px;
+    padding: 64px 24px 48px;
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
     gap: 40px;
@@ -462,7 +878,9 @@ main > section + section {
 
 .site-footer h2 {
     margin: 0 0 12px;
+    font-family: var(--font-body);
     font-size: 1rem;
+    font-weight: 700;
     color: var(--white);
 }
 
@@ -482,11 +900,6 @@ main > section + section {
 
 .site-footer a {
     color: var(--white);
-    text-underline-offset: 3px;
-}
-
-.site-footer a:hover {
-    text-decoration-thickness: 2px;
 }
 
 .site-footer :focus-visible {
@@ -509,13 +922,33 @@ main > section + section {
     margin: 0;
 }
 
-/* ===== Smaller screens ===== */
-@media (max-width: 860px) {
+/* ===== Medium screens ===== */
+@media (max-width: 960px) {
+    .feature-grid,
+    .tier-grid,
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .help-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mosaic {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 160px;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .footer-inner {
         grid-template-columns: 1fr 1fr;
     }
 }
 
+/* ===== Phones ===== */
 @media (max-width: 760px) {
     /* Phone menu: show the "Menu" button, hide the links until it's tapped.
        Only when JavaScript is running, so the links never get stuck hidden. */
@@ -596,11 +1029,12 @@ main > section + section {
 
     .main-nav a {
         padding: 12px 0;
-        border-bottom: 1px solid rgba(19, 88, 151, 0.12);
+        border-bottom: 1px solid var(--line);
     }
 
-    .main-nav a:hover {
-        border-bottom-color: rgba(19, 88, 151, 0.12);
+    .main-nav a:hover,
+    .main-nav a[aria-current="page"] {
+        border-bottom-color: var(--line);
         color: var(--blue);
     }
 
@@ -617,39 +1051,55 @@ main > section + section {
         display: none;   /* not enough room on phones */
     }
 
-    main {
-        margin: 24px 0;
-        padding: 16px 20px;
+    .hero-inner,
+    .split {
+        grid-template-columns: 1fr;
     }
 
-    .hero {
-        grid-template-columns: 1fr;
+    .hero-inner {
+        gap: 24px;
         text-align: center;
-        gap: 8px;
     }
 
     .hero-art {
         grid-row: 1;   /* book above the words on phones */
-        max-width: 220px;
+        width: min(70%, 260px);
+    }
+
+    .hero .lead {
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero .button-row {
         justify-content: center;
     }
 
-    main h1 {
-        font-size: 2rem;
+    .join-band-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .current-edition,
+    .panel {
+        padding: 24px;
     }
 }
 
-@media (max-width: 640px) {
-    .card-grid,
-    .card-grid.three {
+@media (max-width: 560px) {
+    .feature-grid,
+    .tier-grid,
+    .tier-grid.three,
+    .contact-grid,
+    .footer-inner {
         grid-template-columns: 1fr;
     }
 
     .footer-inner {
-        grid-template-columns: 1fr;
         gap: 32px;
     }
 }
@@ -658,5 +1108,10 @@ main > section + section {
 @media (prefers-reduced-motion: reduce) {
     * {
         transition: none !important;
+    }
+
+    .button:hover,
+    .photo:hover img {
+        transform: none;
     }
 }

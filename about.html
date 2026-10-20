@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About the Friends | Friends of The Colony Public Library</title>
+    <meta name="description" content="The mission and work of Friends of The Colony Public Library.">
 
-    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="About the Friends | Friends of The Colony Public Library">
+    <meta property="og:description" content="The mission and work of Friends of The Colony Public Library.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,6 +32,11 @@
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <div class="draft-banner">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </div>
 
     <!-- ===== Info bar ===== -->
     <div class="topbar">
@@ -65,42 +82,80 @@
     </header>
 
     <main id="main">
-        <section class="page-title">
-            <h1>About the Friends</h1>
-            <p class="lead">The mission of FOTCPL is to advocate for and support The Colony Public Library as a cultural and educational asset to the residents of The Colony and Denton County, through fundraising and by promoting volunteer activities.</p>
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>About the Friends</h1>
+                <p class="lead">A nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+            </div>
         </section>
 
-        <section>
-            <h2>What we do</h2>
-            <div class="card-grid">
-                <div class="card">
+        <section class="band">
+            <div class="wrap narrow">
+                <blockquote class="mission">
+                    <p>The mission of FOTCPL is to advocate for and support The Colony Public Library as a cultural and educational asset to the residents of The Colony and Denton County, through fundraising and by promoting volunteer activities.</p>
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="band band-tint">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>What we do</h2>
+                </div>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12"/><path d="M21 7l-9 5-9-5"/></svg></span>
                     <h3>Technology projects</h3>
                     <p>3D printing and technology grants to support the library.</p>
                 </div>
-                <div class="card">
+                <div class="feature-item">
+                    <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
                     <h3>Book donations and memoriams</h3>
                     <p>Accepting and facilitating book donations and adoptions.</p>
                 </div>
-                <div class="card">
+                <div class="feature-item">
+                    <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M12 7.5V14M6 16.5V14h12v2.5"/></svg></span>
                     <h3>Genealogy projects</h3>
                     <p>Helping research the history of The Colony and its residents.</p>
                 </div>
-                <div class="card">
+                <div class="feature-item">
+                    <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-6h6v6"/></svg></span>
                     <h3>Little Free Libraries</h3>
-                    <p>Working with <a href="https://littlefreelibrary.org">littlefreelibrary.org</a> to promote reading and community outreach.</p>
+                    <p>Working with Little Free Library to promote reading and community outreach.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <section class="band">
+            <div class="wrap split">
+                <div>
+                    <h2>Business Friends</h2>
+                    <p>Thank you to the local businesses that support the Friends.</p>
+                    <ul class="logo-row">
+                        <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/grandscape-logo.png/:/rs=w:400" alt="Grandscape" loading="lazy"></li>
+                        <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/lakeside.jpg" alt="Lakeside Community Theatre" loading="lazy"></li>
+                        <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20chamber.png/:/rs=w:400" alt="The Colony Chamber of Commerce" loading="lazy"></li>
+                    </ul>
+                    <p><a href="join.html#business">Become a Business Friend</a></p>
+                </div>
+                <div>
+                    <h2>Our bylaws</h2>
+                    <p>Read how the Friends are organized and run.</p>
+                    <p><a href="https://img1.wsimg.com/blobby/go/426e5310-f3ec-470b-af8e-1451dc94847f/downloads/30%20April%202022%20bylaws.pdf?ver=1777655523602">Bylaws, April 2022 (PDF)</a></p>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>Business Friends</h2>
-            <p>Thank you to the local businesses that support the Friends, including <a href="https://www.thecolonychamber.org/">The Colony Chamber of Commerce</a>.</p>
-            <p><a href="join.html#business">Become a Business Friend</a></p>
-        </section>
-
-        <section>
-            <h2>Our bylaws</h2>
-            <p><a href="https://img1.wsimg.com/blobby/go/426e5310-f3ec-470b-af8e-1451dc94847f/downloads/30%20April%202022%20bylaws.pdf?ver=1777655523602">Friends of The Colony Public Library Bylaws, April 2022 (PDF)</a></p>
+        <!-- ===== Join band (repeats on most pages) ===== -->
+        <section class="band band-dark join-band">
+            <div class="wrap join-band-inner">
+                <div>
+                    <h2>Become a Friend for $15 a year</h2>
+                    <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
+                </div>
+                <a class="button button-light" href="join.html">See membership levels</a>
+            </div>
         </section>
     </main>
 

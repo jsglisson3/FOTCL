@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Friends of The Colony Public Library</title>
+    <meta name="description" content="Contact Friends of The Colony Public Library.">
 
-    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="Contact | Friends of The Colony Public Library">
+    <meta property="og:description" content="Contact Friends of The Colony Public Library.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,6 +32,11 @@
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <div class="draft-banner">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </div>
 
     <!-- ===== Info bar ===== -->
     <div class="topbar">
@@ -65,35 +82,56 @@
     </header>
 
     <main id="main">
-        <section class="page-title">
-            <h1>Contact the Friends</h1>
-            <p class="lead">Questions, ideas or want to help? Drop us a line.</p>
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>Contact the Friends</h1>
+                <p class="lead">Questions, ideas or want to help? Drop us a line.</p>
+            </div>
         </section>
 
-        <section>
-            <div class="card-grid">
-                <div class="card">
-                    <h3>General information</h3>
-                    <p><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></p>
-                </div>
-                <div class="card">
-                    <h3>Margaret Hensley, President</h3>
-                    <p><a href="mailto:president@fotcpl.org">president@fotcpl.org</a></p>
-                </div>
-                <div class="card">
-                    <h3>Facebook</h3>
-                    <p><a href="https://www.facebook.com/FOTCPL/">facebook.com/FOTCPL</a></p>
-                </div>
-                <div class="card">
-                    <h3>Instagram</h3>
-                    <p><a href="https://www.instagram.com/fotcpl/">@fotcpl</a></p>
+        <section class="band">
+            <div class="wrap">
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                        <h3>General information</h3>
+                        <a href="mailto:info@fotcpl.org">info@fotcpl.org</a>
+                    </div>
+                    <div class="contact-card">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                        <h3>Margaret Hensley, President</h3>
+                        <a href="mailto:president@fotcpl.org">president@fotcpl.org</a>
+                    </div>
+                    <div class="contact-card">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+                        <h3>Facebook</h3>
+                        <a href="https://www.facebook.com/FOTCPL/">facebook.com/FOTCPL</a>
+                    </div>
+                    <div class="contact-card">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></span>
+                        <h3>Instagram</h3>
+                        <a href="https://www.instagram.com/fotcpl/">@fotcpl</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>Questions for the library itself?</h2>
-            <p>For library cards, hours and services, visit <a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library website</a> or see <a href="https://www.thecolonytx.gov/498/Who-Can-I-Talk-to">who to contact at the library</a>.</p>
+        <section class="band band-tint">
+            <div class="wrap narrow">
+                <h2>Questions for the library itself?</h2>
+                <p>For library cards, hours and services, visit <a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library website</a> or see <a href="https://www.thecolonytx.gov/498/Who-Can-I-Talk-to">who to contact at the library</a>.</p>
+            </div>
+        </section>
+
+        <!-- ===== Join band (repeats on most pages) ===== -->
+        <section class="band band-dark join-band">
+            <div class="wrap join-band-inner">
+                <div>
+                    <h2>Become a Friend for $15 a year</h2>
+                    <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
+                </div>
+                <a class="button button-light" href="join.html">See membership levels</a>
+            </div>
         </section>
     </main>
 

@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Become a Friend | Friends of The Colony Public Library</title>
+    <meta name="description" content="Join or renew your membership in Friends of The Colony Public Library. Memberships start at $15 a year.">
 
-    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="Become a Friend | Friends of The Colony Public Library">
+    <meta property="og:description" content="Join or renew your membership in Friends of The Colony Public Library. Memberships start at $15 a year.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,6 +32,11 @@
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <div class="draft-banner">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </div>
 
     <!-- ===== Info bar ===== -->
     <div class="topbar">
@@ -65,74 +82,98 @@
     </header>
 
     <main id="main">
-        <section class="page-title">
-            <h1>Let's become Friends</h1>
-            <p class="lead">Joining the Friends of The Colony Public Library is a great way to support our community and our local library.</p>
-            <a class="button" href="https://donorbox.org/fotcpl">Join or renew online</a>
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>Let's become Friends</h1>
+                <p class="lead">Joining the Friends is a great way to support our community and our local library.</p>
+                <a class="button" href="https://donorbox.org/fotcpl">Join or renew online</a>
+            </div>
         </section>
 
-        <section>
-            <h2>Every membership includes</h2>
-            <ul class="check-list">
-                <li>The quarterly newsletter</li>
-                <li>Invitations to private events</li>
-                <li>Access to forums</li>
-                <li>10% off FOTCPL books and sale items</li>
-            </ul>
+        <section class="band">
+            <div class="wrap split">
+                <div>
+                    <h2>Every membership includes</h2>
+                    <p>Whichever level you choose, you'll receive:</p>
+                </div>
+                <ul class="check-list">
+                    <li>The quarterly newsletter</li>
+                    <li>Invitations to private events</li>
+                    <li>Access to forums</li>
+                    <li>10% off FOTCPL books and sale items</li>
+                </ul>
+            </div>
         </section>
 
-        <section>
-            <h2>Individual memberships</h2>
-            <div class="card-grid three">
-                <div class="card tier">
-                    <h3>Friend</h3>
-                    <p class="price">$15 <small>a year</small></p>
+        <section class="band band-tint">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Individual memberships</h2>
                 </div>
-                <div class="card tier">
-                    <h3>Supporter</h3>
-                    <p class="price">$100 <small>a year, or $10 a month</small></p>
-                    <p>Plus 2 tickets to our annual event</p>
-                </div>
-                <div class="card tier">
-                    <h3>Patron</h3>
-                    <p class="price">$200 <small>a year, or $20 a month</small></p>
-                    <p>Plus your name in the quarterly newsletter and 4 annual event tickets</p>
+                <div class="tier-grid three">
+                    <div class="tier">
+                        <h3>Friend</h3>
+                        <p class="price">$15</p>
+                        <p class="per">a year</p>
+                    </div>
+                    <div class="tier">
+                        <h3>Supporter</h3>
+                        <p class="price">$100</p>
+                        <p class="per">a year, or $10 a month</p>
+                        <p>Plus 2 tickets to our annual event</p>
+                    </div>
+                    <div class="tier">
+                        <h3>Patron</h3>
+                        <p class="price">$200</p>
+                        <p class="per">a year, or $20 a month</p>
+                        <p>Plus your name in the quarterly newsletter and 4 annual event tickets</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="business">
-            <h2>Business memberships</h2>
-            <div class="card-grid">
-                <div class="card tier">
-                    <h3>Friend</h3>
-                    <p class="price">$50 <small>a year</small></p>
+        <section class="band" id="business">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Business memberships</h2>
                 </div>
-                <div class="card tier">
-                    <h3>Supporter</h3>
-                    <p class="price">$500 <small>a year, or $45 a month</small></p>
-                    <p>Plus your name in the quarterly newsletter and 2 annual event tickets</p>
-                </div>
-                <div class="card tier">
-                    <h3>Patron</h3>
-                    <p class="price">$1,000 <small>a year, or $85 a month</small></p>
-                    <p>Plus newsletter name placement, a sponsorship table, logo placement and 4 annual event tickets</p>
-                </div>
-                <div class="card tier">
-                    <h3>Partner</h3>
-                    <p class="price">$2,000 <small>a year, or $200 a month</small></p>
-                    <p>Plus newsletter name placement, a sponsorship table, logo placement and 8 annual event tickets</p>
+                <div class="tier-grid">
+                    <div class="tier">
+                        <h3>Friend</h3>
+                        <p class="price">$50</p>
+                        <p class="per">a year</p>
+                    </div>
+                    <div class="tier">
+                        <h3>Supporter</h3>
+                        <p class="price">$500</p>
+                        <p class="per">a year, or $45 a month</p>
+                        <p>Plus your name in the quarterly newsletter and 2 annual event tickets</p>
+                    </div>
+                    <div class="tier">
+                        <h3>Patron</h3>
+                        <p class="price">$1,000</p>
+                        <p class="per">a year, or $85 a month</p>
+                        <p>Plus newsletter name placement, a sponsorship table, logo placement and 4 annual event tickets</p>
+                    </div>
+                    <div class="tier">
+                        <h3>Partner</h3>
+                        <p class="price">$2,000</p>
+                        <p class="per">a year, or $200 a month</p>
+                        <p>Plus newsletter name placement, a sponsorship table, logo placement and 8 annual event tickets</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2>Good to know</h2>
-            <ul>
-                <li>Lifetime members still receive all the benefits of the Friend level.</li>
-                <li>You can also join by bringing a check to the library.</li>
-            </ul>
-            <a class="button" href="https://donorbox.org/fotcpl">Join or renew online</a>
+        <section class="band band-tint">
+            <div class="wrap narrow">
+                <h2>Good to know</h2>
+                <ul>
+                    <li>Lifetime members still receive all the benefits of the Friend level.</li>
+                    <li>You can also join by bringing a check to the library.</li>
+                </ul>
+                <a class="button" href="https://donorbox.org/fotcpl">Join or renew online</a>
+            </div>
         </section>
     </main>
 

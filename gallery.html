@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photos and videos | Friends of The Colony Public Library</title>
+    <meta name="description" content="Photos and videos of programs at The Colony Public Library supported by the Friends.">
 
-    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <!-- Draft: asks search engines not to list this site until the board approves it -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Browser tab icon -->
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Preview card when the link is shared in a text or on Facebook -->
+    <meta property="og:title" content="Photos and videos | Friends of The Colony Public Library">
+    <meta property="og:description" content="Photos and videos of programs at The Colony Public Library supported by the Friends.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -20,6 +32,11 @@
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ===== Draft notice: remove once the board approves the site ===== -->
+    <div class="draft-banner">
+        <p><strong>Draft redesign.</strong> This is not the official Friends website. Visit <a href="https://fotcpl.org/">fotcpl.org</a>.</p>
+    </div>
 
     <!-- ===== Info bar ===== -->
     <div class="topbar">
@@ -65,30 +82,106 @@
     </header>
 
     <main id="main">
-        <section class="page-title">
-            <h1>Photos and videos</h1>
-            <p class="lead">The Friends help fund activities like craft kits, technology experiences, local fishing gear and much more. Here are a few of our favorites.</p>
+        <section class="band band-tint page-header">
+            <div class="wrap narrow">
+                <h1>Photos and videos</h1>
+                <p class="lead">The Friends help fund activities like craft kits, technology experiences, local fishing gear and much more. Here are a few of our favorites.</p>
+            </div>
         </section>
 
-        <section>
-            <h2>Videos</h2>
-            <div class="video-grid">
-                <figure class="video">
-                    <iframe src="https://www.youtube-nocookie.com/embed/LH1VmEHSIyc" title="The journey of a book" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <figcaption><strong>The journey of a book</strong> Follow a book at TCPL from arrival and processing to checkout and check-in, and learn how to get a library card.</figcaption>
-                </figure>
-                <figure class="video">
-                    <iframe src="https://www.youtube-nocookie.com/embed/RMAnlcyCxpg" title="Craft kits from 2020" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <figcaption><strong>Craft kits from 2020</strong> October's craft kit for teens and adults was a paper gems garland.</figcaption>
-                </figure>
-                <figure class="video">
-                    <iframe src="https://www.youtube-nocookie.com/embed/xJDBryNKFgo" title="Newspaper digitization" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <figcaption><strong>Newspaper digitization</strong> The library is digitizing more than 60,000 pages of newspaper back issues.</figcaption>
-                </figure>
-                <figure class="video">
-                    <iframe src="https://www.youtube-nocookie.com/embed/owle2BI2rNA" title="Bridges Cemetery project" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <figcaption><strong>Bridges Cemetery project</strong> Virtually explore Bridges Cemetery, a Historic Texas Cemetery at the northwest corner of Morning Star Dr. and Chesapeake Dr.</figcaption>
-                </figure>
+        <section class="band">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Photos</h2>
+                    <p>Select a photo to see it larger.</p>
+                </div>
+                <div class="photo-grid">
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:1600" data-caption="Story time at the library">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:900" alt="Children gathered on the floor for story time with a costumed character" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0414.JPG/:/rs=w:1600" data-caption="Crafts at the library">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0414.JPG/:/rs=w:900" alt="Children making crafts at a table in the library" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/Fishing%20Fundamentals%202019%201.jpg/:/rs=w:1600" data-caption="Fishing Fundamentals, 2019">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/Fishing%20Fundamentals%202019%201.jpg/:/rs=w:900" alt="A kayak with fishing gear on display inside the library" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/TCPL%20staff%20and%20volunteers%20with%20Lions%20Club%20LFL.jpg/:/rs=w:1600" data-caption="TCPL staff and volunteers with the Lions Club Little Free Library">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/TCPL%20staff%20and%20volunteers%20with%20Lions%20Club%20LFL.jpg/:/rs=w:900" alt="Library staff and volunteers standing with a Little Free Library" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_1995.JPG/:/rs=w:1600" data-caption="Technology at the library">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_1995.JPG/:/rs=w:900" alt="Visitors trying out computers and technology at the library" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_2694.JPG/:/rs=w:1600" data-caption="Hands-on learning">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_2694.JPG/:/rs=w:900" alt="A volunteer helping children with a hands-on activity" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/2019%20TMLDA%20Award%20Presentation.jpg/:/rs=w:1600" data-caption="2019 TMLDA award presentation">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/2019%20TMLDA%20Award%20Presentation.jpg/:/rs=w:900" alt="A group holding an award in front of a City of The Colony sign" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4286.JPG/:/rs=w:1600" data-caption="A program in the children's area">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4286.JPG/:/rs=w:900" alt="Two presenters in a brightly decorated children's room" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4313.jpg/:/rs=w:1600" data-caption="An outdoor family event">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4313.jpg/:/rs=w:900" alt="Families visiting animals at an outdoor event" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0325.JPG/:/rs=w:1600" data-caption="Gathering at a historical marker">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0325.JPG/:/rs=w:900" alt="A group gathered beside a historical marker" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4239.JPG/:/rs=w:1600" data-caption="Books on display">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4239.JPG/:/rs=w:900" alt="Colorful children's books displayed on shelves" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/library%20kids.jpg/:/rs=w:1600" data-caption="A visit from a special friend">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/library%20kids.jpg/:/rs=w:900" alt="A smiling presenter beside a giant pink unicorn plush" loading="lazy">
+                    </a>
+                    <a class="photo" href="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/202013893_5763022540405986_59744194989813-0001.jpg/:/rs=w:1600" data-caption="Friends out in the community">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/202013893_5763022540405986_59744194989813-0001.jpg/:/rs=w:900" alt="A group of people standing together outdoors" loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="band band-tint">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Videos</h2>
+                </div>
+                <div class="video-grid">
+                    <figure class="video">
+                        <iframe src="https://www.youtube-nocookie.com/embed/LH1VmEHSIyc" title="The journey of a book" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <figcaption><strong>The journey of a book</strong> Follow a book at TCPL from arrival and processing to checkout and check-in, and learn how to get a library card.</figcaption>
+                    </figure>
+                    <figure class="video">
+                        <iframe src="https://www.youtube-nocookie.com/embed/RMAnlcyCxpg" title="Craft kits from 2020" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <figcaption><strong>Craft kits from 2020</strong> October's craft kit for teens and adults was a paper gems garland.</figcaption>
+                    </figure>
+                    <figure class="video">
+                        <iframe src="https://www.youtube-nocookie.com/embed/xJDBryNKFgo" title="Newspaper digitization" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <figcaption><strong>Newspaper digitization</strong> The library is digitizing more than 60,000 pages of newspaper back issues.</figcaption>
+                    </figure>
+                    <figure class="video">
+                        <iframe src="https://www.youtube-nocookie.com/embed/owle2BI2rNA" title="Bridges Cemetery project" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <figcaption><strong>Bridges Cemetery project</strong> Virtually explore Bridges Cemetery, a Historic Texas Cemetery at the northwest corner of Morning Star Dr. and Chesapeake Dr.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Larger photo view, opened by script.js -->
+        <dialog class="lightbox" aria-label="Photo">
+            <form method="dialog">
+                <button class="lightbox-close" aria-label="Close">&times;</button>
+            </form>
+            <img src="" alt="">
+            <p class="lightbox-caption"></p>
+        </dialog>
+
+        <!-- ===== Join band (repeats on most pages) ===== -->
+        <section class="band band-dark join-band">
+            <div class="wrap join-band-inner">
+                <div>
+                    <h2>Become a Friend for $15 a year</h2>
+                    <p>Members get the quarterly newsletter, invitations to private events and 10% off FOTCPL books and sale items.</p>
+                </div>
+                <a class="button button-light" href="join.html">See membership levels</a>
             </div>
         </section>
     </main>
