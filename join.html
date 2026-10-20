@@ -6,12 +6,17 @@
     <title>Become a Friend | Friends of The Colony Public Library</title>
     <meta name="description" content="Join or renew your membership in Friends of The Colony Public Library. Memberships start at $15 a year.">
     <meta name="theme-color" content="#0d3d69">
+    <meta name="color-scheme" content="light">
 
     <!-- Draft: asks search engines not to list this site until the board approves it -->
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Browser tab icon -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Starts connecting to the photo server early, so photos appear sooner.
+         Remove this line once the photos are moved into the images folder. -->
+    <link rel="preconnect" href="https://img1.wsimg.com">
 
     <!-- Preview card when the link is shared in a text or on Facebook -->
     <meta property="og:title" content="Become a Friend | Friends of The Colony Public Library">
@@ -22,19 +27,74 @@
     <meta property="og:image:alt" content="Children at story time with a costumed character at The Colony Public Library">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
-    <link rel="preconnect" href="https://img1.wsimg.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
+    <!-- Fonts are stored in the site itself: faster, and no outside service needed.
+         Literata for headings (made for reading books), Public Sans for text
+         (made for clear, accessible public-service websites). -->
 
     <link rel="stylesheet" href="style.css">
 
     <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
     <script>document.documentElement.classList.add("js");</script>
     <script src="script.js" defer></script>
+    <!-- Lets search engines show these questions and answers -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I join or renew?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Join or renew online with our secure Donorbox form, or bring a check to the library."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much does a membership cost?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Individual memberships start at $15 a year, and business memberships start at $50 a year. At the Supporter level and above, you can also pay monthly."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What do members receive?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Every membership includes a subscription to the quarterly newsletter, invitations to private events, access to forums and 10% off FOTCPL books and sale items. Higher levels add annual event tickets, and some include your name in the quarterly newsletter."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can businesses become members?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Business memberships start at $50 a year. Higher business levels add newsletter name placement and annual event tickets, and the Patron and Partner levels also include a sponsorship table and logo placement."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my membership tax-deductible?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Friends of The Colony Public Library is a 501(c)(3) nonprofit. Donations are tax-deductible to the extent allowed by law. For advice about your own taxes, please check with a tax professional."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I get the newsletter?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A subscription to the quarterly newsletter comes with every membership. You can also read current and past editions on our Newsletters page."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
-<body>
+<body id="top">
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -71,7 +131,8 @@
                 <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
             </a>
 
-            <!-- Only shows on phones -->
+            <!-- Only show on phones and tablets -->
+            <a class="button header-join" href="join.html">Join</a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
                 <span class="menu-bars" aria-hidden="true"></span>
                 Menu
@@ -93,12 +154,19 @@
                 <h1>Let's Become Friends</h1>
                 <p class="lead">Joining the Friends is a great way to support our community and our local library.</p>
                 <div class="button-row centered">
-                    <a class="button" href="https://donorbox.org/fotcpl">Join or Renew Online</a>
+                    <a class="button" href="https://donorbox.org/fotcpl"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Join or Renew Online</a>
                     <a class="button button-secondary" href="#levels">See Membership Levels</a>
                 </div>
-                <p class="trust-line"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Friends of The Colony Public Library is a 501(c)(3) nonprofit, so your donation may be tax&#8209;deductible.</p>
+                <p class="trust-line"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Friends of The Colony Public Library is a 501(c)(3) nonprofit. Donations are tax&#8209;deductible to the extent allowed by law.</p>
             </div>
+            <!-- The smiling book peeks up over the water -->
             <img class="peek" src="images/book-friend.svg" alt="" width="320" height="260">
+            <div class="wave" aria-hidden="true">
+                <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+                    <path class="wave-back" d="M0 30 C 160 10 320 12 480 28 S 800 50 960 34 S 1280 8 1440 24 V64 H0 Z"/>
+                    <path class="wave-front" d="M0 42 C 200 24 380 28 560 40 S 900 58 1100 42 S 1340 28 1440 36 V64 H0 Z"/>
+                </svg>
+            </div>
         </section>
 
         <section class="band">
@@ -111,7 +179,7 @@
                     <li class="benefit">
                         <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
                         <h3>The Quarterly Newsletter</h3>
-                        <p>News from the Friends and the library, delivered to your inbox.</p>
+                        <p>A subscription to the Friends newsletter, published every quarter.</p>
                     </li>
                     <li class="benefit">
                         <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
@@ -135,73 +203,82 @@
         <section class="band band-tint" id="levels">
             <div class="wrap">
                 <div class="section-head">
-                    <h2>Individual Memberships</h2>
+                    <h2>Choose Your Level</h2>
+                    <p>Pay once a year, or monthly at the Supporter level and above.</p>
                 </div>
-                <div class="tier-grid three">
+
+                <!-- Individual and Business tabs. Without JavaScript, both lists show. -->
+                <div class="tabs" data-tabs>
+                    <div class="tab-list" aria-label="Membership type" hidden>
+                        <button class="tab" type="button" id="tab-individual" data-panel="individual"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Individual</button>
+                        <button class="tab" type="button" id="tab-business" data-panel="business"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Business</button>
+                    </div>
+
+                    <div class="tab-panel" id="individual">
+                        <h3 class="panel-title">Individual Memberships</h3>
+                        <div class="tier-grid three">
                     <div class="tier">
-                        <h3>Friend</h3>
+                        <h4>Friend</h4>
                         <p class="price">$15</p>
                         <p class="per">a year (about $1.25 a month)</p>
                         <p>All the member benefits</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Friend<span class="visually-hidden"> (individual membership, $15)</span></a>
                     </div>
                     <div class="tier">
-                        <h3>Supporter</h3>
+                        <h4>Supporter</h4>
                         <p class="price">$100</p>
                         <p class="per">a year, or $10 a month</p>
                         <p>Plus 2 tickets to our annual event</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Supporter<span class="visually-hidden"> (individual membership, $100)</span></a>
                     </div>
                     <div class="tier">
-                        <h3>Patron</h3>
+                        <h4>Patron</h4>
                         <p class="price">$200</p>
                         <p class="per">a year, or $20 a month</p>
                         <p>Plus your name in the quarterly newsletter and 4 annual event tickets</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Patron<span class="visually-hidden"> (individual membership, $200)</span></a>
                     </div>
-                </div>
-            </div>
-        </section>
+                        </div>
+                    </div>
 
-        <section class="band" id="business">
-            <div class="wrap">
-                <div class="section-head">
-                    <h2>Business Memberships</h2>
-                </div>
-                <div class="tier-grid">
+                    <div class="tab-panel" id="business">
+                        <h3 class="panel-title">Business Memberships</h3>
+                        <div class="tier-grid">
                     <div class="tier">
-                        <h3>Friend</h3>
+                        <h4>Friend</h4>
                         <p class="price">$50</p>
                         <p class="per">a year</p>
                         <p>All the member benefits</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Friend<span class="visually-hidden"> (business membership, $50)</span></a>
                     </div>
                     <div class="tier">
-                        <h3>Supporter</h3>
+                        <h4>Supporter</h4>
                         <p class="price">$500</p>
                         <p class="per">a year, or $45 a month</p>
                         <p>Plus your name in the quarterly newsletter and 2 annual event tickets</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Supporter<span class="visually-hidden"> (business membership, $500)</span></a>
                     </div>
                     <div class="tier">
-                        <h3>Patron</h3>
+                        <h4>Patron</h4>
                         <p class="price">$1,000</p>
                         <p class="per">a year, or $85 a month</p>
                         <p>Plus newsletter name placement, a sponsorship table, logo placement and 4 annual event tickets</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Patron<span class="visually-hidden"> (business membership, $1,000)</span></a>
                     </div>
                     <div class="tier">
-                        <h3>Partner</h3>
+                        <h4>Partner</h4>
                         <p class="price">$2,000</p>
                         <p class="per">a year, or $200 a month</p>
                         <p>Plus newsletter name placement, a sponsorship table, logo placement and 8 annual event tickets</p>
                         <a class="tier-link" href="https://donorbox.org/fotcpl">Join as a Partner<span class="visually-hidden"> (business membership, $2,000)</span></a>
                     </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="band band-tint">
+        <section class="band">
             <div class="wrap">
                 <div class="section-head">
                     <h2>How to Join</h2>
@@ -216,7 +293,8 @@
                         <span class="step-number" aria-hidden="true">2</span>
                         <h3>Join or Renew</h3>
                         <p>Pay securely online through Donorbox, or bring a check to the library.</p>
-                        <a class="button" href="https://donorbox.org/fotcpl">Join or Renew Online</a>
+                        <a class="button" href="https://donorbox.org/fotcpl"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Join or Renew Online</a>
+                        <p class="secure-note">Payments are processed securely by Donorbox.</p>
                     </li>
                     <li>
                         <span class="step-number" aria-hidden="true">3</span>
@@ -224,6 +302,57 @@
                         <p>The quarterly newsletter, invitations to private events, access to forums and 10% off FOTCPL books and sale items.</p>
                     </li>
                 </ol>
+            </div>
+        </section>
+
+        <section class="band band-tint" id="faq">
+            <div class="wrap faq-layout">
+                <div class="faq-intro">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Still have a question? Email us at <a href="mailto:info@fotcpl.org">info@fotcpl.org</a>.</p>
+                </div>
+                <div class="faq">
+                    <details>
+                        <summary>How do I join or renew?</summary>
+                        <div class="faq-answer">
+                            <p>Join or renew online with our secure <a href="https://donorbox.org/fotcpl">Donorbox form</a>, or bring a check to the library.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>How much does a membership cost?</summary>
+                        <div class="faq-answer">
+                            <p>Individual memberships start at $15 a year, and business memberships start at $50 a year. At the Supporter level and above, you can also pay monthly.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>What do members receive?</summary>
+                        <div class="faq-answer">
+                            <p>Every membership includes a subscription to the quarterly newsletter, invitations to private events, access to forums and 10% off FOTCPL books and sale items. Higher levels add annual event tickets, and some include your name in the quarterly newsletter.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Can businesses become members?</summary>
+                        <div class="faq-answer">
+                            <p>Yes. Business memberships start at $50 a year. Higher business levels add newsletter name placement and annual event tickets, and the Patron and Partner levels also include a sponsorship table and logo placement.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>Is my membership tax-deductible?</summary>
+                        <div class="faq-answer">
+                            <p>Friends of The Colony Public Library is a 501(c)(3) nonprofit. Donations are tax&#8209;deductible to the extent allowed by law. For advice about your own taxes, please check with a tax professional.</p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>How do I get the newsletter?</summary>
+                        <div class="faq-answer">
+                            <p>A subscription to the quarterly newsletter comes with every membership. You can also read current and past editions on our <a href="newsletters.html">Newsletters page</a>.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Worded exactly as on fotcpl.org -->
+            <div class="wrap">
                 <div class="official-note">
                     <p>Our individual and business membership levels have recently been updated and if you are currently a Lifetime member, you are still entitled to all the benefits at the Friend level. You can also join by bringing a check to the library.</p>
                 </div>
@@ -231,8 +360,45 @@
         </section>
     </main>
 
+    <!-- Appears after you scroll down a long page -->
+    <a class="back-to-top" href="#top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="visually-hidden">Back to top</span></a>
+
     <!-- ===== Site footer ===== -->
     <footer class="site-footer">
+        <!-- Night over Lake Lewisville: a nod to The Colony, the City by the Lake -->
+        <div class="lake-scene" aria-hidden="true">
+            <svg class="lake-shore" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" focusable="false">
+                <defs>
+                    <mask id="crescent">
+                        <circle cx="972" cy="30" r="11" fill="#ffffff"/>
+                        <circle cx="977" cy="26" r="9.5" fill="#000000"/>
+                    </mask>
+                </defs>
+                <g fill="rgba(255,255,255,0.5)"><circle cx="70" cy="30" r="1.2"/><circle cx="190" cy="14" r="1.6"/><circle cx="310" cy="40" r="1.2"/><circle cx="450" cy="18" r="1.4"/><circle cx="590" cy="36" r="1.2"/><circle cx="720" cy="12" r="1.6"/><circle cx="840" cy="34" r="1.2"/><circle cx="1100" cy="18" r="1.4"/><circle cx="1220" cy="40" r="1.2"/><circle cx="1320" cy="14" r="1.6"/><circle cx="1410" cy="32" r="1.2"/></g>
+                <circle cx="972" cy="30" r="11" fill="rgba(255,255,255,0.85)" mask="url(#crescent)"/>
+                <path d="M0 80 q16 -10 32 0 q17 -18 34 0 q12 -8 23 0 q20 -8 39 0 q16 -16 33 0 q12 -16 23 0 q14 -8 28 0 q12 -14 24 0 q18 -8 35 0 q14 -8 29 0 q20 -14 39 0 q12 -16 23 0 q12 -10 25 0 q21 -18 42 0 q20 -8 40 0 q20 -16 40 0 q17 -8 34 0 q14 -8 29 0 q20 -10 39 0 q16 -14 31 0 q13 -16 26 0 q12 -16 25 0 q16 -16 31 0 q22 -10 43 0 q12 -16 25 0 q20 -18 40 0 q14 -12 28 0 q12 -16 25 0 q22 -8 44 0 q20 -8 40 0 q20 -10 41 0 q18 -18 37 0 q20 -14 39 0 q23 -12 46 0 q18 -16 36 0 q18 -12 36 0 q16 -10 31 0 q14 -18 27 0 q23 -10 46 0 q12 -16 24 0 q16 -16 31 0 q18 -12 37 0 q22 -14 45 0 V104 H0 Z" fill="rgba(121,160,72,0.18)"/>
+                <path d="M0 84 q14 -14 27 0 q10 -6 20 0 q17 -12 34 0 q12 -10 23 0 q11 -12 22 0 q16 -6 31 0 q10 -14 20 0 q14 -10 28 0 q14 -14 29 0 q16 -14 33 0 q16 -6 32 0 q10 -10 20 0 q16 -6 33 0 q10 -10 19 0 q16 -10 32 0 q15 -10 30 0 q9 -12 18 0 q14 -8 29 0 q10 -12 21 0 q10 -8 19 0 q14 -8 27 0 q12 -12 25 0 q15 -12 30 0 q10 -8 20 0 q16 -12 32 0 q13 -8 26 0 q16 -14 31 0 q13 -12 26 0 q14 -12 29 0 q12 -8 25 0 q10 -8 20 0 q11 -8 22 0 q12 -6 25 0 q16 -14 33 0 q12 -10 23 0 q14 -6 27 0 q11 -12 22 0 q14 -14 29 0 q14 -8 28 0 q17 -14 34 0 q10 -12 19 0 q15 -12 30 0 q15 -12 30 0 q10 -12 21 0 q15 -6 30 0 q12 -6 24 0 q12 -12 24 0 q12 -6 23 0 q14 -14 28 0 q10 -6 19 0 q9 -14 18 0 q11 -14 22 0 q10 -10 21 0 q9 -6 18 0 q12 -14 24 0 q15 -8 30 0 q13 -10 26 0 V104 H0 Z" fill="rgba(121,160,72,0.32)"/>
+                <path d="M0 86 C 120 78 240 78 360 86 S 600 94 720 86 S 960 78 1080 86 S 1320 94 1440 86 V120 H0 Z" fill="rgba(19,88,151,0.65)"/>
+                <g transform="translate(560 32)">
+                    <g class="night-boat">
+                        <path d="M32 4 L40 7.5 L32 11 Z" fill="#e0707b"/>
+                        <path d="M32 6 V48" stroke="#ffffff" stroke-width="2"/>
+                        <path d="M34 10 L34 45 L55 45 Z" fill="rgba(255,255,255,0.92)"/>
+                        <path d="M30 15 L30 45 L13 45 Z" fill="#b9d58f"/>
+                        <path d="M7 48 H57 L50 57 H14 Z" fill="#ffffff"/>
+                    </g>
+                    <g stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 62 H24"/><path d="M38 62 H60"/><path d="M14 68 H48"/>
+                    </g>
+                </g>
+                <path d="M0 98 C 140 90 280 90 420 98 S 700 106 840 98 S 1120 90 1260 98 S 1400 102 1440 100 V120 H0 Z" fill="rgba(19,88,151,0.45)"/>
+                <path d="M0 108 C 160 102 320 102 480 108 S 800 114 960 108 S 1280 102 1440 108 V120 H0 Z" fill="#0a2f52"/>
+                <g stroke="rgba(255,255,255,0.24)" stroke-width="2" stroke-linecap="round">
+                    <path d="M954 94 H990"/><path d="M960 102 H984"/><path d="M966 110 H978"/>
+                </g>
+            </svg>
+        </div>
+
         <div class="footer-inner">
             <div class="footer-about">
                 <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
@@ -254,7 +420,8 @@
                 <h2>Get in Touch</h2>
                 <address>
                     The Colony Public Library<br>
-                    6800 Main St., The Colony, TX
+                    6800 Main St.<br>
+                    The Colony, TX 75056
                 </address>
                 <ul>
                     <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
@@ -277,7 +444,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 Friends of The Colony Public Library <span aria-hidden="true">&middot;</span> <a href="privacy.html">Privacy</a></p>
+            <div class="footer-bottom-inner">
+                <p>&copy; 2026 Friends of The Colony Public Library</p>
+                <a class="footer-privacy" href="privacy.html">Privacy</a>
+                <p class="made-in">Made with <svg class="icon heart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="visually-hidden">love</span> in The Colony, the City by the Lake</p>
+            </div>
         </div>
     </footer>
 

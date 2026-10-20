@@ -2,6 +2,33 @@
    Friends of The Colony Public Library
    ========================================================= */
 
+/* ===== Fonts (stored in the fonts folder) =====
+   font-display: swap shows text right away in a backup font,
+   then switches once the real font has loaded. */
+@font-face {
+    font-family: "Public Sans";
+    src: url("fonts/public-sans-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Public Sans";
+    src: url("fonts/public-sans-latin-700-normal.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Literata";
+    src: url("fonts/literata-latin-600-normal.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* ===== Design tokens =====
    Colors are sampled from the logo. Defined once here, then reused
    everywhere with var(--name). Change one and the whole site updates. */
@@ -19,7 +46,7 @@
     --white: #ffffff;
 
     --font-heading: "Literata", Georgia, serif;
-    --font-body: "Atkinson Hyperlegible", Arial, sans-serif;
+    --font-body: "Public Sans", Arial, sans-serif;
 
     --page-width: 1160px;
     --text-width: 760px;
@@ -101,6 +128,19 @@ p {
     margin: 0 0 16px;
 }
 
+/* Avoids a single word stranded on the last line of a paragraph */
+p,
+li,
+dd,
+figcaption {
+    text-wrap: pretty;
+}
+
+/* Anything marked "hidden" stays hidden, even if a style below says otherwise */
+[hidden] {
+    display: none !important;
+}
+
 .lead {
     font-size: 1.25rem;
     color: var(--ink-soft);
@@ -155,6 +195,11 @@ p {
     transform: translateY(-1px);
 }
 
+/* A tiny press-down when clicked or tapped */
+.button:active {
+    transform: translateY(0) scale(0.98);
+}
+
 /* Outlined button for less important actions */
 .button-secondary {
     color: var(--blue-dark);
@@ -174,6 +219,19 @@ p {
 
 .button-light:hover {
     background-color: var(--tint);
+}
+
+/* An icon inside a button (like the lock on payment buttons) */
+.button .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: -2px;
+}
+
+.secure-note {
+    margin: 10px 0 0;
+    font-size: 0.9rem;
 }
 
 .button-row {
@@ -348,16 +406,31 @@ p {
 }
 
 .main-nav a {
+    position: relative;
     color: var(--ink);
     font-weight: 700;
     text-decoration: none;
     padding: 6px 0;
-    border-bottom: 3px solid transparent;
 }
 
-.main-nav a:hover,
-.main-nav a[aria-current="page"] {
-    border-bottom-color: var(--blue);
+/* An underline that grows out from the middle on hover,
+   and stays under the page you're on */
+.main-nav a:not(.button)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    border-radius: 2px;
+    background-color: var(--blue);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.main-nav a:hover::after,
+.main-nav a[aria-current="page"]::after {
+    transform: scaleX(1);
 }
 
 /* "a.button" is more specific than ".main-nav a",
@@ -372,9 +445,117 @@ p {
     background-color: var(--red-dark);
 }
 
-/* The "Menu" button is hidden on big screens */
-.menu-toggle {
+/* The "Menu" button and the small "Join" button are hidden on big screens */
+.menu-toggle,
+.header-join {
     display: none;
+}
+
+/* ===== Back to top ===== */
+.back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    color: var(--white);
+    background-color: var(--blue-dark);
+    box-shadow: 0 6px 18px rgba(13, 61, 105, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: var(--blue);
+}
+
+.back-to-top .icon {
+    width: 22px;
+    height: 22px;
+}
+
+/* ===== Library hours ===== */
+.hours {
+    margin: 20px 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+
+.hours h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+}
+
+.hours h3 .icon {
+    color: var(--blue);
+}
+
+.hours dl {
+    display: grid;
+    gap: 2px;
+    margin: 0 0 12px;
+}
+
+/* One row per group of days. Today's row is highlighted by script.js. */
+.hours-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    column-gap: 16px;
+    margin: 0 -12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.hours-row dd {
+    text-align: right;
+}
+
+.hours dt {
+    font-weight: 700;
+}
+
+.hours dd {
+    margin: 0;
+}
+
+.hours-row.today {
+    background-color: var(--white);
+    box-shadow: inset 4px 0 0 var(--green);
+}
+
+.today-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background-color: #4f7329;
+    color: var(--white);
+    font-size: 0.75rem;
+    line-height: 1.5;
+    vertical-align: 2px;
+}
+
+.hours .open-status {
+    margin-bottom: 12px;
+}
+
+.hours-note {
+    font-size: 0.9rem;
 }
 
 /* ===== Bands: full-width sections =====
@@ -393,8 +574,28 @@ p {
     color: rgba(255, 255, 255, 0.88);
 }
 
-.band-dark h2 {
+.band-dark h2,
+.band-dark h3 {
     color: var(--white);
+}
+
+/* A white focus outline shows up better on dark blue */
+.band-dark :focus-visible {
+    outline-color: var(--white);
+}
+
+/* Lighter underlines for links on dark blue */
+.band-dark a:not(.button),
+.current-card a:not(.button),
+.governance-card a:not(.button),
+.site-footer a {
+    text-decoration-color: rgba(255, 255, 255, 0.45);
+}
+
+.band-dark a:not(.button):hover,
+.current-card a:not(.button):hover,
+.site-footer a:hover {
+    text-decoration-color: currentColor;
 }
 
 .wrap {
@@ -629,11 +830,6 @@ p {
     height: 44px;
 }
 
-.events-strip p {
-    flex: 1 1 320px;
-    margin: 0;
-    font-size: 1.1rem;
-}
 
 /* Facebook / Instagram links under the newsletter */
 .follow {
@@ -1034,8 +1230,11 @@ a.feature-item:hover .feature-more {
     position: relative;
     overflow: hidden;   /* hides the bottom of the peeking book */
     padding-top: clamp(48px, 6vw, 80px);
-    padding-bottom: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(80px, 9vw, 116px);   /* room for the wave and the book */
     text-align: center;
+    background-image:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), transparent 55%),
+        radial-gradient(circle at 92% 100%, rgba(121, 160, 72, 0.12), transparent 30%);
 }
 
 .page-header .lead {
@@ -1046,59 +1245,256 @@ a.feature-item:hover .feature-more {
     margin-bottom: 0;
 }
 
-/* The smiling book peeks up from the bottom corner */
+/* The smiling book peeks up over the wave in the bottom corner,
+   rising up once when the page opens */
 .peek {
     position: absolute;
+    z-index: 1;   /* behind the wave */
     right: clamp(16px, 6vw, 96px);
-    bottom: -34px;
-    width: clamp(90px, 11vw, 150px);
+    bottom: clamp(2px, 0.8vw, 12px);
+    width: clamp(84px, 10vw, 140px);
     transform: rotate(-8deg);
     pointer-events: none;
+    animation: peek-up 0.8s cubic-bezier(0.2, 0.8, 0.3, 1.2) 0.3s backwards;
+}
+
+@keyframes peek-up {
+    from {
+        transform: translateY(80%) rotate(-8deg);
+    }
 }
 
 /* ===== About page ===== */
+.about-hero {
+    position: relative;
+    overflow: hidden;
+    padding-top: clamp(48px, 6vw, 80px);
+    padding-bottom: clamp(72px, 8vw, 108px);   /* room for the wave */
+    background-image:
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.9), transparent 40%),
+        radial-gradient(circle at 5% 90%, rgba(121, 160, 72, 0.1), transparent 30%);
+}
+
 .about-hero-inner {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.05fr;
     gap: clamp(32px, 6vw, 72px);
     align-items: center;
 }
 
-.about-hero-photo {
-    position: relative;
+.about-hero .lead {
+    max-width: 30em;
+    margin-bottom: 32px;
 }
 
-/* A green block offset behind the photo, like a mat in a frame */
-.about-hero-photo::before {
+/* Three photos pinned up like a scrapbook page */
+.polaroid-stack {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 540px);
+    aspect-ratio: 1 / 0.8;
+}
+
+.polaroid {
+    position: absolute;
+    width: 48%;
+    margin: 0;
+    padding: 10px 10px 0;
+    border-radius: 4px;
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(13, 61, 105, 0.08), 0 18px 40px rgba(13, 61, 105, 0.18);
+    transform: rotate(var(--tilt));
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: settle 0.7s cubic-bezier(0.2, 0.8, 0.3, 1.2) backwards;
+}
+
+.polaroid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 2px;
+    background-color: var(--tint);
+}
+
+.polaroid figcaption {
+    padding: 10px 4px 12px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    text-align: center;
+    color: var(--blue-dark);
+}
+
+/* A strip of tape in one of the logo's colors */
+.polaroid::before {
     content: "";
     position: absolute;
-    inset: 24px -24px -24px 24px;
-    border-radius: 20px;
-    background-color: rgba(121, 160, 72, 0.25);
+    top: -11px;
+    left: 50%;
+    width: 84px;
+    height: 24px;
+    margin-left: -42px;
+    background-color: var(--tape);
+    transform: rotate(-4deg);
 }
 
-.about-hero-photo img {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    max-height: 420px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.18);
+.polaroid-1 {
+    --tilt: -6deg;
+    --tape: rgba(121, 160, 72, 0.55);
+    left: 0;
+    top: 15%;
+    animation-delay: 0.1s;
 }
 
-/* Mission: a refined quote inside the opening section */
-.about-hero {
-    padding-top: clamp(40px, 5vw, 64px);
-    padding-bottom: clamp(48px, 6vw, 72px);
+.polaroid-2 {
+    --tilt: 2deg;
+    --tape: rgba(19, 88, 151, 0.4);
+    left: 26%;
+    top: 0;
+    z-index: 1;
+    animation-delay: 0.25s;
 }
 
-.about-hero h1 {
-    margin-bottom: 28px;
+.polaroid-3 {
+    --tilt: 7deg;
+    --tape: rgba(179, 43, 57, 0.4);
+    right: 0;
+    top: 21%;
+    animation-delay: 0.4s;
+}
+
+/* Hovering a photo straightens it and brings it to the front */
+.polaroid:hover {
+    z-index: 3;
+    transform: rotate(0deg) translateY(-6px) scale(1.03);
+    box-shadow: 0 4px 8px rgba(13, 61, 105, 0.1), 0 26px 50px rgba(13, 61, 105, 0.22);
+}
+
+@keyframes settle {
+    from {
+        opacity: 0;
+        transform: translateY(-28px) rotate(calc(var(--tilt) * 2));
+    }
+}
+
+/* Mission: centered, with a large quotation mark behind it */
+.mission-band {
+    text-align: center;
 }
 
 .mission {
-    margin: 0 0 32px;
+    max-width: 880px;
+    margin: 0 auto clamp(56px, 8vw, 96px);
+}
+
+.mission-band .mission-label {
+    justify-content: center;
+}
+
+.mission-band .mission p {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.45;
+    text-wrap: balance;
+}
+
+/* How your support helps: three steps joined by a dashed line */
+.flow-title {
+    margin-bottom: 40px;
+}
+
+.flow {
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.flow::before {
+    content: "";
+    position: absolute;
+    top: 36px;
+    left: calc((100% - 64px) / 6);
+    right: calc((100% - 64px) / 6);
+    border-top: 3px dashed rgba(19, 88, 151, 0.28);
+    transform-origin: left center;
+    transition: transform 1.2s ease 0.2s;
+}
+
+.flow-step {
+    --step: var(--blue);
+    --step-soft: rgba(19, 88, 151, 0.1);
+}
+
+.flow-step:nth-child(1) {
+    --step: #5c8133;
+    --step-soft: rgba(121, 160, 72, 0.16);
+}
+
+.flow-step:nth-child(3) {
+    --step: var(--red);
+    --step-soft: rgba(179, 43, 57, 0.1);
+}
+
+.flow-icon {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    color: var(--step);
+    background-color: var(--white);
+    background-image: linear-gradient(var(--step-soft), var(--step-soft));
+    box-shadow: 0 0 0 8px var(--white);   /* a white ring that hides the dashed line behind it */
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.3), opacity 0.3s ease;
+}
+
+.flow-icon .icon {
+    width: 30px;
+    height: 30px;
+}
+
+.flow-step h3 {
+    font-size: 1.3rem;
+}
+
+.flow-step p {
+    max-width: 22em;
+    margin: 0 auto;
+    color: var(--ink-soft);
+}
+
+/* When the steps scroll into view, the line draws in and the icons pop in turn
+   (script.js adds these classes) */
+.flow.will-reveal::before {
+    transform: scaleX(0);
+}
+
+.flow.will-reveal .flow-icon {
+    opacity: 0;
+    transform: scale(0.6);
+}
+
+.flow.will-reveal.in-view::before {
+    transform: scaleX(1);
+}
+
+.flow.will-reveal.in-view .flow-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.flow.in-view .flow-step:nth-child(2) .flow-icon {
+    transition-delay: 0.5s;
+}
+
+.flow.in-view .flow-step:nth-child(3) .flow-icon {
+    transition-delay: 1s;
 }
 
 .mission-label {
@@ -1135,51 +1531,52 @@ a.feature-item:hover .feature-more {
     color: var(--blue-dark);
 }
 
-/* What we do: photo and words side by side, switching sides each row */
+/* What we do: four photo cards in a 2 x 2 grid */
 .story-rows {
     display: grid;
-    gap: clamp(40px, 6vw, 72px);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 }
 
 .story-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(28px, 5vw, 64px);
-    align-items: center;
-}
-
-.story-row:nth-child(even) .story-photo {
-    order: 2;   /* photo on the right for every other row */
+    overflow: hidden;
+    border-radius: var(--radius);
+    background-color: var(--white);
+    border: 1px solid var(--line);
 }
 
 .story-photo {
+    display: block;
     width: 100%;
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: var(--radius);
+}
+
+.story-text {
+    position: relative;
+    padding: 0 28px 28px;
+}
+
+/* The icon badge overlaps the bottom edge of the photo */
+.story-text .icon-badge {
+    margin-top: -26px;
+    border: 4px solid var(--white);
+    width: 56px;
+    height: 56px;
 }
 
 .story-text h3 {
-    font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+    font-size: 1.35rem;
+    margin-bottom: 6px;
 }
 
 .story-text p {
-    font-size: 1.15rem;
+    margin: 0;
     color: var(--ink-soft);
-    max-width: 28em;
 }
 
 /* Business Friends */
-.business-band {
-    text-align: center;
-}
-
-.business-band .lead {
-    margin-bottom: 32px;
-}
-
 .business-logos {
-    justify-content: center;
     margin-bottom: 32px;
 }
 
@@ -1204,27 +1601,7 @@ a.feature-item:hover .feature-more {
     line-height: 1.3;
 }
 
-/* Bylaws: a document card */
-.doc-card {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    gap: 24px;
-    padding: 32px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-}
-
-.doc-card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 4px;
-}
-
-.doc-card p {
-    margin: 0;
-    color: var(--ink-soft);
-}
-
+/* Bylaws: a document icon in a rounded square */
 .doc-icon {
     display: grid;
     place-items: center;
@@ -1299,6 +1676,85 @@ a.feature-item:hover .feature-more {
     background-color: rgba(19, 88, 151, 0.04);
 }
 
+/* Newsletters page: featured current edition beside the archive */
+.newsletter-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+}
+
+.current-card {
+    padding: clamp(28px, 4vw, 40px);
+    border-radius: 16px;
+    background-color: var(--blue-dark);
+    background-image: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.current-card .icon-badge {
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+.current-card .kicker {
+    color: #b9d58f;
+}
+
+.current-card h2 {
+    margin-bottom: 24px;
+    font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+    color: var(--white);
+}
+
+.current-card-note {
+    margin: 12px 0 0;
+    font-size: 0.9rem;
+}
+
+.inbox-note {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.inbox-note h3 {
+    color: var(--white);
+}
+
+.inbox-note a {
+    display: inline-block;
+    padding: 4px 0;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.current-card :focus-visible {
+    outline-color: var(--white);
+}
+
+.past-editions h2 {
+    margin-bottom: 24px;
+}
+
+.edition-year {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding: 4px 0 12px;
+    border-top: 1px solid var(--line);
+}
+
+.edition-year h3 {
+    margin: 14px 0 0;
+    font-size: 1.25rem;
+    color: var(--ink-soft);
+}
+
+.edition-year .edition-list li:last-child {
+    border-bottom: none;
+}
+
 .current-edition {
     display: flex;
     align-items: center;
@@ -1357,12 +1813,13 @@ a.feature-item:hover .feature-more {
     box-shadow: 0 12px 28px rgba(13, 61, 105, 0.1);
 }
 
-.tier h3 {
+.tier h4 {
+    margin: 0 0 4px;
     font-family: var(--font-body);
     font-size: 1rem;
-    text-transform: none;
+    font-weight: 700;
+    line-height: 1.3;
     color: var(--ink-soft);
-    margin-bottom: 4px;
 }
 
 .tier .price {
@@ -1548,7 +2005,7 @@ a.feature-item:hover .feature-more {
     margin-top: 48px;
 }
 
-/* Big clickable email cards */
+/* Email cards: the address to click, plus a button that copies it */
 .email-cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1561,35 +2018,35 @@ a.feature-item:hover .feature-more {
     padding: 28px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    color: var(--ink);
-    text-decoration: none;
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .email-card:hover {
-    border-color: var(--blue);
-    box-shadow: 0 10px 28px rgba(13, 61, 105, 0.1);
-    transform: translateY(-2px);
+    border-color: rgba(19, 88, 151, 0.35);
+    box-shadow: 0 10px 28px rgba(13, 61, 105, 0.08);
 }
 
-.email-card-title {
-    font-family: var(--font-heading);
+.email-card h3 {
     font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--blue-dark);
+    margin-bottom: 4px;
 }
 
-.email-card-text {
-    margin: 4px 0 16px;
+.email-card p {
     color: var(--ink-soft);
 }
 
-.email-card-address {
+.email-card-actions {
     margin-top: auto;   /* sits at the bottom of the card */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+}
+
+.email-card-address {
+    display: inline-block;
+    padding: 4px 0;
     font-weight: 700;
-    color: var(--blue);
-    text-decoration: underline;
-    text-underline-offset: 3px;
     overflow-wrap: anywhere;
 }
 
@@ -1665,12 +2122,6 @@ a.feature-item:hover .feature-more {
     font-weight: 700;
 }
 
-.visit-phone {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-}
 
 .social-buttons {
     display: flex;
@@ -1810,12 +2261,942 @@ a.feature-item:hover .feature-more {
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.15);
     padding: 20px 24px;
-    text-align: center;
     font-size: 0.9rem;
+}
+
+.footer-bottom-inner {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 20px;
 }
 
 .footer-bottom p {
     margin: 0;
+}
+
+.footer-privacy {
+    margin-right: auto;   /* pushes "Made with love" to the far right */
+    padding: 4px 0;
+}
+
+.made-in {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.heart-icon {
+    width: 14px;
+    height: 14px;
+    margin: 0 2px;
+    vertical-align: -2px;
+    fill: #e0707b;
+    stroke: none;
+}
+
+/* ===== Footer: night over Lake Lewisville =====
+   Stars, a crescent moon, the far shore and a little sailboat.
+   The sky fades from the join band's blue into the footer's. */
+.lake-scene {
+    height: clamp(84px, 9vw, 128px);
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--blue-dark), var(--blue-deep));
+}
+
+.lake-shore {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.night-boat {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+}
+
+/* The boat rocks on the waves when you reach the footer (script.js adds
+   "in-view"), and again when you point at it */
+.lake-scene.in-view .night-boat {
+    animation: rock 2.4s ease-in-out 2;
+}
+
+.lake-scene:hover .night-boat {
+    animation: rock-again 2.4s ease-in-out 2;
+}
+
+@keyframes rock {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(1.5px) rotate(-4deg); }
+    75% { transform: translateY(-1px) rotate(4deg); }
+}
+
+@keyframes rock-again {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(1.5px) rotate(-4deg); }
+    75% { transform: translateY(-1px) rotate(4deg); }
+}
+
+/* =========================================================
+   Extra touches
+   ========================================================= */
+
+/* ===== The wave along the bottom of each opening section =====
+   A nod to Lake Lewisville. Two layers: a soft one behind, a solid one in front. */
+.wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;   /* tucks under the edge so no thin line shows */
+    z-index: 2;
+    height: clamp(22px, 3.6vw, 52px);
+    pointer-events: none;
+}
+
+.wave svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.wave path {
+    fill: var(--white);
+}
+
+.wave-back {
+    opacity: 0.5;
+}
+
+/* ===== Home: "Happening this week" with the library's open hours ===== */
+.events-text {
+    flex: 1 1 320px;
+}
+
+.events-text p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.events-text .open-status {
+    margin-top: 4px;
+    font-size: 0.95rem;
+}
+
+/* ===== Open now / closed now notes (filled in by script.js) ===== */
+.open-status {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    font-weight: 700;
+}
+
+/* The colored dot, lined up with the first line of words */
+.open-status::before {
+    content: "";
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin-top: calc(0.825em - 5px);
+    border-radius: 50%;
+}
+
+.open-status.is-open {
+    color: #2f5214;
+}
+
+.open-status.is-open::before {
+    background-color: var(--green);
+    animation: pulse 1.5s ease-out 3;   /* pulses three times, then rests */
+}
+
+.open-status.is-closed {
+    color: var(--ink);
+}
+
+.open-status.is-closed::before {
+    background-color: var(--red);
+}
+
+@keyframes pulse {
+    from {
+        box-shadow: 0 0 0 0 rgba(121, 160, 72, 0.6);
+    }
+    to {
+        box-shadow: 0 0 0 9px rgba(121, 160, 72, 0);
+    }
+}
+
+/* ===== Home: membership spotlight ===== */
+.spotlight {
+    position: relative;
+    overflow: hidden;
+    background-image:
+        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 42%),
+        radial-gradient(circle at 100% 100%, rgba(179, 43, 57, 0.16), transparent 40%);
+}
+
+.spotlight-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(36px, 6vw, 80px);
+    align-items: center;
+}
+
+.spotlight h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin-bottom: 12px;
+}
+
+.spotlight-text > p:not(.spotlight-price) {
+    max-width: 30em;
+    font-size: 1.1rem;
+    margin-bottom: 28px;
+}
+
+.spotlight-price {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0 0 20px;
+}
+
+.spotlight-price .amount {
+    font-family: var(--font-heading);
+    font-size: clamp(3.6rem, 8vw, 5.4rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+}
+
+.spotlight-price .per {
+    line-height: 1.4;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.spotlight-benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.spotlight-benefits li {
+    padding: 24px;
+    border-radius: var(--radius);
+    background-color: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.spotlight-benefits li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.spotlight-benefits h3 {
+    font-size: 1.1rem;
+}
+
+.spotlight-benefits p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+/* Light versions of the logo's three colors, easy to see on dark blue */
+.spotlight-benefits li > .icon-badge {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 14px;
+    color: #9cc3e6;
+    background-color: rgba(156, 195, 230, 0.14);
+}
+
+.spotlight-benefits li:nth-child(3n + 1) > .icon-badge {
+    color: #b9d58f;
+    background-color: rgba(185, 213, 143, 0.14);
+}
+
+.spotlight-benefits li:nth-child(3n + 3) > .icon-badge {
+    color: #f0a3ab;
+    background-color: rgba(240, 163, 171, 0.14);
+}
+
+/* Outlined white button for dark backgrounds */
+.button-outline-light {
+    color: var(--white);
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+
+.button-outline-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Copy buttons (only shown when JavaScript is running) ===== */
+.copy-btn {
+    display: none;
+}
+
+.js .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 32px;
+    padding: 4px 12px;
+    border: 1px solid rgba(19, 88, 151, 0.3);
+    border-radius: 999px;
+    background-color: var(--white);
+    color: var(--blue-dark);
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.js .copy-btn:hover {
+    border-color: var(--blue);
+    background-color: var(--tint);
+}
+
+.copy-btn .icon {
+    width: 14px;
+    height: 14px;
+}
+
+.copy-btn .icon-check,
+.copy-btn.copied .icon-copy {
+    display: none;
+}
+
+.copy-btn.copied .icon-check {
+    display: block;
+}
+
+.js .copy-btn.copied {
+    color: #2f5214;
+    border-color: var(--green);
+    background-color: rgba(121, 160, 72, 0.14);
+}
+
+/* Kroger's organization number, shown like a coupon code */
+.code-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.code {
+    display: inline-block;
+    padding: 4px 14px;
+    border: 2px dashed rgba(19, 88, 151, 0.35);
+    border-radius: 8px;
+    background-color: var(--tint);
+    color: var(--blue-dark);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+/* ===== Little pop-up message ===== */
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 50;
+    max-width: calc(100% - 32px);
+    padding: 12px 20px;
+    border-radius: 999px;
+    background-color: var(--ink);
+    color: var(--white);
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    transform: translate(-50%, 16px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.toast:empty {
+    padding: 0;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* ===== Join: Individual and Business tabs ===== */
+.tab-list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 28px;
+    padding: 6px;
+    border-radius: 999px;
+    background-color: var(--white);
+    box-shadow: inset 0 0 0 1px var(--line), 0 4px 14px rgba(13, 61, 105, 0.06);
+}
+
+.tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: var(--ink-soft);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab:hover {
+    color: var(--blue-dark);
+    background-color: var(--tint);
+}
+
+.tab[aria-selected="true"] {
+    color: var(--white);
+    background-color: var(--blue-dark);
+}
+
+.tab .icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* With tabs on, the tab names do the job of the panel headings on screen
+   (the headings stay for screen readers) */
+.tabs-ready .panel-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.panel-title {
+    margin-bottom: 20px;
+}
+
+/* Arriving at join.html#business leaves room above for the tabs */
+.tab-panel {
+    scroll-margin-top: 90px;
+}
+
+.tab-panel + .tab-panel {
+    margin-top: 40px;
+}
+
+.tabs-ready .tab-panel + .tab-panel {
+    margin-top: 0;
+}
+
+.tabs-ready .tab-panel:not([hidden]) {
+    animation: panel-in 0.3s ease-out;
+}
+
+@keyframes panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+}
+
+/* ===== Join: frequently asked questions ===== */
+.faq-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(28px, 5vw, 64px);
+    align-items: start;
+}
+
+.faq-intro p {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+}
+
+.faq details {
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background-color: var(--white);
+    transition: box-shadow 0.2s ease;
+}
+
+.faq details[open] {
+    box-shadow: 0 10px 28px rgba(13, 61, 105, 0.08);
+}
+
+.faq summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 24px;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--blue-dark);
+    cursor: pointer;
+    list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+    display: none;
+}
+
+/* A chevron that flips when the answer opens */
+.faq summary::after {
+    content: "";
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    margin: -4px 4px 0 0;
+    border: solid var(--blue);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.faq details[open] summary::after {
+    margin-top: 4px;
+    transform: rotate(-135deg);
+}
+
+.faq summary:hover {
+    color: var(--blue);
+}
+
+.faq summary:focus-visible {
+    border-radius: var(--radius);
+}
+
+.faq-answer {
+    padding: 0 24px 20px;
+    color: var(--ink-soft);
+}
+
+.faq-answer p {
+    margin: 0;
+}
+
+.faq-answer a {
+    font-weight: 700;
+}
+
+#faq .official-note {
+    margin-top: clamp(32px, 5vw, 48px);
+}
+
+/* ===== Gallery: video previews ===== */
+.video-play {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    background-color: var(--blue-deep);
+}
+
+.video-play img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* trims the black bars from YouTube's preview */
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.video-play:hover img {
+    transform: scale(1.04);
+    opacity: 0.9;
+}
+
+.play-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 72px;
+    margin: -36px 0 0 -36px;
+    border-radius: 50%;
+    background-color: var(--red);
+    color: var(--white);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.25), 0 10px 26px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.play-button .icon {
+    width: 28px;
+    height: 28px;
+    margin-left: 4px;   /* the triangle looks centered when nudged right */
+    fill: currentColor;
+}
+
+.video-play:hover .play-button {
+    transform: scale(1.08);
+    background-color: var(--red-dark);
+}
+
+/* Lightbox: the photo fades softly as it changes */
+.lightbox img {
+    transition: opacity 0.2s ease;
+}
+
+.lightbox img.is-changing {
+    opacity: 0.35;
+}
+
+/* ===== Newsletters: a little drawing of the newsletter ===== */
+.current-card {
+    position: relative;
+    margin-top: 64px;
+    padding-top: 150px;
+    text-align: center;
+}
+
+.current-card .button-row {
+    justify-content: center;
+}
+
+.paper-stack {
+    position: absolute;
+    top: -64px;
+    left: 50%;
+    width: 150px;
+    height: 194px;
+    margin-left: -75px;
+}
+
+.paper {
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.paper-back {
+    background-color: #dbe6f1;
+    transform: rotate(-8deg) translate(-12px, 6px);
+}
+
+.paper-front {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 14px 14px;
+    overflow: hidden;
+    background-color: var(--white);
+    transform: rotate(5deg);
+    transition: transform 0.3s ease;
+}
+
+.current-card:hover .paper-front {
+    transform: rotate(2deg) translateY(-4px);
+}
+
+.paper-stripe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(
+        to right,
+        var(--green) 0 33.33%,
+        var(--blue) 33.33% 66.66%,
+        var(--red) 66.66% 100%
+    );
+}
+
+.paper-logo {
+    width: 100%;
+    height: auto;
+}
+
+.paper-edition {
+    font-family: var(--font-heading);
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--blue-dark);
+}
+
+.paper-photo {
+    display: block;
+    flex: 1;
+    min-height: 36px;
+    border-radius: 3px;
+    background: linear-gradient(135deg, #cfe0f0, #b9d58f);
+}
+
+.paper-line {
+    display: block;
+    height: 5px;
+    border-radius: 3px;
+    background-color: #dfe6ee;
+}
+
+.paper-line.short {
+    width: 60%;
+}
+
+.current-card .inbox-note {
+    text-align: center;
+}
+
+/* ===== About: rooted in the City by the Lake ===== */
+.rooted-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(36px, 6vw, 80px);
+    align-items: center;
+}
+
+.lake-art {
+    position: relative;
+}
+
+/* A soft green block behind the picture, like a mat in a frame */
+.lake-art::before {
+    content: "";
+    position: absolute;
+    inset: 20px -20px -20px 20px;
+    border-radius: 24px;
+    background-color: rgba(121, 160, 72, 0.2);
+}
+
+.lake-art svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.18);
+}
+
+.day-boat {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+}
+
+.lake-art:hover .day-boat {
+    animation: rock 2.4s ease-in-out 2;
+}
+
+.rooted-text > p:not(.lead):not(.sources) {
+    color: var(--ink-soft);
+}
+
+/* A timeline: a circle for each year, joined by a line that runs
+   through the logo's three colors */
+.timeline {
+    list-style: none;
+    margin: 28px 0 20px;
+    padding: 0;
+}
+
+.timeline li {
+    position: relative;
+    padding: 0 0 18px 36px;
+}
+
+.timeline li:last-child {
+    padding-bottom: 0;
+}
+
+.timeline li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--blue);
+    background-color: var(--white);
+}
+
+/* The line from each circle down to the next one */
+.timeline li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -4px;
+    width: 2px;
+    border-radius: 2px;
+    background-color: var(--blue);
+}
+
+.timeline li:first-child::before {
+    border-color: #5c8133;
+}
+
+.timeline li:first-child::after {
+    background: linear-gradient(#5c8133, var(--blue));
+}
+
+.timeline li:nth-last-child(2)::after {
+    background: linear-gradient(var(--blue), var(--red));
+}
+
+/* The year still to come gets a dashed circle */
+.timeline li:last-child::before {
+    border-style: dashed;
+    border-color: var(--red);
+}
+
+.timeline p {
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+.timeline .timeline-year {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 10px;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--blue-dark);
+}
+
+.pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background-color: rgba(179, 43, 57, 0.1);
+    color: var(--red-dark);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.sources {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+}
+
+/* ===== About: Business Friends beside the bylaws ===== */
+.business-governance {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.business-block,
+.governance-card {
+    padding: clamp(28px, 4vw, 44px);
+    border-radius: 16px;
+}
+
+.business-block {
+    background-color: var(--white);
+    border: 1px solid var(--line);
+}
+
+.business-block > p {
+    color: var(--ink-soft);
+}
+
+.governance-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: rgba(255, 255, 255, 0.88);
+    background-color: var(--blue-dark);
+    background-image: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.1), transparent 55%);
+}
+
+.governance-card h2 {
+    color: var(--white);
+}
+
+.governance-card .doc-icon {
+    margin-bottom: 20px;
+    color: var(--white);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.governance-note {
+    margin: auto 0 0;
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.governance-card :focus-visible {
+    outline-color: var(--white);
+}
+
+/* ===== About: arriving from a "Learn more" link =====
+   The card you jumped to glows green for a moment */
+.story-row:target {
+    animation: arrive 2.4s ease-out;
+}
+
+@keyframes arrive {
+    0%, 35% {
+        box-shadow: 0 0 0 4px var(--green), 0 16px 40px rgba(13, 61, 105, 0.16);
+    }
+    100% {
+        box-shadow: 0 0 0 4px rgba(121, 160, 72, 0);
+    }
+}
+
+/* ===== Contact: follow along ===== */
+.follow-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 24px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    background-color: var(--tint);
+}
+
+.follow-card p {
+    margin: 0;
+    color: var(--ink-soft);
+}
+
+/* ===== Contact: directions and phone ===== */
+.visit-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px;
+}
+
+.visit-link .icon {
+    flex-shrink: 0;
+    color: var(--blue);
+}
+
+/* Keeps a phone number on one line */
+.nowrap {
+    white-space: nowrap;
 }
 
 /* ===== Medium screens ===== */
@@ -1826,8 +3207,17 @@ a.feature-item:hover .feature-more {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .contact-layout {
+    .contact-layout,
+    .newsletter-layout,
+    .spotlight-inner,
+    .faq-layout,
+    .business-governance {
         grid-template-columns: 1fr;
+    }
+
+    .newsletter-layout {
+        max-width: 640px;
+        margin: 0 auto;
     }
 
     .help-grid,
@@ -1860,6 +3250,17 @@ a.feature-item:hover .feature-more {
 @media (max-width: 900px) {
     /* Menu button: show the "Menu" button, hide the links until it's tapped.
        Only when JavaScript is running, so the links never get stuck hidden. */
+    .header-inner {
+        column-gap: 10px;
+    }
+
+    .header-join {
+        display: inline-block;
+        margin-left: auto;   /* sits just left of the Menu button */
+        padding: 9px 18px;
+        font-size: 0.95rem;
+    }
+
     .js .menu-toggle {
         display: inline-flex;
         align-items: center;
@@ -1941,9 +3342,12 @@ a.feature-item:hover .feature-more {
         border-bottom: 1px solid var(--line);
     }
 
+    .main-nav a:not(.button)::after {
+        display: none;   /* the menu uses lines between links instead */
+    }
+
     .main-nav a:hover,
     .main-nav a[aria-current="page"] {
-        border-bottom-color: var(--line);
         color: var(--blue);
     }
 
@@ -2003,21 +3407,37 @@ a.feature-item:hover .feature-more {
     }
 
     .about-hero-inner,
-    .story-row {
+    .story-rows,
+    .rooted-inner {
         grid-template-columns: 1fr;
     }
 
-    .story-row:nth-child(even) .story-photo {
-        order: 0;   /* photo always on top on phones */
+    .about-hero-inner {
+        gap: 40px;
     }
 
-    .about-hero-photo::before {
-        inset: 16px -12px -16px 12px;
+    .polaroid-stack {
+        width: min(100%, 420px);
     }
 
-    .doc-card {
-        grid-template-columns: 1fr;
-        justify-items: start;
+    .polaroid {
+        padding: 7px 7px 0;
+    }
+
+    .polaroid figcaption {
+        padding: 8px 2px 10px;
+        font-size: 0.8rem;
+    }
+
+    .polaroid::before {
+        width: 60px;
+        height: 18px;
+        margin-left: -30px;
+        top: -8px;
+    }
+
+    .lake-art::before {
+        inset: 14px -10px -14px 10px;
     }
 
     .join-band-mascot {
@@ -2026,12 +3446,113 @@ a.feature-item:hover .feature-more {
     }
 
     .page-header {
-        padding-bottom: 88px;   /* room for the peeking book */
+        padding-bottom: 96px;   /* room for the wave and the peeking book */
     }
 
     .current-edition,
     .panel {
         padding: 24px;
+    }
+
+    /* How your support helps: steps stack, joined by a line down the left */
+    .flow {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: left;
+    }
+
+    .flow::before {
+        top: 36px;
+        bottom: 36px;
+        left: 34px;
+        right: auto;
+        border-top: 0;
+        border-left: 3px dashed rgba(19, 88, 151, 0.28);
+        transform-origin: center top;
+    }
+
+    .flow.will-reveal::before {
+        transform: scaleY(0);
+    }
+
+    .flow.will-reveal.in-view::before {
+        transform: scaleY(1);
+    }
+
+    .flow-step {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .flow-icon {
+        margin-bottom: 0;
+    }
+
+    .flow-step p {
+        margin: 0;
+    }
+
+    .faq summary {
+        padding: 16px 18px;
+        font-size: 1.05rem;
+    }
+
+    .faq-answer {
+        padding: 0 18px 18px;
+    }
+
+    .current-card {
+        padding-top: 132px;
+    }
+
+    .paper-stack {
+        top: -56px;
+        width: 128px;
+        height: 166px;
+        margin-left: -64px;
+    }
+
+    .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-privacy {
+        margin-right: 0;
+    }
+
+    .play-button {
+        width: 60px;
+        height: 60px;
+        margin: -30px 0 0 -30px;
+    }
+}
+
+/* Small phones: a slightly smaller logo so Join and Menu fit on one line */
+@media (max-width: 420px) {
+    .header-inner {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .brand img {
+        height: 40px;
+    }
+
+    /* Slightly slimmer buttons, so two fit side by side */
+    .button {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .header-join {
+        padding: 8px 14px;
+    }
+
+    .js .menu-toggle {
+        padding: 7px 12px;
     }
 }
 
@@ -2042,8 +3563,58 @@ a.feature-item:hover .feature-more {
     .benefit-grid,
     .email-cards,
     .help-links,
-    .footer-inner {
+    .footer-inner,
+    .spotlight-benefits {
         grid-template-columns: 1fr;
+    }
+
+    /* Benefit cards become compact rows: icon on the left, words on the right */
+    .spotlight-benefits li,
+    .benefit {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 16px;
+        align-items: start;
+        padding: 18px;
+        text-align: left;
+    }
+
+    .spotlight-benefits li > .icon-badge,
+    .benefit > .icon-badge {
+        grid-row: span 2;
+        margin-bottom: 0;
+    }
+
+    .benefit > .icon-badge {
+        width: 52px;
+        height: 52px;
+    }
+
+    .spotlight-benefits h3,
+    .benefit h3 {
+        margin-bottom: 2px;
+    }
+
+    .footer-inner {
+        padding-top: 40px;
+    }
+
+    .tab {
+        padding: 10px 18px;
+    }
+
+    /* Business Friends become a simple list: logo, then name */
+    .business-logos li {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        padding: 12px 16px;
+    }
+
+    .business-logos img {
+        width: 72px;
+        height: 48px;
     }
 
     .footer-inner {
@@ -2062,9 +3633,59 @@ a.feature-item:hover .feature-more {
     }
 }
 
+/* ===== Printing: just the content, no menus or buttons ===== */
+@media print {
+    .topbar,
+    .site-header nav,
+    .menu-toggle,
+    .header-join,
+    .back-to-top,
+    .join-band,
+    .peek,
+    .wave,
+    .lake-scene,
+    .events-strip,
+    .site-footer nav,
+    .footer-support,
+    .lightbox,
+    .copy-btn,
+    .toast,
+    .tab-list {
+        display: none !important;
+    }
+
+    /* Print both membership lists, not just the open tab */
+    .tab-panel[hidden] {
+        display: block !important;
+    }
+
+    .flow.will-reveal::before,
+    .flow.will-reveal .flow-icon {
+        opacity: 1;
+        transform: none;
+    }
+
+    .site-header {
+        position: static;
+        box-shadow: none;
+    }
+
+    .band {
+        padding: 24px 0;
+        background: none !important;
+    }
+
+    body {
+        font-size: 11pt;
+        color: #000;
+    }
+}
+
 /* Respect people who turn off animations in their device settings */
 @media (prefers-reduced-motion: reduce) {
-    * {
+    *,
+    *::before,
+    *::after {
         transition: none !important;
         animation: none !important;
     }
@@ -2074,9 +3695,12 @@ a.feature-item:hover .feature-more {
     }
 
     .button:hover,
+    .button:active,
     .tier:hover,
     .help-item:hover,
-    .photo:hover img {
+    .photo:hover img,
+    .video-play:hover img,
+    .spotlight-benefits li:hover {
         transform: none;
     }
 }

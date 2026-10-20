@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About the Friends | Friends of The Colony Public Library</title>
-    <meta name="description" content="The mission and work of Friends of The Colony Public Library.">
+    <meta name="description" content="Friends of The Colony Public Library is a 501(c)(3) nonprofit supporting The Colony Public Library through fundraising and volunteer activities.">
     <meta name="theme-color" content="#0d3d69">
+    <meta name="color-scheme" content="light">
 
     <!-- Draft: asks search engines not to list this site until the board approves it -->
     <meta name="robots" content="noindex, nofollow">
@@ -13,20 +14,22 @@
     <!-- Browser tab icon -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 
+    <!-- Starts connecting to the photo server early, so photos appear sooner.
+         Remove this line once the photos are moved into the images folder. -->
+    <link rel="preconnect" href="https://img1.wsimg.com">
+
     <!-- Preview card when the link is shared in a text or on Facebook -->
     <meta property="og:title" content="About the Friends | Friends of The Colony Public Library">
-    <meta property="og:description" content="The mission and work of Friends of The Colony Public Library.">
+    <meta property="og:description" content="Friends of The Colony Public Library is a 501(c)(3) nonprofit supporting The Colony Public Library through fundraising and volunteer activities.">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Friends of The Colony Public Library">
     <meta property="og:image" content="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/friends%20children.jpg/:/rs=w:1200,h:630,cg:true">
     <meta property="og:image:alt" content="Children at story time with a costumed character at The Colony Public Library">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
-    <link rel="preconnect" href="https://img1.wsimg.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
+    <!-- Fonts are stored in the site itself: faster, and no outside service needed.
+         Literata for headings (made for reading books), Public Sans for text
+         (made for clear, accessible public-service websites). -->
 
     <link rel="stylesheet" href="style.css">
 
@@ -34,7 +37,7 @@
     <script>document.documentElement.classList.add("js");</script>
     <script src="script.js" defer></script>
 </head>
-<body>
+<body id="top">
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -71,7 +74,8 @@
                 <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
             </a>
 
-            <!-- Only shows on phones -->
+            <!-- Only show on phones and tablets -->
+            <a class="button header-join" href="join.html">Join</a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
                 <span class="menu-bars" aria-hidden="true"></span>
                 Menu
@@ -90,116 +94,308 @@
     <main id="main">
         <section class="band band-tint about-hero">
             <div class="wrap about-hero-inner">
-                <div>
+                <div class="about-hero-text">
                     <h1>About the Friends</h1>
-                    <figure class="mission">
-                        <figcaption class="mission-label"><span class="tri-rule" aria-hidden="true"></span>Our Mission</figcaption>
-                        <blockquote>
-                            <p>To advocate for and support The Colony Public Library as a cultural and educational asset to the residents of The Colony and Denton County, through fundraising and by promoting volunteer activities.</p>
-                        </blockquote>
-                    </figure>
+                    <p class="lead">A 501(c)(3) nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
                     <div class="button-row">
                         <a class="button" href="join.html">Become a Friend</a>
-                        <a class="button button-secondary" href="contact.html">Contact Us</a>
+                        <a class="button button-secondary" href="#get-involved">Get Involved</a>
                     </div>
                 </div>
-                <div class="about-hero-photo">
-                    <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_2694.JPG/:/rs=w:1000" alt="A volunteer helping children with a hands-on activity">
+                <div class="polaroid-stack">
+                    <figure class="polaroid polaroid-1">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_2694.JPG/:/rs=w:640" alt="A volunteer helping children with a hands-on activity" decoding="async">
+                        <figcaption>Hands-on learning</figcaption>
+                    </figure>
+                    <figure class="polaroid polaroid-2">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4286.JPG/:/rs=w:640" alt="Two presenters in a brightly decorated children's room" fetchpriority="high" decoding="async">
+                        <figcaption>Children's programs</figcaption>
+                    </figure>
+                    <figure class="polaroid polaroid-3">
+                        <img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4313.jpg/:/rs=w:640" alt="Families visiting animals at an outdoor event" decoding="async">
+                        <figcaption>Outdoor family events</figcaption>
+                    </figure>
                 </div>
+            </div>
+            <div class="wave" aria-hidden="true">
+                <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+                    <path class="wave-back" d="M0 30 C 160 10 320 12 480 28 S 800 50 960 34 S 1280 8 1440 24 V64 H0 Z"/>
+                    <path class="wave-front" d="M0 42 C 200 24 380 28 560 40 S 900 58 1100 42 S 1340 28 1440 36 V64 H0 Z"/>
+                </svg>
             </div>
         </section>
 
-        <section class="band">
+        <section class="band mission-band">
+            <div class="wrap">
+                <figure class="mission">
+                    <figcaption class="mission-label"><span class="tri-rule" aria-hidden="true"></span>Our Mission<span class="tri-rule" aria-hidden="true"></span></figcaption>
+                    <blockquote>
+                        <p>To advocate for and support The Colony Public Library as a cultural and educational asset to the residents of The Colony and Denton County, through fundraising and by promoting volunteer activities.</p>
+                    </blockquote>
+                </figure>
+
+                <h2 class="flow-title">How Your Support Helps</h2>
+                <ol class="flow">
+                    <li class="flow-step">
+                        <span class="flow-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+                        <div>
+                            <h3>You Become a Friend</h3>
+                            <p>Your membership or donation supports the Friends.</p>
+                        </div>
+                    </li>
+                    <li class="flow-step">
+                        <span class="flow-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-4 0v1"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span>
+                        <div>
+                            <h3>The Friends Get to Work</h3>
+                            <p>We advocate for and support the library through fundraising and by promoting volunteer activities.</p>
+                        </div>
+                    </li>
+                    <li class="flow-step">
+                        <span class="flow-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+                        <div>
+                            <h3>The Library Does More</h3>
+                            <p>Technology projects, book donations, genealogy research and Little Free Libraries for The Colony.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="band band-tint">
             <div class="wrap">
                 <div class="section-head">
                     <h2>What We Do</h2>
                     <p>Here are four ways the Friends support the library.</p>
                 </div>
                 <div class="story-rows">
-                <div class="story-row" id="technology">
-                    <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_1995.JPG/:/rs=w:900" alt="Visitors trying out computers and technology at the library" loading="lazy">
-                    <div class="story-text">
-                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12"/><path d="M21 7l-9 5-9-5"/></svg></span>
-                        <h3>Technology Projects</h3>
-                        <p>3D printing and technology grants to support the library.</p>
+                    <div class="story-row" id="technology">
+                        <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_1995.JPG/:/rs=w:900" alt="Visitors trying out computers and technology at the library" loading="lazy" decoding="async">
+                        <div class="story-text">
+                            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12"/><path d="M21 7l-9 5-9-5"/></svg></span>
+                            <h3>Technology Projects</h3>
+                            <p>3D printing and technology grants to support the library.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="story-row" id="book-donations">
-                    <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4239.JPG/:/rs=w:900" alt="Colorful children's books displayed on shelves" loading="lazy">
-                    <div class="story-text">
-                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-                        <h3>Book Donations and Memoriams</h3>
-                        <p>Accepting and facilitating book donations and adoptions.</p>
+                    <div class="story-row" id="book-donations">
+                        <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_4239.JPG/:/rs=w:900" alt="Colorful children's books displayed on shelves" loading="lazy" decoding="async">
+                        <div class="story-text">
+                            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+                            <h3>Book Donations and Memoriams</h3>
+                            <p>Accepting and facilitating book donations and adoptions.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="story-row" id="genealogy">
-                    <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0325.JPG/:/rs=w:900" alt="A group gathered beside a historical marker" loading="lazy">
-                    <div class="story-text">
-                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M12 7.5V14M6 16.5V14h12v2.5"/></svg></span>
-                        <h3>Genealogy Projects</h3>
-                        <p>Helping research the history of The Colony and its residents.</p>
+                    <div class="story-row" id="genealogy">
+                        <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/IMG_0325.JPG/:/rs=w:900" alt="A group gathered beside a historical marker" loading="lazy" decoding="async">
+                        <div class="story-text">
+                            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M12 7.5V14M6 16.5V14h12v2.5"/></svg></span>
+                            <h3>Genealogy Projects</h3>
+                            <p>Helping research the history of The Colony and its residents.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="story-row" id="little-free-libraries">
-                    <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/TCPL%20staff%20and%20volunteers%20with%20Lions%20Club%20LFL.jpg/:/rs=w:900" alt="Library staff and volunteers standing with a Little Free Library" loading="lazy">
-                    <div class="story-text">
-                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-6h6v6"/></svg></span>
-                        <h3>Little Free Libraries</h3>
-                        <p>Working with Little Free Library to promote reading and community outreach.</p>
+                    <div class="story-row" id="little-free-libraries">
+                        <img class="story-photo" src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/TCPL%20staff%20and%20volunteers%20with%20Lions%20Club%20LFL.jpg/:/rs=w:900" alt="Library staff and volunteers standing with a Little Free Library" loading="lazy" decoding="async">
+                        <div class="story-text">
+                            <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-6h6v6"/></svg></span>
+                            <h3>Little Free Libraries</h3>
+                            <p>Working with Little Free Library to promote reading and community outreach.</p>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </section>
 
-        <section class="band band-tint business-band">
-            <div class="wrap narrow">
-                <h2>Thank You, Business Friends</h2>
-                <p class="lead">These local businesses support the Friends and our library.</p>
-                <ul class="logo-row business-logos">
-                    <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/grandscape-logo.png/:/rs=w:400" alt="" loading="lazy"><span>Grandscape</span></li>
-                    <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/lakeside.jpg" alt="" loading="lazy"><span>Lakeside Community Theatre</span></li>
-                    <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20chamber.png/:/rs=w:400" alt="" loading="lazy"><span>The Colony Chamber of Commerce</span></li>
-                </ul>
-                <a class="button button-secondary" href="join.html#business">Become a Business Friend</a>
-            </div>
-        </section>
-
-        <section class="band">
-            <div class="wrap narrow">
-                <div class="doc-card">
-                    <span class="doc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
-                    <div>
-                        <h2>Our Bylaws</h2>
-                        <p>Learn how the Friends are organized and run. The bylaws are dated April 2022.</p>
-                    </div>
-                    <a class="button" href="https://img1.wsimg.com/blobby/go/426e5310-f3ec-470b-af8e-1451dc94847f/downloads/30%20April%202022%20bylaws.pdf?ver=1777655523602">Read the Bylaws (PDF)</a>
+        <!-- ===== A nod to The Colony itself ===== -->
+        <section class="band rooted">
+            <div class="wrap rooted-inner">
+                <div class="lake-art">
+                    <svg viewBox="0 0 560 400" role="img" aria-labelledby="lake-art-title" focusable="false">
+                        <title id="lake-art-title">Illustration of a sunny lakeshore with a sailboat and a Little Free Library</title>
+                        <defs>
+                            <linearGradient id="lake-art-sky" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#cfe0f0"/>
+                                <stop offset="1" stop-color="#f4f8fb"/>
+                            </linearGradient>
+                            <linearGradient id="lake-art-water" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#2a6fae"/>
+                                <stop offset="1" stop-color="#0d3d69"/>
+                            </linearGradient>
+                            <radialGradient id="lake-art-glow">
+                                <stop offset="0.45" stop-color="#ffe7a8" stop-opacity="0.9"/>
+                                <stop offset="1" stop-color="#ffe7a8" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+                        <rect width="560" height="400" fill="url(#lake-art-sky)"/>
+                        <circle cx="430" cy="92" r="84" fill="url(#lake-art-glow)"/>
+                        <circle cx="430" cy="92" r="38" fill="#f6c453"/>
+                        <g fill="#ffffff">
+                            <ellipse cx="120" cy="86" rx="46" ry="16"/><ellipse cx="150" cy="74" rx="30" ry="18"/>
+                            <ellipse cx="300" cy="58" rx="34" ry="11"/><ellipse cx="322" cy="50" rx="20" ry="12"/>
+                        </g>
+                        <g fill="none" stroke="#4a5866" stroke-width="2.5" stroke-linecap="round">
+                            <path d="M228 110 q8 -8 16 0 q8 -8 16 0"/><path d="M270 132 q6 -6 12 0 q6 -6 12 0"/>
+                        </g>
+                        <path d="M0 212 C 80 196 150 202 220 208 S 380 196 460 204 S 540 210 560 206 V240 H0 Z" fill="#b9d58f"/>
+                        <g fill="#79a048">
+                            <circle cx="30" cy="206" r="16"/><circle cx="58" cy="200" r="20"/><circle cx="90" cy="208" r="14"/>
+                            <circle cx="300" cy="204" r="15"/><circle cx="326" cy="198" r="19"/><circle cx="354" cy="206" r="13"/>
+                            <circle cx="480" cy="204" r="16"/><circle cx="508" cy="198" r="20"/><circle cx="538" cy="205" r="15"/>
+                        </g>
+                        <g fill="#5c8133">
+                            <circle cx="44" cy="214" r="12"/><circle cx="316" cy="212" r="11"/><circle cx="494" cy="212" r="12"/>
+                        </g>
+                        <rect y="232" width="560" height="168" fill="url(#lake-art-water)"/>
+                        <g fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.35">
+                            <path d="M60 268 q14 -8 28 0"/><path d="M250 300 q14 -8 28 0"/><path d="M330 262 q14 -8 28 0"/>
+                            <path d="M120 330 q14 -8 28 0"/><path d="M460 316 q14 -8 28 0"/><path d="M380 356 q14 -8 28 0"/>
+                        </g>
+                        <g stroke="#f6c453" stroke-width="4" stroke-linecap="round" opacity="0.6">
+                            <path d="M404 250 H456"/><path d="M412 262 H448"/><path d="M420 274 H440"/>
+                        </g>
+                        <g class="day-boat">
+                            <path d="M196 238 V290" stroke="#1f2933" stroke-width="3"/>
+                            <path d="M196 236 L208 241 L196 246 Z" fill="#b32b39"/>
+                            <path d="M199 248 L199 286 L236 286 Z" fill="#ffffff"/>
+                            <path d="M193 252 L193 286 L166 286 Z" fill="#b9d58f"/>
+                            <path d="M160 290 H238 L226 304 H172 Z" fill="#b32b39"/>
+                        </g>
+                        <g stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.45">
+                            <path d="M164 312 H192"/><path d="M206 312 H236"/>
+                        </g>
+                        <path d="M0 400 V318 C 40 304 90 300 140 312 C 170 320 190 340 200 400 Z" fill="#79a048"/>
+                        <path d="M0 400 V340 C 40 330 80 330 120 342 C 140 350 150 370 156 400 Z" fill="#5c8133"/>
+                        <rect x="74" y="292" width="8" height="58" fill="#7a5a36"/>
+                        <path d="M48 263 L78 240 L108 263 Z" fill="#b32b39"/>
+                        <rect x="54" y="262" width="48" height="36" rx="3" fill="#135897"/>
+                        <rect x="60" y="267" width="36" height="26" rx="2" fill="#ffffff"/>
+                        <g>
+                            <rect x="64" y="272" width="5" height="18" fill="#79a048"/><rect x="70" y="274" width="5" height="16" fill="#b32b39"/>
+                            <rect x="76" y="271" width="5" height="19" fill="#135897"/><rect x="82" y="275" width="5" height="15" fill="#f6c453"/>
+                            <rect x="88" y="273" width="4" height="17" fill="#79a048"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="rooted-text">
+                    <h2>Rooted in the City by the Lake</h2>
+                    <p class="lead">The Colony sits on the eastern shore of Lake Lewisville, with about 23 miles of shoreline. That's why it's known as the City by the Lake.</p>
+                    <p>Helping research the history of The Colony and its residents is part of what the Friends do. Here are a few moments from that history.</p>
+                    <ol class="timeline">
+                        <li>
+                            <p class="timeline-year">1841</p>
+                            <p>The Peters Colony settlement contract begins under the Republic of Texas. The city later takes its name from it.</p>
+                        </li>
+                        <li>
+                            <p class="timeline-year">1954</p>
+                            <p>The Lake Lewisville dam, built by the U.S. Army Corps of Engineers, begins collecting water.</p>
+                        </li>
+                        <li>
+                            <p class="timeline-year">1977</p>
+                            <p>Residents vote to incorporate The Colony as a city.</p>
+                        </li>
+                        <li>
+                            <p class="timeline-year">1982</p>
+                            <p>The Colony Public Library opens.</p>
+                        </li>
+                        <li>
+                            <p class="timeline-year">2027 <span class="pill">Coming up</span></p>
+                            <p>The Colony turns 50.</p>
+                        </li>
+                    </ol>
+                    <p class="sources">Sources: <a href="https://www.thecolonytx.gov/692/City-History">City of The Colony history</a> and <a href="https://en.wikipedia.org/wiki/The_Colony,_Texas">Wikipedia</a>.</p>
                 </div>
             </div>
         </section>
 
-        <!-- ===== Join band (repeats on most pages) ===== -->
-        <section class="band band-dark join-band">
-            <div class="wrap join-band-inner">
-                <div class="join-band-mascot">
-                    <img src="images/book-friend.svg" alt="" width="320" height="260">
-                </div>
-                <div class="join-band-text">
-                    <h2>Become a Friend for $15 a Year</h2>
-                    <p>That's about $1.25 a month to support your library.</p>
-                    <ul class="join-band-benefits">
-                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Quarterly newsletter</li>
-                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Private event invitations</li>
-                        <li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 10% off FOTCPL books and sale items</li>
+        <section class="band band-tint">
+            <div class="wrap business-governance">
+                <div class="business-block">
+                    <h2>Thank You, Business Friends</h2>
+                    <p>These local businesses support the Friends and our library.</p>
+                    <ul class="logo-row business-logos">
+                        <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/grandscape-logo.png/:/rs=w:400" alt="" loading="lazy"><span>Grandscape</span></li>
+                        <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/lakeside.jpg" alt="" loading="lazy"><span>Lakeside Community Theatre</span></li>
+                        <li><img src="https://img1.wsimg.com/isteam/ip/426e5310-f3ec-470b-af8e-1451dc94847f/the%20colony%20chamber.png/:/rs=w:400" alt="" loading="lazy"><span>The Colony Chamber of Commerce</span></li>
                     </ul>
+                    <a class="button button-secondary" href="join.html#business">Become a Business Friend</a>
                 </div>
-                <a class="button button-light" href="join.html">Become a Friend</a>
+                <div class="governance-card">
+                    <span class="doc-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
+                    <h2>Our Bylaws</h2>
+                    <p>Learn how the Friends are organized and run. The bylaws are dated April 2022.</p>
+                    <a class="button button-light" href="https://img1.wsimg.com/blobby/go/426e5310-f3ec-470b-af8e-1451dc94847f/downloads/30%20April%202022%20bylaws.pdf?ver=1777655523602">Read the Bylaws (PDF)</a>
+                    <p class="governance-note">Friends of The Colony Public Library is a 501(c)(3) nonprofit organization.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="band" id="get-involved">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Get Involved</h2>
+                    <p>There's more than one way to be a Friend.</p>
+                </div>
+                <div class="help-grid">
+                    <div class="help-item">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+                        <h3>Become a Friend</h3>
+                        <p>Memberships start at $15 a year and come with member benefits.</p>
+                        <a href="join.html">See membership levels</a>
+                    </div>
+                    <div class="help-item">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                        <h3>Volunteer</h3>
+                        <p>The Friends promote volunteer activities that support the library. Email us to find out how you can help.</p>
+                        <a href="mailto:info@fotcpl.org?subject=Volunteering">Email us about volunteering</a>
+                    </div>
+                    <div class="help-item">
+                        <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+                        <h3>Donate a Book</h3>
+                        <p>Give a book to the library or adopt one in memory or honor of someone special.</p>
+                        <a href="mailto:info@fotcpl.org?subject=Book%20donation">Email us about a donation</a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
+    <!-- Appears after you scroll down a long page -->
+    <a class="back-to-top" href="#top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="visually-hidden">Back to top</span></a>
+
     <!-- ===== Site footer ===== -->
     <footer class="site-footer">
+        <!-- Night over Lake Lewisville: a nod to The Colony, the City by the Lake -->
+        <div class="lake-scene" aria-hidden="true">
+            <svg class="lake-shore" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" focusable="false">
+                <defs>
+                    <mask id="crescent">
+                        <circle cx="972" cy="30" r="11" fill="#ffffff"/>
+                        <circle cx="977" cy="26" r="9.5" fill="#000000"/>
+                    </mask>
+                </defs>
+                <g fill="rgba(255,255,255,0.5)"><circle cx="70" cy="30" r="1.2"/><circle cx="190" cy="14" r="1.6"/><circle cx="310" cy="40" r="1.2"/><circle cx="450" cy="18" r="1.4"/><circle cx="590" cy="36" r="1.2"/><circle cx="720" cy="12" r="1.6"/><circle cx="840" cy="34" r="1.2"/><circle cx="1100" cy="18" r="1.4"/><circle cx="1220" cy="40" r="1.2"/><circle cx="1320" cy="14" r="1.6"/><circle cx="1410" cy="32" r="1.2"/></g>
+                <circle cx="972" cy="30" r="11" fill="rgba(255,255,255,0.85)" mask="url(#crescent)"/>
+                <path d="M0 80 q16 -10 32 0 q17 -18 34 0 q12 -8 23 0 q20 -8 39 0 q16 -16 33 0 q12 -16 23 0 q14 -8 28 0 q12 -14 24 0 q18 -8 35 0 q14 -8 29 0 q20 -14 39 0 q12 -16 23 0 q12 -10 25 0 q21 -18 42 0 q20 -8 40 0 q20 -16 40 0 q17 -8 34 0 q14 -8 29 0 q20 -10 39 0 q16 -14 31 0 q13 -16 26 0 q12 -16 25 0 q16 -16 31 0 q22 -10 43 0 q12 -16 25 0 q20 -18 40 0 q14 -12 28 0 q12 -16 25 0 q22 -8 44 0 q20 -8 40 0 q20 -10 41 0 q18 -18 37 0 q20 -14 39 0 q23 -12 46 0 q18 -16 36 0 q18 -12 36 0 q16 -10 31 0 q14 -18 27 0 q23 -10 46 0 q12 -16 24 0 q16 -16 31 0 q18 -12 37 0 q22 -14 45 0 V104 H0 Z" fill="rgba(121,160,72,0.18)"/>
+                <path d="M0 84 q14 -14 27 0 q10 -6 20 0 q17 -12 34 0 q12 -10 23 0 q11 -12 22 0 q16 -6 31 0 q10 -14 20 0 q14 -10 28 0 q14 -14 29 0 q16 -14 33 0 q16 -6 32 0 q10 -10 20 0 q16 -6 33 0 q10 -10 19 0 q16 -10 32 0 q15 -10 30 0 q9 -12 18 0 q14 -8 29 0 q10 -12 21 0 q10 -8 19 0 q14 -8 27 0 q12 -12 25 0 q15 -12 30 0 q10 -8 20 0 q16 -12 32 0 q13 -8 26 0 q16 -14 31 0 q13 -12 26 0 q14 -12 29 0 q12 -8 25 0 q10 -8 20 0 q11 -8 22 0 q12 -6 25 0 q16 -14 33 0 q12 -10 23 0 q14 -6 27 0 q11 -12 22 0 q14 -14 29 0 q14 -8 28 0 q17 -14 34 0 q10 -12 19 0 q15 -12 30 0 q15 -12 30 0 q10 -12 21 0 q15 -6 30 0 q12 -6 24 0 q12 -12 24 0 q12 -6 23 0 q14 -14 28 0 q10 -6 19 0 q9 -14 18 0 q11 -14 22 0 q10 -10 21 0 q9 -6 18 0 q12 -14 24 0 q15 -8 30 0 q13 -10 26 0 V104 H0 Z" fill="rgba(121,160,72,0.32)"/>
+                <path d="M0 86 C 120 78 240 78 360 86 S 600 94 720 86 S 960 78 1080 86 S 1320 94 1440 86 V120 H0 Z" fill="rgba(19,88,151,0.65)"/>
+                <g transform="translate(560 32)">
+                    <g class="night-boat">
+                        <path d="M32 4 L40 7.5 L32 11 Z" fill="#e0707b"/>
+                        <path d="M32 6 V48" stroke="#ffffff" stroke-width="2"/>
+                        <path d="M34 10 L34 45 L55 45 Z" fill="rgba(255,255,255,0.92)"/>
+                        <path d="M30 15 L30 45 L13 45 Z" fill="#b9d58f"/>
+                        <path d="M7 48 H57 L50 57 H14 Z" fill="#ffffff"/>
+                    </g>
+                    <g stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 62 H24"/><path d="M38 62 H60"/><path d="M14 68 H48"/>
+                    </g>
+                </g>
+                <path d="M0 98 C 140 90 280 90 420 98 S 700 106 840 98 S 1120 90 1260 98 S 1400 102 1440 100 V120 H0 Z" fill="rgba(19,88,151,0.45)"/>
+                <path d="M0 108 C 160 102 320 102 480 108 S 800 114 960 108 S 1280 102 1440 108 V120 H0 Z" fill="#0a2f52"/>
+                <g stroke="rgba(255,255,255,0.24)" stroke-width="2" stroke-linecap="round">
+                    <path d="M954 94 H990"/><path d="M960 102 H984"/><path d="M966 110 H978"/>
+                </g>
+            </svg>
+        </div>
+
         <div class="footer-inner">
             <div class="footer-about">
                 <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
@@ -221,7 +417,8 @@
                 <h2>Get in Touch</h2>
                 <address>
                     The Colony Public Library<br>
-                    6800 Main St., The Colony, TX
+                    6800 Main St.<br>
+                    The Colony, TX 75056
                 </address>
                 <ul>
                     <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
@@ -244,7 +441,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 Friends of The Colony Public Library <span aria-hidden="true">&middot;</span> <a href="privacy.html">Privacy</a></p>
+            <div class="footer-bottom-inner">
+                <p>&copy; 2026 Friends of The Colony Public Library</p>
+                <a class="footer-privacy" href="privacy.html">Privacy</a>
+                <p class="made-in">Made with <svg class="icon heart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="visually-hidden">love</span> in The Colony, the City by the Lake</p>
+            </div>
         </div>
     </footer>
 

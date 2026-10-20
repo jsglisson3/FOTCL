@@ -6,12 +6,17 @@
     <title>Contact | Friends of The Colony Public Library</title>
     <meta name="description" content="Contact Friends of The Colony Public Library by email, or find us at The Colony Public Library, 6800 Main St.">
     <meta name="theme-color" content="#0d3d69">
+    <meta name="color-scheme" content="light">
 
     <!-- Draft: asks search engines not to list this site until the board approves it -->
     <meta name="robots" content="noindex, nofollow">
 
     <!-- Browser tab icon -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Starts connecting to the photo server early, so photos appear sooner.
+         Remove this line once the photos are moved into the images folder. -->
+    <link rel="preconnect" href="https://img1.wsimg.com">
 
     <!-- Preview card when the link is shared in a text or on Facebook -->
     <meta property="og:title" content="Contact | Friends of The Colony Public Library">
@@ -22,11 +27,9 @@
     <meta property="og:image:alt" content="Children at story time with a costumed character at The Colony Public Library">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Fonts: Literata for headings (made for reading books), Atkinson Hyperlegible for text (made to be easy to read) -->
-    <link rel="preconnect" href="https://img1.wsimg.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,600&display=swap" rel="stylesheet">
+    <!-- Fonts are stored in the site itself: faster, and no outside service needed.
+         Literata for headings (made for reading books), Public Sans for text
+         (made for clear, accessible public-service websites). -->
 
     <link rel="stylesheet" href="style.css">
 
@@ -34,7 +37,7 @@
     <script>document.documentElement.classList.add("js");</script>
     <script src="script.js" defer></script>
 </head>
-<body>
+<body id="top">
 
     <!-- Lets keyboard users jump past the menu -->
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -71,7 +74,8 @@
                 <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
             </a>
 
-            <!-- Only shows on phones -->
+            <!-- Only show on phones and tablets -->
+            <a class="button header-join" href="join.html">Join</a>
             <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
                 <span class="menu-bars" aria-hidden="true"></span>
                 Menu
@@ -93,7 +97,14 @@
                 <h1>Contact the Friends</h1>
                 <p class="lead">Have a question or an idea, or want to help? We'd love to hear from you.</p>
             </div>
+            <!-- The smiling book peeks up over the water -->
             <img class="peek" src="images/book-friend.svg" alt="" width="320" height="260">
+            <div class="wave" aria-hidden="true">
+                <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+                    <path class="wave-back" d="M0 30 C 160 10 320 12 480 28 S 800 50 960 34 S 1280 8 1440 24 V64 H0 Z"/>
+                    <path class="wave-front" d="M0 42 C 200 24 380 28 560 40 S 900 58 1100 42 S 1340 28 1440 36 V64 H0 Z"/>
+                </svg>
+            </div>
         </section>
 
         <section class="band">
@@ -101,18 +112,24 @@
                 <div class="contact-main">
                     <h2>Email Us</h2>
                     <div class="email-cards">
-                        <a class="email-card" href="mailto:info@fotcpl.org">
+                        <div class="email-card">
                             <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-                            <span class="email-card-title">General Questions</span>
-                            <span class="email-card-text">Partnerships, fundraising and general questions</span>
-                            <span class="email-card-address">info@fotcpl.org</span>
-                        </a>
-                        <a class="email-card" href="mailto:president@fotcpl.org">
+                            <h3>General Questions</h3>
+                            <p>Partnerships, fundraising and general questions</p>
+                            <div class="email-card-actions">
+                                <a class="email-card-address" href="mailto:info@fotcpl.org">info@fotcpl.org</a>
+                                <button class="copy-btn" type="button" data-copy="info@fotcpl.org"><svg class="icon icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="icon icon-check" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span class="copy-text">Copy</span><span class="visually-hidden"> info@fotcpl.org</span></button>
+                            </div>
+                        </div>
+                        <div class="email-card">
                             <span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-                            <span class="email-card-title">The Friends President</span>
-                            <span class="email-card-text">Reach the Friends president directly</span>
-                            <span class="email-card-address">president@fotcpl.org</span>
-                        </a>
+                            <h3>The Friends President</h3>
+                            <p>Reach the Friends president directly</p>
+                            <div class="email-card-actions">
+                                <a class="email-card-address" href="mailto:president@fotcpl.org">president@fotcpl.org</a>
+                                <button class="copy-btn" type="button" data-copy="president@fotcpl.org"><svg class="icon icon-copy" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><svg class="icon icon-check" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span class="copy-text">Copy</span><span class="visually-hidden"> president@fotcpl.org</span></button>
+                            </div>
+                        </div>
                     </div>
 
                     <h2 class="contact-subhead">What Can We Help With?</h2>
@@ -122,6 +139,15 @@
                     <li><a href="mailto:info@fotcpl.org?subject=Book%20donation"><span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span><span>Donate a Book or Memorial</span></a></li>
                     <li><a href="newsletters.html"><span class="icon-badge"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Read the Newsletter</span></a></li>
                     </ul>
+
+                    <h2 class="contact-subhead">Follow Along</h2>
+                    <div class="follow-card">
+                        <p>News, photos and events from the Friends.</p>
+                        <div class="social-buttons">
+                            <a class="button button-secondary" href="https://www.facebook.com/FOTCPL/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
+                            <a class="button button-secondary" href="https://www.instagram.com/fotcpl/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="contact-side">
@@ -131,18 +157,20 @@
                         <address>
                             The Colony Public Library<br>
                             6800 Main St.<br>
-                            The Colony, TX
+                            The Colony, TX 75056
                         </address>
-                        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=6800+Main+St+The+Colony+TX">Get directions</a></p>
-                        <p class="visit-phone"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+19726244401">(972) 624-4401</a></p>
-                    </div>
-
-                    <div class="visit-card">
-                        <h2>Follow Along</h2>
-                        <p>News, photos and events from the Friends.</p>
-                        <div class="social-buttons">
-                            <a class="button button-secondary" href="https://www.facebook.com/FOTCPL/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg> Facebook</a>
-                            <a class="button button-secondary" href="https://www.instagram.com/fotcpl/"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg> Instagram</a>
+                        <p class="visit-link"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <a href="https://www.google.com/maps/search/?api=1&amp;query=6800+Main+St+The+Colony+TX+75056">Get directions</a></p>
+                        <p class="visit-link"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span>Library main number: <a class="nowrap" href="tel:+19726251900">972-625-1900</a></span></p>
+                        <div class="hours">
+                            <h3><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Library Hours</h3>
+                            <p class="open-status" data-open-status="" hidden></p>
+                            <dl>
+                                <div class="hours-row" data-days="2 3 4"><dt>Tuesday to Thursday</dt><dd>10 a.m. to 8 p.m.</dd></div>
+                                <div class="hours-row" data-days="5 6"><dt>Friday and Saturday</dt><dd>10 a.m. to 5 p.m.</dd></div>
+                                <div class="hours-row" data-days="0"><dt>Sunday</dt><dd>1 to 5 p.m.</dd></div>
+                                <div class="hours-row" data-days="1"><dt>Monday</dt><dd>Closed</dd></div>
+                            </dl>
+                            <p class="hours-note">Hours can change for holidays and special closures. <a href="https://www.thecolonytx.gov/404/Library">Check current hours</a></p>
                         </div>
                     </div>
                 </div>
@@ -179,8 +207,45 @@
         </section>
     </main>
 
+    <!-- Appears after you scroll down a long page -->
+    <a class="back-to-top" href="#top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg><span class="visually-hidden">Back to top</span></a>
+
     <!-- ===== Site footer ===== -->
     <footer class="site-footer">
+        <!-- Night over Lake Lewisville: a nod to The Colony, the City by the Lake -->
+        <div class="lake-scene" aria-hidden="true">
+            <svg class="lake-shore" viewBox="0 0 1440 120" preserveAspectRatio="xMidYMax slice" focusable="false">
+                <defs>
+                    <mask id="crescent">
+                        <circle cx="972" cy="30" r="11" fill="#ffffff"/>
+                        <circle cx="977" cy="26" r="9.5" fill="#000000"/>
+                    </mask>
+                </defs>
+                <g fill="rgba(255,255,255,0.5)"><circle cx="70" cy="30" r="1.2"/><circle cx="190" cy="14" r="1.6"/><circle cx="310" cy="40" r="1.2"/><circle cx="450" cy="18" r="1.4"/><circle cx="590" cy="36" r="1.2"/><circle cx="720" cy="12" r="1.6"/><circle cx="840" cy="34" r="1.2"/><circle cx="1100" cy="18" r="1.4"/><circle cx="1220" cy="40" r="1.2"/><circle cx="1320" cy="14" r="1.6"/><circle cx="1410" cy="32" r="1.2"/></g>
+                <circle cx="972" cy="30" r="11" fill="rgba(255,255,255,0.85)" mask="url(#crescent)"/>
+                <path d="M0 80 q16 -10 32 0 q17 -18 34 0 q12 -8 23 0 q20 -8 39 0 q16 -16 33 0 q12 -16 23 0 q14 -8 28 0 q12 -14 24 0 q18 -8 35 0 q14 -8 29 0 q20 -14 39 0 q12 -16 23 0 q12 -10 25 0 q21 -18 42 0 q20 -8 40 0 q20 -16 40 0 q17 -8 34 0 q14 -8 29 0 q20 -10 39 0 q16 -14 31 0 q13 -16 26 0 q12 -16 25 0 q16 -16 31 0 q22 -10 43 0 q12 -16 25 0 q20 -18 40 0 q14 -12 28 0 q12 -16 25 0 q22 -8 44 0 q20 -8 40 0 q20 -10 41 0 q18 -18 37 0 q20 -14 39 0 q23 -12 46 0 q18 -16 36 0 q18 -12 36 0 q16 -10 31 0 q14 -18 27 0 q23 -10 46 0 q12 -16 24 0 q16 -16 31 0 q18 -12 37 0 q22 -14 45 0 V104 H0 Z" fill="rgba(121,160,72,0.18)"/>
+                <path d="M0 84 q14 -14 27 0 q10 -6 20 0 q17 -12 34 0 q12 -10 23 0 q11 -12 22 0 q16 -6 31 0 q10 -14 20 0 q14 -10 28 0 q14 -14 29 0 q16 -14 33 0 q16 -6 32 0 q10 -10 20 0 q16 -6 33 0 q10 -10 19 0 q16 -10 32 0 q15 -10 30 0 q9 -12 18 0 q14 -8 29 0 q10 -12 21 0 q10 -8 19 0 q14 -8 27 0 q12 -12 25 0 q15 -12 30 0 q10 -8 20 0 q16 -12 32 0 q13 -8 26 0 q16 -14 31 0 q13 -12 26 0 q14 -12 29 0 q12 -8 25 0 q10 -8 20 0 q11 -8 22 0 q12 -6 25 0 q16 -14 33 0 q12 -10 23 0 q14 -6 27 0 q11 -12 22 0 q14 -14 29 0 q14 -8 28 0 q17 -14 34 0 q10 -12 19 0 q15 -12 30 0 q15 -12 30 0 q10 -12 21 0 q15 -6 30 0 q12 -6 24 0 q12 -12 24 0 q12 -6 23 0 q14 -14 28 0 q10 -6 19 0 q9 -14 18 0 q11 -14 22 0 q10 -10 21 0 q9 -6 18 0 q12 -14 24 0 q15 -8 30 0 q13 -10 26 0 V104 H0 Z" fill="rgba(121,160,72,0.32)"/>
+                <path d="M0 86 C 120 78 240 78 360 86 S 600 94 720 86 S 960 78 1080 86 S 1320 94 1440 86 V120 H0 Z" fill="rgba(19,88,151,0.65)"/>
+                <g transform="translate(560 32)">
+                    <g class="night-boat">
+                        <path d="M32 4 L40 7.5 L32 11 Z" fill="#e0707b"/>
+                        <path d="M32 6 V48" stroke="#ffffff" stroke-width="2"/>
+                        <path d="M34 10 L34 45 L55 45 Z" fill="rgba(255,255,255,0.92)"/>
+                        <path d="M30 15 L30 45 L13 45 Z" fill="#b9d58f"/>
+                        <path d="M7 48 H57 L50 57 H14 Z" fill="#ffffff"/>
+                    </g>
+                    <g stroke="rgba(255,255,255,0.28)" stroke-width="2" stroke-linecap="round">
+                        <path d="M4 62 H24"/><path d="M38 62 H60"/><path d="M14 68 H48"/>
+                    </g>
+                </g>
+                <path d="M0 98 C 140 90 280 90 420 98 S 700 106 840 98 S 1120 90 1260 98 S 1400 102 1440 100 V120 H0 Z" fill="rgba(19,88,151,0.45)"/>
+                <path d="M0 108 C 160 102 320 102 480 108 S 800 114 960 108 S 1280 102 1440 108 V120 H0 Z" fill="#0a2f52"/>
+                <g stroke="rgba(255,255,255,0.24)" stroke-width="2" stroke-linecap="round">
+                    <path d="M954 94 H990"/><path d="M960 102 H984"/><path d="M966 110 H978"/>
+                </g>
+            </svg>
+        </div>
+
         <div class="footer-inner">
             <div class="footer-about">
                 <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
@@ -202,7 +267,8 @@
                 <h2>Get in Touch</h2>
                 <address>
                     The Colony Public Library<br>
-                    6800 Main St., The Colony, TX
+                    6800 Main St.<br>
+                    The Colony, TX 75056
                 </address>
                 <ul>
                     <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
@@ -225,7 +291,11 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 Friends of The Colony Public Library <span aria-hidden="true">&middot;</span> <a href="privacy.html">Privacy</a></p>
+            <div class="footer-bottom-inner">
+                <p>&copy; 2026 Friends of The Colony Public Library</p>
+                <a class="footer-privacy" href="privacy.html">Privacy</a>
+                <p class="made-in">Made with <svg class="icon heart-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="visually-hidden">love</span> in The Colony, the City by the Lake</p>
+            </div>
         </div>
     </footer>
 

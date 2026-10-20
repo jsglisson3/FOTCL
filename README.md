@@ -10,9 +10,15 @@ A volunteer-built redesign of fotcpl.org. Plain HTML, CSS and a little JavaScrip
 | `about.html`, `join.html`, `newsletters.html`, `gallery.html`, `contact.html`, `privacy.html` | The other pages |
 | `404.html` | "Page not found" page |
 | `style.css` | All the styling. Brand colors are at the top in `:root` |
-| `script.js` | Phone menu, header shadow, gallery viewer |
+| `script.js` | Phone menu, header shadow, gallery viewer, video players, copy buttons, membership tabs and the library's "Open now" notes |
 | `images/` | Logo, smiling book drawing, tab icon |
+| `fonts/` | Public Sans (text) and Literata (headings), hosted with the site. Both are free under the SIL Open Font License (license files included) |
 | `sitemap.xml`, `robots.txt` | Help search engines find the pages once the site is live |
+
+## Keeping it up to date
+
+- **Library hours** are in two places: the hours list on `contact.html` and `LIBRARY_HOURS` at the top of `script.js` (which powers the "Open now" notes). Change both.
+- **A new newsletter:** add it at the top of the list on `newsletters.html`, and update the "Current Edition" card and the home page.
 
 ## Launch checklist (only after the board approves)
 
@@ -27,4 +33,5 @@ A volunteer-built redesign of fotcpl.org. Plain HTML, CSS and a little JavaScrip
 ## Checked so far
 
 - Accessibility: automated axe-core check (WCAG 2.1 A and AA plus best practices) passes on every page at desktop and phone sizes; keyboard navigation tested.
-- Works at phone, tablet and desktop widths.
+- Works at phone, tablet and desktop widths (tested at 360, 390, 768, 1024 and 1440 pixels).
+- All internal links, page anchors and images checked.
