@@ -35,6 +35,12 @@
 
 html {
     scroll-padding-top: 100px;   /* so the sticky header doesn't cover headings you jump to */
+    scroll-behavior: smooth;     /* in-page links glide instead of jumping */
+}
+
+/* Highlighted text uses a soft version of the logo green */
+::selection {
+    background-color: rgba(121, 160, 72, 0.3);
 }
 
 body {
@@ -55,10 +61,12 @@ img {
 a {
     color: var(--blue);
     text-underline-offset: 3px;
+    text-decoration-color: rgba(19, 88, 151, 0.4);   /* a softer underline */
 }
 
 a:hover {
     text-decoration-thickness: 2px;
+    text-decoration-color: currentColor;
 }
 
 /* Headings: a bookish serif, with sizes that grow on bigger screens.
@@ -313,6 +321,20 @@ p {
 .brand img {
     height: 60px;
     width: auto;
+    transition: height 0.2s ease;
+}
+
+.header-inner {
+    transition: padding 0.2s ease;
+}
+
+.is-scrolled .brand img {
+    height: 50px;
+}
+
+.is-scrolled .header-inner {
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 /* ===== Navigation ===== */
@@ -415,8 +437,35 @@ p {
 
 /* ===== Home: hero ===== */
 .hero {
+    position: relative;
+    overflow: hidden;
     padding-top: clamp(48px, 7vw, 88px);
     padding-bottom: clamp(48px, 7vw, 88px);
+    /* Soft glows in the logo colors give the opener a little depth */
+    background-image:
+        radial-gradient(circle at 82% 30%, rgba(255, 255, 255, 0.9), transparent 38%),
+        radial-gradient(circle at 95% 95%, rgba(121, 160, 72, 0.12), transparent 30%),
+        radial-gradient(circle at 5% 10%, rgba(19, 88, 151, 0.07), transparent 35%);
+}
+
+.hero h1 {
+    letter-spacing: -0.02em;
+}
+
+.hero-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+}
+
+.hero-note .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--red);
+    fill: rgba(179, 43, 57, 0.15);
 }
 
 .hero-inner {
@@ -443,6 +492,7 @@ p {
 
 .friend {
     position: absolute;
+    background-color: var(--tint);   /* shows while the photo loads */
     aspect-ratio: 1;
     object-fit: cover;
     border-radius: 50%;
@@ -686,9 +736,15 @@ a.feature-item:hover .feature-more {
 }
 
 .help-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     padding: 32px;
     border: 1px solid var(--line);
     border-radius: var(--radius);
+}
+
+.help-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(13, 61, 105, 0.08);
 }
 
 .help-item p {
@@ -720,6 +776,33 @@ a.feature-item:hover .feature-more {
 
 .photo:hover img {
     transform: scale(1.04);
+}
+
+.photo {
+    position: relative;
+}
+
+/* Caption slides up over the bottom of a photo on hover */
+.photo-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 32px 16px 12px;
+    background: linear-gradient(to bottom, transparent, rgba(10, 47, 82, 0.8));
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.photo:hover .photo-caption,
+.photo:focus-visible .photo-caption {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Home: one large photo with four smaller ones beside it */
@@ -774,11 +857,52 @@ a.feature-item:hover .feature-more {
     border-radius: var(--radius) var(--radius) 0 0;
 }
 
+.lightbox-stage {
+    position: relative;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.92);
+    color: var(--blue-dark);
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-nav:hover {
+    background-color: var(--white);
+}
+
+.lightbox-prev {
+    left: 12px;
+}
+
+.lightbox-next {
+    right: 12px;
+}
+
 .lightbox-caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
     margin: 0;
     padding: 14px 20px;
     font-weight: 700;
     color: var(--blue-dark);
+}
+
+.lightbox-count {
+    flex-shrink: 0;
+    font-weight: 400;
+    color: var(--ink-soft);
 }
 
 .lightbox-close {
@@ -1115,6 +1239,7 @@ a.feature-item:hover .feature-more {
 }
 
 .edition-list li {
+    transition: background-color 0.15s ease;
     display: flex;
     justify-content: space-between;
     gap: 16px;
@@ -1128,6 +1253,10 @@ a.feature-item:hover .feature-more {
 
 .edition-list a {
     font-weight: 700;
+}
+
+.edition-list li:hover {
+    background-color: rgba(19, 88, 151, 0.04);
 }
 
 .current-edition {
@@ -1165,6 +1294,7 @@ a.feature-item:hover .feature-more {
 }
 
 .tier {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     padding: 28px;
     background-color: var(--white);
     border-radius: var(--radius);
@@ -1178,6 +1308,11 @@ a.feature-item:hover .feature-more {
 
 .tier:nth-child(3n + 3) {
     border-top-color: var(--red);
+}
+
+.tier:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(13, 61, 105, 0.1);
 }
 
 .tier h3 {
@@ -1671,6 +1806,7 @@ a.feature-item:hover .feature-more {
 
     .js .menu-open .main-nav {
         display: flex;
+        animation: menu-in 0.2s ease-out;
     }
 
     .main-nav {
@@ -1791,6 +1927,17 @@ a.feature-item:hover .feature-more {
     }
 }
 
+@keyframes menu-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Respect people who turn off animations in their device settings */
 @media (prefers-reduced-motion: reduce) {
     * {
@@ -1798,7 +1945,13 @@ a.feature-item:hover .feature-more {
         animation: none !important;
     }
 
+    html {
+        scroll-behavior: auto;
+    }
+
     .button:hover,
+    .tier:hover,
+    .help-item:hover,
     .photo:hover img {
         transform: none;
     }

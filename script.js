@@ -38,22 +38,41 @@ window.addEventListener("scroll", updateShadow, { passive: true });
 updateShadow();
 
 // ===== Larger photo view (Gallery page) =====
-// Clicking a photo opens it big in a pop-up. Without JavaScript,
-// the link still works and simply opens the photo on its own.
+// Clicking a photo opens it big in a pop-up. Use the arrows (or the
+// left and right arrow keys) to move between photos. Without JavaScript,
+// each link still works and simply opens the photo on its own.
 const lightbox = document.querySelector(".lightbox");
 
 if (lightbox) {
+    const photos = [...document.querySelectorAll(".photo-grid .photo")];
     const bigImage = lightbox.querySelector("img");
-    const caption = lightbox.querySelector(".lightbox-caption");
+    const captionText = lightbox.querySelector(".lightbox-text");
+    const counter = lightbox.querySelector(".lightbox-count");
+    let current = 0;
 
-    document.querySelectorAll(".photo-grid .photo").forEach((link) => {
+    function show(index) {
+        current = (index + photos.length) % photos.length;   // wraps around at either end
+        const link = photos[current];
+        bigImage.src = link.href;
+        bigImage.alt = link.querySelector("img").alt;
+        captionText.textContent = link.dataset.caption;
+        counter.textContent = `${current + 1} of ${photos.length}`;
+    }
+
+    photos.forEach((link, index) => {
         link.addEventListener("click", (event) => {
             event.preventDefault();   // stay on the page instead of following the link
-            bigImage.src = link.href;
-            bigImage.alt = link.querySelector("img").alt;
-            caption.textContent = link.dataset.caption;
+            show(index);
             lightbox.showModal();
         });
+    });
+
+    lightbox.querySelector(".lightbox-prev").addEventListener("click", () => show(current - 1));
+    lightbox.querySelector(".lightbox-next").addEventListener("click", () => show(current + 1));
+
+    lightbox.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") show(current - 1);
+        if (event.key === "ArrowRight") show(current + 1);
     });
 
     // Clicking the dark area around the photo closes it
