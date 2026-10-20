@@ -1,51 +1,97 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friends of The Colony Public Library</title>
+
+    <!-- Font: Atkinson Hyperlegible, designed by the Braille Institute to be easy to read -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   
-<header>
-    <h1>Friends of The Colony Public Library</h1>
-    <p>Supporting our library and our community.</p>
 
-    <nav aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#support">Support Us</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+    <!-- Lets keyboard users jump past the menu -->
+    <a class="skip-link" href="#main">Skip to main content</a>
 
-<main>
-    <section id="home">
-        <h2>Welcome</h2>
-        <p>Welcome to the new home of the Friends of The Colony Public Library!</p>
-    </section>
+    <!-- ===== Site header ===== -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="#home">
+                <img src="images/logo.png" alt="Friends of The Colony Public Library home" width="1026" height="358">
+            </a>
 
-    <section id="about">
-        <h2>About the Friends</h2>
-        <p>Learn how community support helps our public library.</p>
-    </section>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="#about">About</a>
+                <a href="#support">Ways to help</a>
+                <a href="#contact">Contact</a>
+                <a class="button" href="#support">Become a Friend</a>
+            </nav>
+        </div>
+    </header>
 
-    <section id="support">
-        <h2>Support the Library</h2>
-        <p>Discover ways to get involved and support our mission.</p>
-    </section>
+    <main id="main">
+        <section id="home">
+            <h1>Welcome</h1>
+            <p>Welcome to the new home of the Friends of The Colony Public Library!</p>
+        </section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>More information coming soon.</p>
-    </section>
-</main>
+        <section id="about">
+            <h2>About the Friends</h2>
+            <p>Learn how community support helps our public library.</p>
+        </section>
 
+        <section id="support">
+            <h2>Support the Library</h2>
+            <p>Discover ways to get involved and support our mission.</p>
+        </section>
 
-    <footer>
-        <p>Friends of The Colony Public Library</p>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>More information coming soon.</p>
+        </section>
+    </main>
+
+    <!-- ===== Site footer ===== -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <img class="footer-logo" src="images/logo.png" alt="Friends of The Colony Public Library" width="1026" height="358">
+                <p>A nonprofit organization dedicated to supporting, enhancing and promoting the work of The Colony Public Library.</p>
+            </div>
+
+            <nav class="footer-links" aria-label="Footer">
+                <h2>Explore</h2>
+                <ul>
+                    <li><a href="#about">About the Friends</a></li>
+                    <li><a href="#support">Become a Friend</a></li>
+                    <li><a href="https://www.thecolonytx.gov/404/Library">The Colony Public Library</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h2>Get in touch</h2>
+                <ul>
+                    <li><a href="mailto:info@fotcpl.org">info@fotcpl.org</a></li>
+                    <li><a href="https://www.facebook.com/FOTCPL/">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/fotcpl/">Instagram</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-kroger">
+                <h2>Shop at Kroger?</h2>
+                <p>Add your Kroger Shopper Card to Community Rewards and choose the Friends, organization number <strong>NE251</strong>.</p>
+                <a href="https://www.krogercommunityrewards.com">Enroll in Kroger Community Rewards</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Friends of The Colony Public Library</p>
+        </div>
     </footer>
+
 </body>
 </html>
