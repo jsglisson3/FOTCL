@@ -11,8 +11,10 @@
     <!-- Draft: asks search engines not to list this site until the board approves it -->
     <meta name="robots" content="noindex, nofollow">
 
-    <!-- Browser tab icon -->
+    <!-- Browser tab icon, a backup for older browsers, and the icon for a phone's home screen -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="images/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
     <!-- Starts connecting to the photo server early, so photos appear sooner.
          Remove this line once the photos are moved into the images folder. -->
@@ -36,6 +38,35 @@
     <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
     <script>document.documentElement.classList.add("js");</script>
     <script src="script.js" defer></script>
+    <!-- Old fotcpl.org addresses (from the GoDaddy site) and where they live now.
+         When someone follows an old link or bookmark, this sends them to the right page. -->
+    <script>
+        (function () {
+            var moved = {
+                "home": "index.html",
+                "what-we-do": "about.html",
+                "become-a-friend-/-renew": "join.html",
+                "newsletter-archive": "newsletters.html",
+                "photo-&-video-gallery": "gallery.html",
+                "contact": "contact.html",
+                "privacy-policy": "privacy.html"
+            };
+            var raw, path;
+            try {
+                raw = decodeURIComponent(location.pathname).replace(/\/+$/, "");
+            } catch (e) {
+                return;
+            }
+            path = raw.toLowerCase();   // match in any capitalization, keep the rest as typed
+            for (var old in moved) {
+                var at = path.lastIndexOf("/" + old);
+                if (at !== -1 && at + old.length + 1 === path.length) {
+                    location.replace(raw.slice(0, at + 1) + moved[old]);
+                    return;
+                }
+            }
+        })();
+    </script>
 </head>
 <body id="top">
 

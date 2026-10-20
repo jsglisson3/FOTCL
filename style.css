@@ -1041,6 +1041,23 @@ a.feature-item:hover .feature-more {
     transform: translateY(0);
 }
 
+/* Touchscreens can't hover, so photo captions show all the time there
+   (kept to two lines so they don't cover the photo) */
+@media (hover: none) {
+    .photo-caption {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        padding: 28px 12px 0;
+        border-bottom: 10px solid transparent;   /* spacing that also hides a cut-off third line */
+        background-origin: border-box;           /* the shading reaches all the way to the bottom */
+        font-size: 0.85rem;
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* Home: one large photo with four smaller ones beside it */
 .mosaic {
     display: grid;
@@ -3223,6 +3240,22 @@ a.feature-item:hover .feature-more {
     }
     100% {
         box-shadow: 0 0 0 4px rgba(121, 160, 72, 0);
+    }
+}
+
+/* ===== Contact: on tablets, the address sits beside the hours ===== */
+@media (min-width: 600px) and (max-width: 960px) {
+    .visit-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 32px;
+    }
+
+    .visit-card .hours {
+        margin: 0;
+        padding: 0 0 0 32px;
+        border-top: 0;
+        border-left: 1px solid var(--line);
     }
 }
 
