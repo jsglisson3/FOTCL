@@ -1226,6 +1226,24 @@ a.feature-item:hover .feature-more {
     flex: 1;
 }
 
+/* The main button, with a quick way to renew for people who are already members */
+.join-band-actions {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.renew-note {
+    margin: 10px 0 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.renew-note a {
+    padding-block: 4px;
+    font-weight: 700;
+    color: var(--white);
+}
+
 .join-band-text p {
     margin: 0 0 12px;
 }
@@ -3509,6 +3527,10 @@ a.feature-item:hover .feature-more {
     .join-band-inner {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .join-band-actions {
+        text-align: left;
     }
 
     .video-grid {
