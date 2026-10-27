@@ -1,2 +1,5 @@
 # Tools installed by "npm install" (GitHub installs its own copy)
 node_modules/
+
+# Design review screenshots and notes (tasteskill). Never published.
+.taste-skill/

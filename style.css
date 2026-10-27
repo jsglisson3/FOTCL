@@ -5,12 +5,13 @@
      Fonts, Design tokens (colors and sizes), Base styles, Buttons,
      Draft notice, Info bar, Header, Navigation, Back to top,
      Library hours, Bands (full-width sections), Home, Photos,
-     Join band, Inner page header, About page, Membership levels,
-     Join, Videos, Contact, 404 page, Footer, Extra touches
-     (waves, open-now notes, spotlight, copy buttons, tabs,
-     comparison tables, FAQ, video previews, newsletter drawing,
-     timeline), then the layouts for medium screens, tablets and
-     phones, printing, and reduced motion.
+     Join band, Inner page header, About page, Join, Videos, Contact,
+     404 page, Footer, Extra touches (waves, open-now notes, copy
+     buttons, comparison tables, FAQ, video previews, newsletter
+     drawing, timeline), Home page (hero circle, colour chapters,
+     membership picker, tiles), Join page, Motion, then the layouts
+     for medium screens, tablets and phones, printing, and reduced
+     motion.
    ========================================================= */
 
 /* ===== Fonts (stored in the fonts folder) =====
@@ -50,18 +51,32 @@
     --red: #b32b39;
     --red-dark: #921f2c;
     --green: #79a048;
+    --green-deep: #4f7329;   /* the logo green, darkened so text in it is easy to read */
     --ink: #1f2933;
     --ink-soft: #4a5866;
     --tint: #eef3f8;
+    --tint-deep: #e1eaf3;    /* one step darker than the tint, for a box on a tinted band */
     --line: rgba(19, 88, 151, 0.14);
     --white: #ffffff;
 
     --font-heading: "Literata", Georgia, serif;
     --font-body: "Public Sans", Arial, sans-serif;
 
-    --page-width: 1160px;
+    /* Five text sizes do all the work on every page:
+       display (page titles), heading (section titles), lead, body and small */
+    --size-display: clamp(2.6rem, 6.2vw, 5.6rem);
+    --size-heading: clamp(2rem, 3.8vw, 3.4rem);
+    --size-lead: clamp(1.2rem, 1.6vw, 1.4rem);
+    --size-body: 1.125rem;
+    --size-small: 0.95rem;
+
+    --page-width: 1240px;
     --text-width: 760px;
-    --radius: 12px;
+    --gutter: clamp(20px, 4vw, 48px);   /* the space at the left and right of every page */
+    --radius: 0;   /* photos and boxes have square corners; buttons stay round */
+
+    /* The logo's three friends as one little stripe, drawn as three flat blocks */
+    --tri-stripe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 1' preserveAspectRatio='none'%3E%3Crect width='1' height='1' fill='%2379a048'/%3E%3Crect x='1' width='1' height='1' fill='%23135897'/%3E%3Crect x='2' width='1' height='1' fill='%23b32b39'/%3E%3C/svg%3E");
 }
 
 /* ===== Base styles ===== */
@@ -84,8 +99,8 @@ html {
 body {
     margin: 0;
     font-family: var(--font-body);
-    font-size: 1.0625rem;
-    line-height: 1.65;
+    font-size: var(--size-body);
+    line-height: 1.6;
     color: var(--ink);
     background-color: var(--white);
 }
@@ -114,24 +129,27 @@ h2,
 h3 {
     font-family: var(--font-heading);
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
     color: var(--blue-dark);
     text-wrap: balance;   /* evens out line lengths in headings */
 }
 
 h1 {
-    font-size: clamp(2.25rem, 4.5vw, 3.4rem);
-    margin: 0 0 16px;
-    letter-spacing: -0.01em;
+    font-size: var(--size-display);
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
 }
 
 h2 {
-    font-size: clamp(1.7rem, 3vw, 2.25rem);
-    margin: 0 0 16px;
+    font-size: var(--size-heading);
+    margin: 0 0 24px;
 }
 
 h3 {
-    font-size: 1.2rem;
+    font-size: var(--size-lead);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
     margin: 0 0 8px;
 }
 
@@ -153,8 +171,9 @@ figcaption {
 }
 
 .lead {
-    font-size: 1.25rem;
-    color: var(--ink-soft);
+    font-size: var(--size-lead);
+    line-height: 1.5;
+    color: var(--ink);
 }
 
 /* A clear outline for anyone using the keyboard */
@@ -191,31 +210,31 @@ figcaption {
 /* ===== Buttons ===== */
 .button {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 12px 26px;
+    border: 2px solid transparent;   /* the outlined buttons color this in */
     border-radius: 999px;
     font-weight: 700;
     line-height: 1.3;
     text-decoration: none;
     color: var(--white);
     background-color: var(--red);
-    transition: background-color 0.15s ease, transform 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
 }
 
 .button:hover {
     background-color: var(--red-dark);
-    transform: translateY(-1px);
 }
 
 /* A tiny press-down when clicked or tapped */
 .button:active {
-    transform: translateY(0) scale(0.98);
+    transform: scale(0.97);
 }
 
 /* Outlined button for less important actions */
 .button-secondary {
     color: var(--blue-dark);
     background-color: transparent;
-    box-shadow: inset 0 0 0 2px var(--blue);
+    border-color: var(--blue);
 }
 
 .button-secondary:hover {
@@ -263,33 +282,6 @@ figcaption {
     stroke-linejoin: round;
 }
 
-/* An icon in a soft colored circle. Colors cycle with the logo's three. */
-.icon-badge {
-    display: inline-grid;
-    place-items: center;
-    width: 52px;
-    height: 52px;
-    margin-bottom: 16px;
-    border-radius: 50%;
-    color: var(--blue);
-    background-color: rgba(19, 88, 151, 0.1);
-}
-
-.icon-badge .icon {
-    width: 24px;
-    height: 24px;
-}
-
-:nth-child(3n + 1) > .icon-badge {
-    color: #5c8133;   /* a darker green, so the line stays easy to see */
-    background-color: rgba(121, 160, 72, 0.15);
-}
-
-:nth-child(3n + 3) > .icon-badge {
-    color: var(--red);
-    background-color: rgba(179, 43, 57, 0.1);
-}
-
 /* ===== Draft notice ===== */
 .draft-banner {
     background-color: #fff3cd;
@@ -316,9 +308,9 @@ figcaption {
 }
 
 .topbar-inner {
-    max-width: var(--page-width);
+    max-width: calc(var(--page-width) + 2 * var(--gutter));
     margin: 0 auto;
-    padding: 6px 24px;
+    padding: 6px var(--gutter);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -371,13 +363,12 @@ figcaption {
     top: 0;
     z-index: 10;
     background-color: var(--white);
-    box-shadow: 0 1px 0 var(--line);
     transition: box-shadow 0.2s ease;
 }
 
 /* Added by script.js once you scroll down */
 .site-header.is-scrolled {
-    box-shadow: 0 6px 20px rgba(13, 61, 105, 0.12);
+    box-shadow: 0 6px 20px rgba(13, 61, 105, 0.12);   /* taste-skill-ignore: the header floats once you scroll */
 }
 
 /* The three-color stripe, one color for each figure in the logo */
@@ -385,18 +376,14 @@ figcaption {
     content: "";
     display: block;
     height: 6px;
-    background: linear-gradient(
-        to right,
-        var(--green) 0 33.33%,
-        var(--blue) 33.33% 66.66%,
-        var(--red) 66.66% 100%
-    );
+    background-image: var(--tri-stripe);
+    background-size: 100% 100%;
 }
 
 .header-inner {
-    max-width: var(--page-width);
+    max-width: calc(var(--page-width) + 2 * var(--gutter));
     margin: 0 auto;
-    padding: 12px 24px;
+    padding: 12px var(--gutter);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -465,8 +452,8 @@ figcaption {
 /* ===== Back to top ===== */
 .back-to-top {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    right: 16px;
+    bottom: 16px;
     z-index: 20;
     display: grid;
     place-items: center;
@@ -475,7 +462,7 @@ figcaption {
     border-radius: 50%;
     color: var(--white);
     background-color: var(--blue-dark);
-    box-shadow: 0 6px 18px rgba(13, 61, 105, 0.3);
+    box-shadow: 0 6px 18px rgba(13, 61, 105, 0.3);   /* taste-skill-ignore: floats over the page */
     opacity: 0;
     visibility: hidden;
     transform: translateY(12px);
@@ -501,14 +488,12 @@ figcaption {
 .site-footer .back-to-top:focus-visible {
     outline: 3px solid var(--blue-dark);
     outline-offset: 3px;
-    box-shadow: 0 0 0 3px var(--white), 0 6px 18px rgba(13, 61, 105, 0.3);
+    box-shadow: 0 0 0 3px var(--white), 0 6px 18px rgba(13, 61, 105, 0.3);   /* taste-skill-ignore: focus ring on a floating button */
 }
 
 /* ===== Library hours ===== */
 .hours {
-    margin: 20px 0;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
+    margin: 28px 0 20px;
 }
 
 .hours h3 {
@@ -553,7 +538,7 @@ figcaption {
 
 .hours-row.today {
     background-color: var(--white);
-    box-shadow: inset 4px 0 0 var(--green);
+    font-weight: 700;
 }
 
 .today-badge {
@@ -580,7 +565,7 @@ figcaption {
    Each section stretches edge to edge. ".wrap" keeps the
    content inside at a comfortable width. */
 .band {
-    padding: clamp(52px, 7vw, 84px) 24px;
+    padding: clamp(64px, 8vw, 112px) var(--gutter);
 }
 
 .band-tint {
@@ -589,7 +574,7 @@ figcaption {
 
 .band-dark {
     background-color: var(--blue-dark);
-    color: rgba(255, 255, 255, 0.88);
+    color: var(--white);
 }
 
 .band-dark h2,
@@ -632,8 +617,9 @@ figcaption {
 }
 
 .section-head p {
-    font-size: 1.15rem;
-    color: var(--ink-soft);
+    font-size: var(--size-lead);
+    line-height: 1.5;
+    color: var(--ink);
 }
 
 .more-link {
@@ -672,180 +658,16 @@ figcaption {
     align-items: center;
 }
 
-/* A white box that sits on a tinted band */
+/* A box one tone step off the page */
 .panel {
     padding: 28px 32px;
-    background-color: var(--white);
-    border-radius: var(--radius);
-    box-shadow: 0 1px 2px rgba(13, 61, 105, 0.06), 0 8px 24px rgba(13, 61, 105, 0.06);
+    background-color: var(--tint);
 }
-
-/* ===== Home: hero ===== */
-.hero {
-    position: relative;
-    overflow: hidden;
-    padding-top: clamp(48px, 7vw, 88px);
-    padding-bottom: clamp(48px, 7vw, 88px);
-    /* Soft glows in the logo colors give the opener a little depth */
-    background-image:
-        radial-gradient(circle at 82% 30%, rgba(255, 255, 255, 0.9), transparent 38%),
-        radial-gradient(circle at 95% 95%, rgba(121, 160, 72, 0.12), transparent 30%),
-        radial-gradient(circle at 5% 10%, rgba(19, 88, 151, 0.07), transparent 35%);
-}
-
-.hero h1 {
-    letter-spacing: -0.02em;
-}
-
-.hero-note {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 20px 0 0;
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-}
-
-.hero-note .icon {
-    width: 16px;
-    height: 16px;
-    color: var(--red);
-    fill: rgba(179, 43, 57, 0.15);
-}
-
-.hero-inner {
-    display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 48px;
-    align-items: center;
-}
-
-.hero .lead {
-    max-width: 34em;
-    margin-bottom: 32px;
-}
-
-/* ===== Home: the Friends logo, brought to life =====
-   Like the logo: three friends (green, blue, red) above an open book.
-   The friends are real photos; the book is our smiling book. */
-.hero-friends {
-    position: relative;
-    justify-self: center;
-    width: min(100%, 560px);
-    aspect-ratio: 1 / 0.76;
-}
-
-.friend {
-    position: absolute;
-    background-color: var(--tint);   /* shows while the photo loads */
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 5px solid var(--white);
-    box-shadow: 0 0 0 6px var(--ring), 0 16px 34px rgba(13, 61, 105, 0.2);
-    animation: pop-in 0.6s cubic-bezier(0.2, 0.8, 0.3, 1.25) both;
-}
-
-.friend-center {
-    --ring: var(--blue);
-    z-index: 1;   /* the center friend sits in front, like the logo */
-    width: 46%;
-    left: 27%;
-    top: 3%;
-    object-position: 62% 45%;
-    animation-delay: 0.05s;
-}
-
-.friend-left {
-    --ring: var(--green);
-    width: 36%;
-    left: 1%;
-    top: 17%;
-    object-position: 60% 35%;
-    animation-delay: 0.2s;
-}
-
-.friend-right {
-    --ring: var(--red);
-    width: 36%;
-    right: 1%;
-    top: 17%;
-    object-position: 60% 8%;
-    animation-delay: 0.35s;
-}
-
-/* The book sits below the friends at about the size it is in the logo */
-.hero-booker {
-    position: absolute;
-    z-index: 2;
-    left: 26%;
-    bottom: 0;
-    width: 48%;
-    animation: rise-in 0.7s ease-out 0.45s both;
-}
-
-.booker {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
-    filter: drop-shadow(0 10px 18px rgba(13, 61, 105, 0.12));
-}
-
-/* The book waves twice when the page loads, and again when you hover */
-.booker-wave {
-    transform-box: fill-box;
-    transform-origin: 0% 100%;   /* the shoulder */
-    animation: wave 1.1s ease-in-out 1.1s 2;
-}
-
-.hero-friends:hover .booker-wave {
-    animation: wave-again 1.1s ease-in-out;
-}
-
-@keyframes pop-in {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes rise-in {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Two copies of the same wave, so hovering can start it over */
-@keyframes wave {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-18deg); }
-    50% { transform: rotate(8deg); }
-    75% { transform: rotate(-12deg); }
-}
-
-@keyframes wave-again {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-18deg); }
-    50% { transform: rotate(8deg); }
-    75% { transform: rotate(-12deg); }
-}
-
 
 /* ===== Happening now strip ===== */
 .events-strip {
-    padding: 20px 24px;
-    background-color: var(--white);
-    border-bottom: 1px solid var(--line);
+    padding: 24px var(--gutter);
+    background-color: var(--tint);
 }
 
 .events-strip-inner {
@@ -855,11 +677,6 @@ figcaption {
     flex-wrap: wrap;
 }
 
-.events-strip .icon-badge {
-    margin: 0;
-    width: 44px;
-    height: 44px;
-}
 
 
 /* Facebook / Instagram links under the newsletter */
@@ -937,75 +754,6 @@ figcaption {
     font-weight: 700;
 }
 
-/* ===== What we do ===== */
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px 32px;
-}
-
-.feature-item {
-    display: block;
-    margin: -16px;
-    padding: 16px;
-    border-radius: var(--radius);
-    color: var(--ink);
-    text-decoration: none;
-    transition: background-color 0.15s ease;
-}
-
-a.feature-item:hover {
-    background-color: var(--tint);
-}
-
-.feature-item p {
-    margin: 0;
-    color: var(--ink-soft);
-}
-
-.feature-more {
-    display: inline-block;
-    margin-top: 10px;
-    font-weight: 700;
-    color: var(--blue);
-}
-
-a.feature-item:hover .feature-more {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-/* ===== More ways to help ===== */
-.help-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.help-item {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    padding: 32px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-}
-
-.help-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(13, 61, 105, 0.08);
-}
-
-.help-item p {
-    color: var(--ink-soft);
-}
-
-.help-item a {
-    font-weight: 700;
-}
-
-.band-tint .help-item {
-    background-color: var(--white);
-}
-
 /* ===== Photos ===== */
 .photo {
     display: block;
@@ -1035,8 +783,8 @@ a.feature-item:hover .feature-more {
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 32px 16px 12px;
-    background: linear-gradient(to bottom, transparent, rgba(10, 47, 82, 0.8));
+    padding: 10px 16px 12px;
+    background-color: rgba(10, 47, 82, 0.88);
     color: var(--white);
     font-weight: 700;
     font-size: 0.95rem;
@@ -1060,26 +808,14 @@ a.feature-item:hover .feature-more {
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
-        padding: 28px 12px 0;
-        border-bottom: 10px solid transparent;   /* spacing that also hides a cut-off third line */
-        background-origin: border-box;           /* the shading reaches all the way to the bottom */
+        padding: 8px 12px 0;
+        border-bottom: 8px solid transparent;    /* spacing that also hides a cut-off third line */
+        background-clip: padding-box;
+        box-sizing: content-box;
         font-size: 0.85rem;
         opacity: 1;
         transform: none;
     }
-}
-
-/* Home: one large photo with four smaller ones beside it */
-.mosaic {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
-    gap: 12px;
-}
-
-.photo-large {
-    grid-column: span 2;
-    grid-row: span 2;
 }
 
 /* Gallery page: an even grid of photos */
@@ -1138,7 +874,7 @@ a.feature-item:hover .feature-more {
     font-size: 1.8rem;
     line-height: 1;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);   /* taste-skill-ignore: floats over the photo */
 }
 
 .lightbox-nav:hover {
@@ -1181,7 +917,7 @@ a.feature-item:hover .feature-more {
     line-height: 1;
     color: var(--blue-dark);
     background-color: var(--white);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);   /* taste-skill-ignore: floats over the photo */
     cursor: pointer;
 }
 
@@ -1202,9 +938,7 @@ a.feature-item:hover .feature-more {
     width: 140px;
     height: 90px;
     padding: 12px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background-color: var(--white);
+    background-color: var(--tint);
 }
 
 .logo-row img {
@@ -1298,24 +1032,49 @@ a.feature-item:hover .feature-more {
     width: 78%;
 }
 
-/* ===== Inner page header ===== */
+/* ===== Inner page header =====
+   A big title on the left and three real photos on the right */
 .page-header {
     position: relative;
     overflow: hidden;   /* hides the bottom of the peeking book */
-    padding-top: clamp(48px, 6vw, 80px);
-    padding-bottom: clamp(80px, 9vw, 116px);   /* room for the wave and the book */
-    text-align: center;
-    background-image:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), transparent 55%),
-        radial-gradient(circle at 92% 100%, rgba(121, 160, 72, 0.12), transparent 30%);
+    padding-top: clamp(48px, 6vw, 88px);
+    padding-bottom: clamp(80px, 9vw, 120px);   /* room for the wave and the book */
+    text-align: left;
+}
+
+.page-header-inner {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    align-items: end;
+    gap: clamp(32px, 5vw, 80px);
+}
+
+.page-header h1 {
+    margin-bottom: 20px;
+    font-size: var(--size-display);
 }
 
 .page-header .lead {
-    margin: 0 auto 24px;
+    max-width: 32em;
+    margin: 0 0 24px;
 }
 
 .page-header .lead:last-child {
     margin-bottom: 0;
+}
+
+/* Four photos in a square of two by two */
+.page-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.page-photos img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
 }
 
 /* The smiling book peeks up over the wave in the bottom corner,
@@ -1343,9 +1102,6 @@ a.feature-item:hover .feature-more {
     overflow: hidden;
     padding-top: clamp(48px, 6vw, 80px);
     padding-bottom: clamp(72px, 8vw, 108px);   /* room for the wave */
-    background-image:
-        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.9), transparent 40%),
-        radial-gradient(circle at 5% 90%, rgba(121, 160, 72, 0.1), transparent 30%);
 }
 
 .about-hero-inner {
@@ -1375,9 +1131,8 @@ a.feature-item:hover .feature-more {
     padding: 10px 10px 0;
     border-radius: 4px;
     background-color: var(--white);
-    box-shadow: 0 2px 4px rgba(13, 61, 105, 0.08), 0 18px 40px rgba(13, 61, 105, 0.18);
     transform: rotate(var(--tilt));
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
     animation: settle 0.7s cubic-bezier(0.2, 0.8, 0.3, 1.2) backwards;
 }
 
@@ -1442,7 +1197,6 @@ a.feature-item:hover .feature-more {
 .polaroid:hover {
     z-index: 3;
     transform: rotate(0deg) translateY(-6px) scale(1.03);
-    box-shadow: 0 4px 8px rgba(13, 61, 105, 0.1), 0 26px 50px rgba(13, 61, 105, 0.22);
 }
 
 @keyframes settle {
@@ -1472,103 +1226,48 @@ a.feature-item:hover .feature-more {
     text-wrap: balance;
 }
 
-/* How your support helps: three steps joined by a dashed line */
+/* How your support helps: three steps, each under a thick bar in one of
+   the logo's three colors (green, blue, red), in the order they happen */
 .flow-title {
     margin-bottom: 40px;
 }
 
 .flow {
-    position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-}
-
-.flow::before {
-    content: "";
-    position: absolute;
-    top: 36px;
-    left: calc((100% - 64px) / 6);
-    right: calc((100% - 64px) / 6);
-    border-top: 3px dashed rgba(19, 88, 151, 0.28);
-    transform-origin: left center;
-    transition: transform 1.2s ease 0.2s;
+    gap: clamp(24px, 4vw, 48px);
+    text-align: left;
 }
 
 .flow-step {
-    --step: var(--blue);
-    --step-soft: rgba(19, 88, 151, 0.1);
+    padding-top: 24px;
+    border-top: 8px solid var(--blue);
 }
 
 .flow-step:nth-child(1) {
-    --step: #5c8133;
-    --step-soft: rgba(121, 160, 72, 0.16);
+    border-top-color: var(--green);
 }
 
 .flow-step:nth-child(3) {
-    --step: var(--red);
-    --step-soft: rgba(179, 43, 57, 0.1);
-}
-
-.flow-icon {
-    position: relative;
-    display: inline-grid;
-    place-items: center;
-    width: 72px;
-    height: 72px;
-    margin-bottom: 20px;
-    border-radius: 50%;
-    color: var(--step);
-    background-color: var(--white);
-    background-image: linear-gradient(var(--step-soft), var(--step-soft));
-    box-shadow: 0 0 0 8px var(--white);   /* a white ring that hides the dashed line behind it */
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.3), opacity 0.3s ease;
-}
-
-.flow-icon .icon {
-    width: 30px;
-    height: 30px;
-}
-
-.flow-step h3 {
-    font-size: 1.3rem;
+    border-top-color: var(--red);
 }
 
 .flow-step p {
-    max-width: 22em;
-    margin: 0 auto;
-    color: var(--ink-soft);
+    max-width: 24em;
+    margin: 0;
 }
 
-/* When the steps scroll into view, the line draws in and the icons pop in turn
-   (script.js adds these classes) */
-.flow.will-reveal::before {
-    transform: scaleX(0);
+.mission-label {
+    justify-content: center;
 }
 
-.flow.will-reveal .flow-icon {
-    opacity: 0;
-    transform: scale(0.6);
-}
-
-.flow.will-reveal.in-view::before {
-    transform: scaleX(1);
-}
-
-.flow.will-reveal.in-view .flow-icon {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.flow.in-view .flow-step:nth-child(2) .flow-icon {
-    transition-delay: 0.5s;
-}
-
-.flow.in-view .flow-step:nth-child(3) .flow-icon {
-    transition-delay: 1s;
+.mission-band .mission p {
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.45;
+    text-wrap: balance;
 }
 
 .mission-label {
@@ -1587,13 +1286,8 @@ a.feature-item:hover .feature-more {
 .tri-rule {
     width: 48px;
     height: 4px;
-    border-radius: 2px;
-    background: linear-gradient(
-        to right,
-        var(--green) 0 33.33%,
-        var(--blue) 33.33% 66.66%,
-        var(--red) 66.66% 100%
-    );
+    background-image: var(--tri-stripe);
+    background-size: 100% 100%;
 }
 
 .mission blockquote {
@@ -1617,9 +1311,7 @@ a.feature-item:hover .feature-more {
 
 .story-row {
     overflow: hidden;
-    border-radius: var(--radius);
-    background-color: var(--white);
-    border: 1px solid var(--line);
+    background-color: var(--tint);
 }
 
 .story-photo {
@@ -1635,12 +1327,6 @@ a.feature-item:hover .feature-more {
 }
 
 /* The icon badge overlaps the bottom edge of the photo */
-.story-text .icon-badge {
-    margin-top: -26px;
-    border: 4px solid var(--white);
-    width: 56px;
-    height: 56px;
-}
 
 .story-text h3 {
     font-size: 1.35rem;
@@ -1683,8 +1369,6 @@ a.feature-item:hover .feature-more {
     gap: 10px;
     height: 100%;
     padding: 18px 14px 16px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
     background-color: var(--white);
     text-align: center;
     text-decoration: none;
@@ -1692,13 +1376,11 @@ a.feature-item:hover .feature-more {
 }
 
 a.biz-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.15s ease;
 }
 
 a.biz-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(19, 88, 151, 0.4);
-    box-shadow: 0 12px 26px rgba(13, 61, 105, 0.12);
+    background-color: var(--tint-deep);
 }
 
 /* Every logo fits inside the same size box, whatever its shape */
@@ -1751,12 +1433,7 @@ a.biz-card:hover .biz-name {
 /* The open spot that invites the next business */
 .biz-invite .biz-card {
     justify-content: center;
-    border: 2px dashed rgba(19, 88, 151, 0.3);
-    background-color: transparent;
-}
-
-.biz-invite .biz-card:hover {
-    border-color: var(--blue);
+    background-color: var(--tint-deep);
 }
 
 .biz-plus {
@@ -1765,7 +1442,7 @@ a.biz-card:hover .biz-name {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background-color: var(--tint);
+    background-color: var(--white);
     color: var(--blue);
 }
 
@@ -1792,7 +1469,7 @@ a.biz-card:hover .biz-name {
 }
 
 .biz-marquee {
-    padding: 6px 0 10px;   /* room for the lift and shadow when you point at a logo */
+    padding: 6px 0 10px;   /* room for the lift when you point at a logo */
 }
 
 .biz-row {
@@ -1808,8 +1485,6 @@ a.biz-card:hover .biz-name {
 
 .biz-marquee.is-scrolling {
     overflow: hidden;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
 .biz-marquee.is-scrolling .biz-track {
@@ -1841,9 +1516,9 @@ a.biz-card:hover .biz-name {
     gap: 8px;
     margin-top: 14px;
     padding: 8px 18px;
-    border: 1px solid rgba(19, 88, 151, 0.35);
+    border: 0;
     border-radius: 999px;
-    background-color: var(--white);
+    background-color: var(--tint);
     font: inherit;
     font-size: 0.9rem;
     font-weight: 700;
@@ -1852,7 +1527,7 @@ a.biz-card:hover .biz-name {
 }
 
 .biz-toggle:hover {
-    border-color: var(--blue);
+    background-color: var(--tint-deep);
 }
 
 .biz-toggle .icon {
@@ -1871,7 +1546,6 @@ a.biz-card:hover .biz-name {
 
 .biz-band + .partners .wrap {
     padding-top: 40px;
-    border-top: 1px solid var(--line);
 }
 
 /* Join page: a compact list under the business levels */
@@ -1936,12 +1610,7 @@ a.biz-card:hover .biz-name {
     display: flex;
     justify-content: space-between;
     gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.edition-list li:last-child {
-    border-bottom: none;
+    padding: 12px 0;
 }
 
 .edition-list a {
@@ -1964,12 +1633,7 @@ a.biz-card:hover .biz-name {
     padding: clamp(28px, 4vw, 40px);
     border-radius: 16px;
     background-color: var(--blue-dark);
-    background-image: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08), transparent 55%);
-    color: rgba(255, 255, 255, 0.88);
-}
-
-.current-card .kicker {
-    color: #b9d58f;
+    color: var(--white);
 }
 
 .current-card h2 {
@@ -1984,9 +1648,7 @@ a.biz-card:hover .biz-name {
 }
 
 .inbox-note {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    margin-top: 40px;
 }
 
 .inbox-note h3 {
@@ -2012,8 +1674,7 @@ a.biz-card:hover .biz-name {
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 16px;
-    padding: 4px 0 12px;
-    border-top: 1px solid var(--line);
+    padding: 4px 0 20px;
 }
 
 .edition-year h3 {
@@ -2022,186 +1683,12 @@ a.biz-card:hover .biz-name {
     color: var(--ink-soft);
 }
 
-.edition-year .edition-list li:last-child {
-    border-bottom: none;
-}
-
-.kicker {
-    margin: 0 0 4px;
-    font-weight: 700;
-    color: var(--ink-soft);
-}
-
-/* ===== Membership levels ===== */
-.tier-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.tier-grid.three {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.tier {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    padding: 28px;
-    background-color: var(--white);
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    border-top: 5px solid var(--blue);
-}
-
-.tier:nth-child(3n + 1) {
-    border-top-color: var(--green);
-}
-
-.tier:nth-child(3n + 3) {
-    border-top-color: var(--red);
-}
-
-.tier:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(13, 61, 105, 0.1);
-}
-
-.tier h4 {
-    margin: 0 0 4px;
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.3;
-    color: var(--ink-soft);
-}
-
-.tier .price {
-    margin: 0;
-    font-family: var(--font-heading);
-    font-size: 2.4rem;
-    font-weight: 600;
-    line-height: 1.1;
-    color: var(--blue-dark);
-}
-
-.tier .per {
-    margin-bottom: 16px;
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-}
-
-.tier-link {
-    margin-top: auto;   /* keeps every link lined up at the bottom of its card */
-    padding-top: 16px;
-    font-weight: 700;
-}
-
-/* ===== Join: benefits ===== */
-.benefit-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.benefit {
-    padding: 28px 24px;
-    border-radius: var(--radius);
-    background-color: var(--tint);
-    text-align: center;
-}
-
-.benefit .icon-badge {
-    width: 60px;
-    height: 60px;
-    background-color: var(--white);
-}
-
-.benefit .icon-badge .icon {
-    width: 26px;
-    height: 26px;
-}
-
-.benefit h3 {
-    font-size: 1.15rem;
-}
-
-.benefit p {
-    margin: 0;
-    color: var(--ink-soft);
-}
-
-.button-row.centered {
-    justify-content: center;
-}
-
-.trust-line {
-    margin: 20px 0 0;
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    text-align: center;
-}
-
-/* The heart sits inline with the words, so it stays put when the line wraps */
-.trust-line .icon {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    margin-right: 6px;
-    vertical-align: -2px;
-    color: var(--red);
-}
-
-/* ===== Join: how to join ===== */
-.steps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    counter-reset: none;
-}
-
-.steps li {
-    padding: 28px;
-    border-radius: var(--radius);
-    background-color: var(--white);
-    border: 1px solid var(--line);
-}
-
-.steps p {
-    color: var(--ink-soft);
-}
-
-.steps .button {
-    margin-top: 4px;
-}
-
-.step-number {
-    display: inline-grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    margin-bottom: 16px;
-    border-radius: 50%;
-    background-color: var(--blue-dark);
-    color: var(--white);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 1.15rem;
-}
-
 /* Official membership note, worded exactly as on fotcpl.org */
 .official-note {
     margin-top: 24px;
     padding: 20px 24px;
-    border-left: 4px solid var(--green);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    background-color: var(--white);
+    border-left: 6px solid var(--green);
+    background-color: var(--tint);
 }
 
 .official-note p {
@@ -2270,14 +1757,7 @@ a.biz-card:hover .biz-name {
     display: flex;
     flex-direction: column;
     padding: 28px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.email-card:hover {
-    border-color: rgba(19, 88, 151, 0.35);
-    box-shadow: 0 10px 28px rgba(13, 61, 105, 0.08);
+    background-color: var(--tint);
 }
 
 .email-card h3 {
@@ -2328,21 +1808,10 @@ a.biz-card:hover .biz-name {
 }
 
 .help-links a:hover {
-    background-color: #e1eaf3;
+    background-color: var(--tint-deep);
 }
 
-.help-links .icon-badge {
-    margin: 0;
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-    background-color: var(--white);
-}
 
-.help-links .icon-badge .icon {
-    width: 20px;
-    height: 20px;
-}
 
 /* Side column */
 .contact-side {
@@ -2397,9 +1866,6 @@ a.biz-card:hover .biz-name {
     align-items: flex-start;
 }
 
-.library-note .icon-badge {
-    flex-shrink: 0;
-}
 
 .library-note h2 {
     font-size: 1.5rem;
@@ -2423,11 +1889,15 @@ a.biz-card:hover .biz-name {
     justify-content: center;
 }
 
+.not-found-photos {
+    margin-top: clamp(40px, 5vw, 64px);
+}
+
 /* ===== Footer ===== */
 .site-footer {
     background-color: var(--blue-deep);
     color: rgba(255, 255, 255, 0.85);
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .footer-inner {
@@ -2514,8 +1984,8 @@ a.biz-card:hover .biz-name {
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 20px 24px;
+    padding: 20px var(--gutter) 28px;
+    background-color: var(--blue-deep);
     font-size: 0.9rem;
 }
 
@@ -2561,7 +2031,7 @@ a.biz-card:hover .biz-name {
 .lake-scene {
     height: clamp(84px, 9vw, 128px);
     overflow: hidden;
-    background: linear-gradient(to bottom, var(--blue-dark), var(--blue-deep));
+    background-color: var(--blue-deep);
 }
 
 .lake-shore {
@@ -2690,119 +2160,17 @@ a.biz-card:hover .biz-name {
 }
 
 @keyframes pulse {
-    from {
-        box-shadow: 0 0 0 0 rgba(121, 160, 72, 0.6);
+    50% {
+        transform: scale(1.5);
+        opacity: 0.6;
     }
-    to {
-        box-shadow: 0 0 0 9px rgba(121, 160, 72, 0);
-    }
-}
-
-/* ===== Home: membership spotlight ===== */
-.spotlight {
-    position: relative;
-    overflow: hidden;
-    background-image:
-        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.08), transparent 42%),
-        radial-gradient(circle at 100% 100%, rgba(179, 43, 57, 0.16), transparent 40%);
-}
-
-.spotlight-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: clamp(36px, 6vw, 80px);
-    align-items: center;
-}
-
-.spotlight h2 {
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    margin-bottom: 12px;
-}
-
-.spotlight-text > p:not(.spotlight-price) {
-    max-width: 30em;
-    font-size: 1.1rem;
-    margin-bottom: 28px;
-}
-
-.spotlight-price {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin: 0 0 20px;
-}
-
-.spotlight-price .amount {
-    font-family: var(--font-heading);
-    font-size: clamp(3.6rem, 8vw, 5.4rem);
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--white);
-}
-
-.spotlight-price .per {
-    line-height: 1.4;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.88);
-}
-
-.spotlight-benefits {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-}
-
-.spotlight-benefits li {
-    padding: 24px;
-    border-radius: var(--radius);
-    background-color: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.spotlight-benefits li:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-}
-
-.spotlight-benefits h3 {
-    font-size: 1.1rem;
-}
-
-.spotlight-benefits p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.82);
-}
-
-/* Light versions of the logo's three colors, easy to see on dark blue */
-.spotlight-benefits li > .icon-badge {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 14px;
-    color: #9cc3e6;
-    background-color: rgba(156, 195, 230, 0.14);
-}
-
-.spotlight-benefits li:nth-child(3n + 1) > .icon-badge {
-    color: #b9d58f;
-    background-color: rgba(185, 213, 143, 0.14);
-}
-
-.spotlight-benefits li:nth-child(3n + 3) > .icon-badge {
-    color: #f0a3ab;
-    background-color: rgba(240, 163, 171, 0.14);
 }
 
 /* Outlined white button for dark backgrounds */
 .button-outline-light {
     color: var(--white);
     background-color: transparent;
-    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 .button-outline-light:hover {
@@ -2820,9 +2188,9 @@ a.biz-card:hover .biz-name {
     gap: 6px;
     min-height: 32px;
     padding: 4px 12px;
-    border: 1px solid rgba(19, 88, 151, 0.3);
+    border: 0;
     border-radius: 999px;
-    background-color: var(--white);
+    background-color: var(--tint-deep);
     color: var(--blue-dark);
     font: inherit;
     font-size: 0.85rem;
@@ -2833,8 +2201,7 @@ a.biz-card:hover .biz-name {
 }
 
 .js .copy-btn:hover {
-    border-color: var(--blue);
-    background-color: var(--tint);
+    background-color: #d3e0ec;
 }
 
 .copy-btn .icon {
@@ -2853,8 +2220,7 @@ a.biz-card:hover .biz-name {
 
 .js .copy-btn.copied {
     color: #2f5214;
-    border-color: var(--green);
-    background-color: rgba(121, 160, 72, 0.14);
+    background-color: rgba(121, 160, 72, 0.2);
 }
 
 /* Kroger's organization number, shown like a coupon code */
@@ -2868,9 +2234,7 @@ a.biz-card:hover .biz-name {
 .code {
     display: inline-block;
     padding: 4px 14px;
-    border: 2px dashed rgba(19, 88, 151, 0.35);
-    border-radius: 8px;
-    background-color: var(--tint);
+    background-color: var(--tint-deep);
     color: var(--blue-dark);
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -2889,7 +2253,7 @@ a.biz-card:hover .biz-name {
     color: var(--white);
     font-weight: 700;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);   /* taste-skill-ignore: floats over the page */
     opacity: 0;
     transform: translate(-50%, 16px);
     pointer-events: none;
@@ -2905,99 +2269,6 @@ a.biz-card:hover .biz-name {
     transform: translate(-50%, 0);
 }
 
-/* ===== Join: Individual and Business tabs =====
-   The tabs only show when JavaScript is running. Without it, both lists
-   simply appear one after the other. The second list starts hidden, so the
-   page doesn't jump while script.js sets the tabs up. */
-.tab-list {
-    display: none;
-}
-
-.js .tabs:not(.tabs-ready) .tab-panel + .tab-panel {
-    display: none;
-}
-
-.js .tab-list {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-bottom: 28px;
-    padding: 6px;
-    border-radius: 999px;
-    background-color: var(--white);
-    box-shadow: inset 0 0 0 1px var(--line), 0 4px 14px rgba(13, 61, 105, 0.06);
-}
-
-.tab {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
-    border: 0;
-    border-radius: 999px;
-    background: none;
-    color: var(--ink-soft);
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.tab:hover {
-    color: var(--blue-dark);
-    background-color: var(--tint);
-}
-
-.tab[aria-selected="true"] {
-    color: var(--white);
-    background-color: var(--blue-dark);
-}
-
-.tab .icon {
-    width: 18px;
-    height: 18px;
-}
-
-/* With tabs on, the tab names do the job of the panel headings on screen
-   (the headings stay for screen readers) */
-.js .panel-title {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
-.panel-title {
-    margin-bottom: 20px;
-}
-
-/* Arriving at join.html#business leaves room above for the tabs */
-.tab-panel {
-    scroll-margin-top: 90px;
-}
-
-.tab-panel + .tab-panel {
-    margin-top: 40px;
-}
-
-.js .tab-panel + .tab-panel {
-    margin-top: 0;
-}
-
-/* A soft fade when switching tabs (not when the page first opens) */
-.tabs-switched .tab-panel:not([hidden]) {
-    animation: panel-in 0.3s ease-out;
-}
-
-@keyframes panel-in {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-}
-
 /* ===== Join: compare the levels side by side ===== */
 .compare {
     margin-top: 24px;
@@ -3009,8 +2280,8 @@ a.biz-card:hover .biz-name {
     gap: 10px;
     padding: 10px 22px;
     border-radius: 999px;
-    background-color: var(--white);
-    box-shadow: inset 0 0 0 2px var(--blue);
+    background-color: transparent;
+    border: 2px solid var(--blue);
     color: var(--blue-dark);
     font-weight: 700;
     cursor: pointer;
@@ -3046,8 +2317,6 @@ a.biz-card:hover .biz-name {
 .compare-scroll {
     margin-top: 16px;
     overflow-x: auto;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
     background-color: var(--white);
 }
 
@@ -3133,15 +2402,8 @@ a.biz-card:hover .biz-name {
 }
 
 .faq details {
-    margin-bottom: 12px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    margin-bottom: 8px;
     background-color: var(--white);
-    transition: box-shadow 0.2s ease;
-}
-
-.faq details[open] {
-    box-shadow: 0 10px 28px rgba(13, 61, 105, 0.08);
 }
 
 .faq summary {
@@ -3240,7 +2502,6 @@ a.biz-card:hover .biz-name {
     border-radius: 50%;
     background-color: var(--red);
     color: var(--white);
-    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.25), 0 10px 26px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
@@ -3285,8 +2546,6 @@ a.biz-card:hover .biz-name {
 .paper {
     position: absolute;
     inset: 0;
-    border-radius: 4px;
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
 }
 
 .paper-back {
@@ -3315,12 +2574,8 @@ a.biz-card:hover .biz-name {
     left: 0;
     right: 0;
     height: 5px;
-    background: linear-gradient(
-        to right,
-        var(--green) 0 33.33%,
-        var(--blue) 33.33% 66.66%,
-        var(--red) 66.66% 100%
-    );
+    background-image: var(--tri-stripe);
+    background-size: 100% 100%;
 }
 
 .paper-logo {
@@ -3340,8 +2595,7 @@ a.biz-card:hover .biz-name {
     display: block;
     flex: 1;
     min-height: 36px;
-    border-radius: 3px;
-    background: linear-gradient(135deg, #cfe0f0, #b9d58f);
+    background-color: #b9d58f;
 }
 
 .paper-line {
@@ -3377,7 +2631,6 @@ a.biz-card:hover .biz-name {
     content: "";
     position: absolute;
     inset: 20px -20px -20px 20px;
-    border-radius: 24px;
     background-color: rgba(121, 160, 72, 0.2);
 }
 
@@ -3386,8 +2639,6 @@ a.biz-card:hover .biz-name {
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(13, 61, 105, 0.18);
 }
 
 .day-boat {
@@ -3449,17 +2700,17 @@ a.biz-card:hover .biz-name {
 }
 
 .timeline li:first-child::after {
-    background: linear-gradient(#5c8133, var(--blue));
+    background-color: #5c8133;
 }
 
 .timeline li:nth-last-child(2)::after {
-    background: linear-gradient(var(--blue), var(--red));
+    background-color: var(--red);
 }
 
 /* The year still to come gets a dashed circle */
 .timeline li:last-child::before {
-    border-style: dashed;
     border-color: var(--red);
+    background-color: rgba(179, 43, 57, 0.15);
 }
 
 .timeline p {
@@ -3506,12 +2757,10 @@ a.biz-card:hover .biz-name {
 .business-block,
 .governance-card {
     padding: clamp(28px, 4vw, 44px);
-    border-radius: 16px;
 }
 
 .business-block {
     background-color: var(--white);
-    border: 1px solid var(--line);
 }
 
 .business-block > p {
@@ -3522,9 +2771,8 @@ a.biz-card:hover .biz-name {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: rgba(255, 255, 255, 0.88);
+    color: var(--white);
     background-color: var(--blue-dark);
-    background-image: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.1), transparent 55%);
 }
 
 .governance-card h2 {
@@ -3607,10 +2855,10 @@ a.biz-card:hover .biz-name {
 
 @keyframes arrive {
     0%, 35% {
-        box-shadow: 0 0 0 4px var(--green), 0 16px 40px rgba(13, 61, 105, 0.16);
+        outline: 4px solid var(--green);
     }
     100% {
-        box-shadow: 0 0 0 4px rgba(121, 160, 72, 0);
+        outline: 4px solid rgba(121, 160, 72, 0);
     }
 }
 
@@ -3624,9 +2872,7 @@ a.biz-card:hover .biz-name {
 
     .visit-card .hours {
         margin: 0;
-        padding: 0 0 0 32px;
-        border-top: 0;
-        border-left: 1px solid var(--line);
+        padding: 0;
     }
 }
 
@@ -3677,16 +2923,13 @@ a.biz-card:hover .biz-name {
 
 .swatch {
     padding: 16px;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    background-color: var(--tint);
 }
 
 .swatch-color {
     display: block;
     height: 72px;
     margin-bottom: 12px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .swatch-text {
@@ -3758,20 +3001,827 @@ code {
     margin: 0;
     padding: 0;
     display: flex;
+    gap: 24px;
+    color: var(--blue);
+}
+
+.badge-row .icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* ===== Home page =====
+   The page reads like a row of posters: each section ("chapter") is one
+   flat color from the logo, edge to edge. Blue for what the Friends do,
+   green for library moments, then the two membership fields. */
+
+/* --- Opening: a giant circle, like the three friends in the logo --- */
+.home-hero {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    align-items: center;
+    min-height: clamp(560px, 48vw, 780px);
+    padding: clamp(48px, 6vw, 96px) var(--gutter);
+    background-color: var(--white);
+}
+
+.home-hero-inner {
+    width: 100%;
+}
+
+.home-hero-text {
+    position: relative;
+    z-index: 2;
+    max-width: 44vw;
+}
+
+.home-hero h1 {
+    font-size: clamp(2.8rem, 6.2vw, 6rem);
+}
+
+.home-hero .lead {
+    max-width: 30em;
+    margin-bottom: 32px;
+}
+
+/* The photo sits in a circle about two-thirds of the screen wide, centered
+   near the right edge, so the top, right and bottom of the screen crop it */
+.home-hero-circle {
+    position: absolute;
+    z-index: 1;
+    left: 52vw;
+    top: calc(55% - 32vw);
+    width: 64vw;
+    aspect-ratio: 1;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    border: clamp(8px, 0.9vw, 14px) solid var(--blue);
+    background-color: var(--tint);
+}
+
+.home-hero-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 55% 40%;
+}
+
+/* Our smiling book, sitting at the edge of the circle */
+.home-hero-book {
+    position: absolute;
+    z-index: 2;
+    left: calc(52vw - clamp(60px, 6vw, 96px));
+    bottom: clamp(16px, 3vw, 40px);
+    width: clamp(120px, 13vw, 200px);
+    height: auto;
+    transform: rotate(-6deg);
+}
+
+/* --- This week at the library --- */
+.events-strip-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px 32px;
+    flex-wrap: wrap;
+}
+
+.events-title {
+    margin: 0 0 4px;
+    font-size: var(--size-lead);
+}
+
+.events-text p {
+    margin: 0;
+}
+
+/* --- Chapters: full-width fields of one flat color --- */
+.chapter {
+    padding: clamp(80px, 10vw, 160px) var(--gutter);
+}
+
+.chapter-blue {
+    background-color: var(--blue);
+    color: var(--white);
+}
+
+.chapter-green {
+    background-color: var(--green);
+    color: var(--ink);
+}
+
+.chapter-blue h2,
+.chapter-blue h3 {
+    color: var(--white);
+}
+
+.chapter-blue a:not(.button) {
+    color: var(--white);
+}
+
+.chapter-blue :focus-visible {
+    outline-color: var(--white);
+}
+
+.chapter-green h2 {
+    color: var(--blue-deep);
+}
+
+/* Ink, not navy, so small link text clears 4.5:1 on the green */
+.chapter-green a {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration-color: currentColor;
+}
+
+.chapter-green :focus-visible {
+    outline-color: var(--blue-deep);
+}
+
+/* --- What the Friends do: the title stays put on the left while the rows pass on the right --- */
+.what-layout {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    column-gap: clamp(32px, 6vw, 96px);
+}
+
+.rows-head {
+    position: sticky;
+    top: 140px;
+    align-self: start;
+}
+
+.rows-head h2 {
+    font-size: var(--size-display);
+}
+
+.rows-head p {
+    max-width: 34em;
+    font-size: var(--size-lead);
+    line-height: 1.5;
+}
+
+.margin-rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(56px, 7vw, 104px);
+}
+
+.margin-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: clamp(24px, 4vw, 56px);
+}
+
+.margin-row-text h3 {
+    font-size: var(--size-heading);
+    margin-bottom: 12px;
+}
+
+.margin-row-text p {
+    max-width: 30em;
+    margin: 0;
+}
+
+/* Each row's photo sits at the right margin, at its own size */
+.margin-photo {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    object-fit: cover;
+}
+
+.margin-photo-a {
+    width: 320px;
+    aspect-ratio: 3 / 2;
+}
+
+.margin-photo-b {
+    width: 240px;
+    aspect-ratio: 4 / 5;
+}
+
+.margin-photo-c {
+    width: 280px;
+    aspect-ratio: 1;
+}
+
+.chapter-more {
+    grid-column: 2;
+    margin: clamp(56px, 7vw, 96px) 0 0;
+}
+
+/* --- Library moments: the title, with real photos dropped beside it like prints --- */
+.prints-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(32px, 5vw, 64px);
+}
+
+.prints-title {
+    margin: 0;
+    font-size: clamp(4rem, 11vw, 10.5rem);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+}
+
+.prints {
+    position: relative;
+    grid-row: span 2;
+    min-height: clamp(360px, 38vw, 560px);
+}
+
+.print {
+    position: absolute;
+    width: 56%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border: 8px solid var(--white);
+    transition: transform 0.2s ease;
+}
+
+.print-1 {
+    left: 0;
+    top: 0;
+    transform: rotate(-8deg);
+}
+
+.print-2 {
+    left: 34%;
+    top: 8%;
+    transform: rotate(6deg);
+}
+
+.print-3 {
+    right: 0;
+    bottom: 0;
+    width: 36%;
+    aspect-ratio: 4 / 3;
+    transform: rotate(-3deg);
+}
+
+/* Pointing at a print straightens it and brings it to the front */
+@media (hover: hover) {
+    .print:hover {
+        z-index: 2;
+        transform: rotate(0deg);
+    }
+}
+
+.prints-note {
+    max-width: 30em;
+    margin: 0;
+}
+
+/* --- Membership: two fields side by side with a hard edge between them --- */
+.membership {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+}
+
+.plan {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: clamp(56px, 7vw, 104px) clamp(24px, 4vw, 64px);
+}
+
+/* The left field starts on the page's left margin */
+.plan-individual {
+    padding-left: max(var(--gutter), calc((100vw - var(--page-width)) / 2));
+    background-color: var(--blue-dark);
+    color: var(--white);
+}
+
+.plan-business {
+    padding-right: max(var(--gutter), calc((100vw - var(--page-width)) / 2));
+    background-color: var(--tint-deep);
+    color: var(--ink);
+}
+
+.plan-name {
+    margin: 0;
+    font-size: var(--size-heading);
+}
+
+.plan-individual .plan-name {
+    color: var(--white);
+}
+
+.plan-for {
+    max-width: 30em;
+    margin: 0;
+}
+
+.plan-individual :focus-visible {
+    outline-color: var(--white);
+}
+
+/* The picker: choose a level and how to pay, then see the price */
+.picker {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+/* Without JavaScript the choices can't update the price, so only the list shows */
+.picker-controls,
+.picker-result,
+.picker-join {
+    display: none;
+}
+
+.js .picker-controls,
+.js .picker-result {
+    display: block;
+}
+
+.js .picker-join {
+    display: inline-block;
+}
+
+.js .picker-all {
+    display: none;
+}
+
+.picker-all {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.picker-all li + li {
+    margin-top: 8px;
+}
+
+.picker fieldset {
+    margin: 0 0 16px;
+    padding: 0;
+    border: 0;
+}
+
+.picker legend {
+    margin-bottom: 8px;
+    padding: 0;
+    font-weight: 700;
+}
+
+/* Each choice is a round button; the chosen one fills in */
+.picker label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin: 0 6px 8px 0;
+    padding: 8px 18px;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    touch-action: manipulation;   /* answers taps right away on phones */
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+}
+
+.picker label:active {
+    transform: scale(0.97);
+}
+
+/* The real radio button stays for keyboards and screen readers, just out of sight */
+.picker input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.plan-individual label:has(input:checked) {
+    background-color: var(--white);
+    border-color: var(--white);
+    color: var(--blue-dark);
+}
+
+.plan-business label {
+    color: var(--blue-dark);
+}
+
+.plan-business label:has(input:checked) {
+    background-color: var(--blue-dark);
+    border-color: var(--blue-dark);
+    color: var(--white);
+}
+
+.picker label:has(input:focus-visible) {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+
+.plan-individual label:has(input:focus-visible) {
+    outline-color: var(--white);
+}
+
+.plan-business label:has(input:focus-visible) {
+    outline-color: var(--blue-dark);
+}
+
+.picker label:has(input:disabled) {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+@media (hover: hover) {
+    .plan-individual label:hover {
+        background-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .plan-business label:hover {
+        background-color: rgba(13, 61, 105, 0.08);
+    }
+
+    .plan-individual label:has(input:checked):hover {
+        background-color: var(--white);
+    }
+
+    .plan-business label:has(input:checked):hover {
+        background-color: var(--blue-dark);
+    }
+}
+
+.picker-price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin: 0 0 8px;
+}
+
+.picker-amount {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 9vw, 7.5rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.picker-per {
+    font-size: var(--size-lead);
+    font-weight: 700;
+}
+
+.picker-extra {
+    max-width: 30em;
+    margin: 0;
+}
+
+/* --- More ways to help: a photo that stays put beside the list --- */
+.help-layout {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+}
+
+.help-photo {
+    position: sticky;
+    top: 120px;
+    margin: 0;
+}
+
+.help-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
+.help-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 40px;
+}
+
+.help-list h3 {
+    font-size: var(--size-lead);
+}
+
+.help-list p {
+    margin: 0 0 8px;
+}
+
+.help-list a {
+    display: inline-block;
+    padding: 4px 0;
+    font-weight: 700;
+}
+
+/* A white box on a tinted band */
+.panel-white {
+    background-color: var(--white);
+}
+
+/* --- For businesses: three tiles in a row, the middle one in red --- */
+.tile-row {
+    display: grid;
+    grid-template-columns: 2fr 8fr 2fr;
+    gap: 12px;
+    padding: clamp(64px, 8vw, 112px) 0;
+}
+
+.tile {
+    min-height: 360px;
+}
+
+.tile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tile-action {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    padding: 40px clamp(24px, 4vw, 56px);
+    background-color: var(--red);
+    color: var(--white);
+}
+
+.tile-action h2 {
+    margin-bottom: 8px;
+    font-size: var(--size-heading);
+    color: var(--white);
+}
+
+.tile-action p {
+    max-width: 34em;
+    margin-bottom: 16px;
+}
+
+.tile-action :focus-visible {
+    outline-color: var(--white);
+}
+
+.tile-action .button-light {
+    color: var(--red-dark);
+}
+
+.tile-flat {
+    background-color: var(--green);
+}
+
+/* ===== Join page ===== */
+.page-header-note {
+    max-width: 34em;
+    margin: 24px 0 0;
+    font-size: var(--size-small);
+}
+
+/* Every membership includes: a short list set in big type */
+.includes-layout {
+    display: grid;
+    gap: clamp(24px, 4vw, 48px);
+}
+
+.includes-layout h2 {
+    margin: 0;
+}
+
+.includes-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+    gap: 24px clamp(24px, 4vw, 56px);
+}
+
+.includes-list li {
+    padding: 16px 0 16px 20px;
+    border-left: 6px solid var(--green);
+    font-family: var(--font-heading);
+    font-size: var(--size-lead);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--blue-deep);
+}
+
+.includes-list li:nth-child(2) {
+    border-left-color: var(--blue);
+}
+
+.includes-list li:nth-child(3) {
+    border-left-color: var(--red);
+}
+
+/* Closed panels take no room at all */
+.compare:not([open]) > :not(summary) {
+    display: none;
+}
+
+/* The two compare tables, one above the other */
+.compare-pair {
+    display: grid;
     gap: 16px;
+}
+
+/* --- Home page on tablets and phones --- */
+@media (max-width: 900px) {
+    .home-hero {
+        display: block;
+        min-height: 0;
+        padding-bottom: 0;
+    }
+
+    .home-hero-text {
+        max-width: none;
+    }
+
+    .home-hero h1 {
+        font-size: clamp(2.6rem, 11vw, 4.5rem);
+    }
+
+    /* The circle moves below the words and rises from the bottom edge */
+    .home-hero-circle {
+        position: relative;
+        left: 50%;
+        top: auto;
+        width: 130vw;
+        margin: 40px 0 -65vw -65vw;
+    }
+
+    .home-hero-book {
+        left: var(--gutter);
+        bottom: 12px;
+        width: clamp(96px, 24vw, 150px);
+    }
+
+    .page-header-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .page-photos {
+        max-width: 520px;
+    }
+
+    .what-layout,
+    .margin-row {
+        grid-template-columns: 1fr;
+    }
+
+    .rows-head {
+        position: static;
+        margin-bottom: 56px;
+    }
+
+    .margin-row-text,
+    .margin-photo,
+    .chapter-more {
+        grid-column: 1;
+    }
+
+    .margin-photo {
+        grid-row: 2;
+        margin-top: 24px;
+    }
+
+    .margin-photo-a {
+        width: 100%;
+    }
+
+    .margin-photo-b {
+        width: 70%;
+        justify-self: end;
+    }
+
+    .margin-photo-c {
+        width: 55%;
+    }
+
+    .prints-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .prints {
+        grid-row: auto;
+        min-height: 96vw;
+    }
+
+    .print {
+        width: 58%;
+    }
+
+    .membership,
+    .help-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .plan-individual,
+    .plan-business {
+        padding-left: var(--gutter);
+        padding-right: var(--gutter);
+    }
+
+    .help-photo {
+        position: static;
+    }
+
+    .help-photo img {
+        aspect-ratio: 4 / 3;
+    }
+
+    .tile-row {
+        grid-template-columns: 1fr 1fr;
+        padding-left: var(--gutter);
+        padding-right: var(--gutter);
+    }
+
+    .tile-action {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        min-height: 300px;
+    }
+
+    .tile-photo,
+    .tile-flat {
+        min-height: 120px;
+    }
+}
+
+/* ===== Motion =====
+   Only when JavaScript runs and the visitor hasn't asked for less motion
+   (script.js adds the "rise" class). Things fade up into place as they
+   scroll into view, one after another. */
+.rise {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--rise-delay, 0ms),
+        transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--rise-delay, 0ms);
+}
+
+.rise.risen {
+    opacity: 1;
+    transform: none;
+}
+
+/* The big circle on the home page opens like a roller shutter: a blue
+   blind rolls up and off the photo. The photo itself is there from the
+   first moment, so the page still loads fast. */
+.js .shutter::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--blue);
+    transform: translateY(-101%);
+    animation: shutter-open 1s cubic-bezier(0.65, 0, 0.35, 1) 0.15s backwards;
+    pointer-events: none;
+}
+
+@keyframes shutter-open {
+    from {
+        transform: translateY(0);
+    }
+}
+
+/* The photo prints drop onto the green, one by one */
+.prints.risen .print {
+    animation: print-drop 0.7s cubic-bezier(0.2, 0.8, 0.3, 1.1) backwards;
+}
+
+.prints.risen .print-2 {
+    animation-delay: 0.15s;
+}
+
+.prints.risen .print-3 {
+    animation-delay: 0.3s;
+}
+
+@keyframes print-drop {
+    from {
+        opacity: 0;
+        transform: translateY(-48px) rotate(0deg) scale(1.06);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .js .shutter::after,
+    .prints.risen .print {
+        animation: none;
+    }
 }
 
 /* ===== Medium screens ===== */
 @media (max-width: 960px) {
-    .feature-grid,
-    .tier-grid,
-    .benefit-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .contact-layout,
     .newsletter-layout,
-    .spotlight-inner,
     .faq-layout {
         grid-template-columns: 1fr;
     }
@@ -3781,28 +3831,14 @@ code {
         margin: 0 auto;
     }
 
-    .steps,
     .rooted-inner {
         grid-template-columns: 1fr;
-    }
-
-    .help-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .help-grid > :last-child:nth-child(odd) {
-        grid-column: 1 / -1;
     }
 
     .lake-art {
         position: relative;
         top: auto;
         max-width: 560px;
-    }
-
-    .mosaic {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 160px;
     }
 
     .photo-grid {
@@ -3913,7 +3949,6 @@ code {
 
     .main-nav a {
         padding: 12px 0;
-        border-bottom: 1px solid var(--line);
     }
 
     .main-nav a:not(.button)::after {
@@ -3941,34 +3976,8 @@ code {
         display: none;   /* not enough room on phones */
     }
 
-    .hero-inner,
     .split {
         grid-template-columns: 1fr;
-    }
-
-    .hero-inner {
-        gap: 24px;
-        text-align: center;
-    }
-
-    .hero-friends {
-        grid-row: 1;   /* picture above the words on phones */
-        width: min(100%, 380px);
-    }
-
-    .friend {
-        border-width: 4px;
-        box-shadow: 0 0 0 4px var(--ring), 0 10px 24px rgba(13, 61, 105, 0.18);
-    }
-
-    .hero .lead {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero .button-row,
-    .hero-note {
-        justify-content: center;
     }
 
     .join-band-inner {
@@ -4031,44 +4040,10 @@ code {
         padding: 24px;
     }
 
-    /* How your support helps: steps stack, joined by a line down the left */
+    /* How your support helps: the steps stack */
     .flow {
         grid-template-columns: 1fr;
-        gap: 28px;
-        text-align: left;
-    }
-
-    .flow::before {
-        top: 36px;
-        bottom: 36px;
-        left: 34px;
-        right: auto;
-        border-top: 0;
-        border-left: 3px dashed rgba(19, 88, 151, 0.28);
-        transform-origin: center top;
-    }
-
-    .flow.will-reveal::before {
-        transform: scaleY(0);
-    }
-
-    .flow.will-reveal.in-view::before {
-        transform: scaleY(1);
-    }
-
-    .flow-step {
-        display: grid;
-        grid-template-columns: 72px 1fr;
-        gap: 20px;
-        align-items: start;
-    }
-
-    .flow-icon {
-        margin-bottom: 0;
-    }
-
-    .flow-step p {
-        margin: 0;
+        gap: 32px;
     }
 
     .faq summary {
@@ -4135,52 +4110,15 @@ code {
 }
 
 @media (max-width: 560px) {
-    .feature-grid,
-    .tier-grid,
-    .tier-grid.three,
-    .benefit-grid,
     .email-cards,
     .help-links,
-    .footer-inner,
-    .spotlight-benefits,
-    .help-grid {
+    .footer-inner {
         grid-template-columns: 1fr;
-    }
-
-    /* Benefit cards become compact rows: icon on the left, words on the right */
-    .spotlight-benefits li,
-    .benefit {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        column-gap: 16px;
-        align-items: start;
-        padding: 18px;
-        text-align: left;
-    }
-
-    .spotlight-benefits li > .icon-badge,
-    .benefit > .icon-badge {
-        grid-row: span 2;
-        margin-bottom: 0;
-    }
-
-    .benefit > .icon-badge {
-        width: 52px;
-        height: 52px;
-    }
-
-    .spotlight-benefits h3,
-    .benefit h3 {
-        margin-bottom: 2px;
     }
 
     .footer-inner {
         gap: 32px;
         padding-top: 40px;
-    }
-
-    .tab {
-        padding: 10px 18px;
     }
 
     .compare-table {
@@ -4214,7 +4152,7 @@ code {
         left: 0;
         z-index: 1;
         min-width: 120px;
-        box-shadow: 1px 0 0 var(--line);
+        box-shadow: 1px 0 0 var(--line);   /* taste-skill-ignore: the edge of a table column */
     }
 
     /* Business Friends: smaller tiles, two to a row */
@@ -4294,24 +4232,20 @@ code {
     .lightbox,
     .copy-btn,
     .toast,
-    .tab-list {
+    .picker-controls,
+    .picker-result,
+    .picker-join {
         display: none !important;
     }
 
-    /* Print both membership lists, not just the open tab */
-    .tab-panel[hidden] {
+    /* Print every membership level, not just the one picked on screen */
+    .js .picker-all {
         display: block !important;
-    }
-
-    .flow.will-reveal::before,
-    .flow.will-reveal .flow-icon {
-        opacity: 1;
-        transform: none;
     }
 
     .site-header {
         position: static;
-        box-shadow: none;
+        box-shadow: none;   /* taste-skill-ignore: removes the scrolled-header shadow when printing */
     }
 
     .band {
@@ -4338,13 +4272,9 @@ code {
         scroll-behavior: auto;
     }
 
-    .button:hover,
     .button:active,
-    .tier:hover,
-    .help-item:hover,
     .photo:hover img,
-    .video-play:hover img,
-    .spotlight-benefits li:hover {
+    .video-play:hover img {
         transform: none;
     }
 }
@@ -4358,11 +4288,9 @@ code {
 .mission .mark {
     font-weight: inherit;   /* the heading font comes in one weight, so color does the work */
     color: var(--blue-dark);
-    background-image: linear-gradient(rgba(121, 160, 72, 0.22), rgba(121, 160, 72, 0.22));
-    background-repeat: no-repeat;
-    background-position: 0 90%;
-    background-size: 100% 0.2em;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    padding: 0 0.08em;
+    text-decoration-line: underline;
+    text-decoration-color: rgba(121, 160, 72, 0.35);
+    text-decoration-thickness: 0.22em;
+    text-underline-offset: -0.06em;
+    text-decoration-skip-ink: none;
 }
