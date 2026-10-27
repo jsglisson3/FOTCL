@@ -51,14 +51,14 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-// ===== Header lift =====   (taste-skill-ignore: the sticky header is a real overlay)
-// Adds a soft shadow once you scroll down, so the header lifts off the page.   taste-skill-ignore
+// ===== Header shadow =====
+// Adds a soft shadow once you scroll down, so the header lifts off the page.
 // An invisible marker sits at the very top of the page; when it scrolls out
-// of view, the shadow turns on. (Only that changes, never the header's   taste-skill-ignore
+// of view, the shadow turns on. (Only the shadow changes, never the header's
 // size, so the page never jumps.)
 const topMarker = document.createElement("div");
 topMarker.setAttribute("aria-hidden", "true");
-topMarker.style.cssText = "position:absolute;top:0;left:0;width:1px;height:1px;";   // taste-skill-ignore: invisible marker, not a line
+topMarker.style.cssText = "position:absolute;top:0;left:0;width:1px;height:1px;";
 document.body.prepend(topMarker);
 
 new IntersectionObserver(([entry]) => {
@@ -206,70 +206,75 @@ if (statusNotes.length || hoursRows.length) {
     });
 }
 
-// ===== Membership picker (home and Join pages) =====
-// Choose a level and how often to pay, and the price and what's included
-// update right away. The button always goes to the same Donorbox form.
-// Without JavaScript, a plain list of every level shows instead.
-//
-// IF THE PRICES CHANGE: update them here, in the "picker-all" lists on
-// index.html and join.html, and in the compare tables on join.html.
-// monthly: null means that level can only be paid yearly.
-const MEMBERSHIP = {
-    individual: [
-        { name: "Friend", yearly: "15", monthly: null, extra: "All the member benefits. Monthly payments start at the Supporter level." },
-        { name: "Supporter", yearly: "100", monthly: "10", extra: "All the member benefits, plus 2 tickets to our annual event." },
-        { name: "Patron", yearly: "200", monthly: "20", extra: "All the member benefits, plus your name in the quarterly newsletter and 4 annual event tickets." },
-    ],
-    business: [
-        { name: "Friend", yearly: "50", monthly: null, extra: "All the member benefits. Monthly payments start at the Supporter level." },
-        { name: "Supporter", yearly: "500", monthly: "45", extra: "All the member benefits, plus your name in the quarterly newsletter and 2 annual event tickets." },
-        { name: "Patron", yearly: "1,000", monthly: "85", extra: "All the member benefits, plus newsletter name placement, a sponsorship table, logo placement and 4 annual event tickets." },
-        { name: "Partner", yearly: "2,000", monthly: "200", extra: "All the member benefits, plus newsletter name placement, a sponsorship table, logo placement and 8 annual event tickets." },
-    ],
-};
+// ===== Membership tabs (Join page) =====
+// Switches between the Individual and Business levels. Without JavaScript,
+// both lists simply show one after the other.
+document.querySelectorAll("[data-tabs]").forEach((tabs) => {
+    const list = tabs.querySelector(".tab-list");
+    const buttons = [...list.querySelectorAll(".tab")];
+    const panels = buttons.map((button) => document.getElementById(button.dataset.panel));
 
-document.querySelectorAll("[data-picker]").forEach((picker) => {
-    const track = picker.dataset.picker;   // "individual" or "business"
-    const levels = MEMBERSHIP[track];
-    const monthlyInput = picker.querySelector(`input[name="${track}-pay"][value="month"]`);
-    const yearlyInput = picker.querySelector(`input[name="${track}-pay"][value="year"]`);
-    const amount = picker.querySelector(".picker-amount");
-    const per = picker.querySelector(".picker-per");
-    const extra = picker.querySelector(".picker-extra");
-    const join = picker.querySelector(".picker-join");
-    if (!levels || !amount) return;
+    // Label everything for screen readers
+    list.setAttribute("role", "tablist");
+    buttons.forEach((button, i) => {
+        button.setAttribute("role", "tab");
+        button.setAttribute("aria-controls", panels[i].id);
+        panels[i].setAttribute("role", "tabpanel");
+        panels[i].setAttribute("aria-labelledby", button.id);
+        panels[i].tabIndex = 0;
+    });
+    tabs.classList.add("tabs-ready");
 
-    function update() {
-        const level = levels[Number(picker.querySelector(`input[name="${track}-level"]:checked`).value)];
-
-        // Friend can only be paid yearly, so Monthly switches off for it
-        monthlyInput.disabled = !level.monthly;
-        if (!level.monthly && monthlyInput.checked) yearlyInput.checked = true;
-
-        const monthly = monthlyInput.checked;
-        amount.textContent = `$${monthly ? level.monthly : level.yearly}`;
-        per.textContent = monthly ? "a month" : "a year";
-        extra.textContent = level.extra;
-        join.textContent = `Join as a ${track === "business" ? "Business " : ""}${level.name}`;
+    function select(index, moveFocus) {
+        buttons.forEach((button, i) => {
+            const selected = i === index;
+            button.setAttribute("aria-selected", selected);
+            button.tabIndex = selected ? 0 : -1;   // only the chosen tab is in the Tab order
+            panels[i].hidden = !selected;
+        });
+        if (moveFocus) buttons[index].focus();
     }
 
-    picker.addEventListener("change", update);
-    update();
+    buttons.forEach((button, i) => {
+        button.addEventListener("click", () => {
+            tabs.classList.add("tabs-switched");   // lets the new list fade in
+            select(i, false);
+        });
+
+        // Arrow keys move between tabs, Home and End jump to the first and last
+        button.addEventListener("keydown", (event) => {
+            const keys = {
+                ArrowRight: (i + 1) % buttons.length,
+                ArrowLeft: (i - 1 + buttons.length) % buttons.length,
+                Home: 0,
+                End: buttons.length - 1,
+            };
+            if (event.key in keys) {
+                event.preventDefault();
+                tabs.classList.add("tabs-switched");
+                select(keys[event.key], true);
+            }
+        });
+    });
+
+    // A link to join.html#business opens the Business tab and scrolls to it
+    // (style.css leaves room above it, so the tabs stay in view)
+    function selectFromAddress() {
+        const index = panels.findIndex((panel) => `#${panel.id}` === location.hash);
+        if (index === -1) return false;
+        select(index, false);
+        panels[index].scrollIntoView();
+        return true;
+    }
+
+    if (!selectFromAddress()) select(0, false);
+    window.addEventListener("hashchange", selectFromAddress);
 });
 
 // ===== Videos (Gallery page) =====
 // Each video shows a preview picture first. The YouTube player loads only
 // when you press play, which keeps the page fast and private.
-// If YouTube's preview picture can't load (some school and office networks
-// block YouTube), it's removed, leaving the blue box and play button.
 document.querySelectorAll(".video-play").forEach((link) => {
-    const preview = link.querySelector("img");
-    if (preview) {
-        const dropIfBroken = () => preview.remove();
-        preview.addEventListener("error", dropIfBroken);
-        if (preview.complete && preview.naturalWidth === 0 && preview.currentSrc) dropIfBroken();
-    }
-
     link.addEventListener("click", (event) => {
         event.preventDefault();
         const player = document.createElement("iframe");
@@ -355,7 +360,8 @@ if (lightbox) {
 }
 
 // ===== Little moments as things scroll into view =====
-// In the footer the sailboat rocks on the waves. Skipped for anyone
+// On the About page the "How your support helps" line draws itself in,
+// and in the footer the sailboat rocks on the waves. Skipped for anyone
 // who has asked their device to reduce motion.
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -369,43 +375,9 @@ if ("IntersectionObserver" in window && !reduceMotion) {
         });
     }, { threshold: 0.35 });
 
-    document.querySelectorAll(".lake-scene").forEach((item) => {
+    document.querySelectorAll(".flow, .lake-scene").forEach((item) => {
         item.classList.add("will-reveal");
         watcher.observe(item);
-    });
-}
-
-// ===== Things rise into place as they scroll into view =====
-// Headings, photos and list items fade up one after another (page titles
-// stay put, so they can be read straight away). Nothing is
-// hidden unless JavaScript is running, and none of it happens for anyone
-// who has asked their device to reduce motion.
-const RISE = [
-    "main h2:not(.visually-hidden)", "main .lead", ".section-head p", ".rows-head p",
-    "main .button-row", ".page-header-note", ".page-photos img", ".margin-row", ".prints",
-    ".prints-note", ".plan-name", ".plan-for", ".picker", ".help-photo", ".help-list li",
-    ".tile", ".includes-list li", ".flow-step", ".faq details", ".compare", ".events-strip-inner > *",
-    ".photo-grid .photo", ".video-grid .video", ".email-card", ".help-links li", ".prose > *",
-    ".partner-logos li", ".not-found-photos img",
-].join(", ");
-
-if ("IntersectionObserver" in window && !reduceMotion) {
-    const riser = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("risen");
-                riser.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll(RISE).forEach((item) => {
-        // Neighbours that rise together go one after another, 80ms apart
-        const neighbours = [...item.parentElement.children].filter((child) => child.matches(RISE));
-        const place = Math.min(neighbours.indexOf(item), 5);
-        item.style.setProperty("--rise-delay", `${place * 80}ms`);
-        item.classList.add("rise");
-        riser.observe(item);
     });
 }
 
@@ -533,7 +505,7 @@ function buildBusinessStrip(spot, friends) {
     toggle.hidden = true;
     spot.append(viewport, toggle);
 
-    let copy = null;              // a second copy of the logos lets the loop run on without a gap
+    let copy = null;              // a second copy of the logos makes the loop seamless
     let paused = false;           // the visitor pressed Pause
     let keyboardInside = false;   // someone is tabbing through the logos
 

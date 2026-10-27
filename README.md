@@ -11,7 +11,7 @@ A volunteer-built redesign of fotcpl.org. Plain HTML, CSS and a little JavaScrip
 | `404.html` | "Page not found" page. It also sends old fotcpl.org addresses to the new pages |
 | `styleguide.html` | Colors, type, buttons and writing rules for anyone editing the site. Not in the menu, and hidden from search engines |
 | `style.css` | All the styling. Brand colors are at the top in `:root`, followed by a table of contents |
-| `script.js` | Phone menu, header shadow, gallery viewer, video players, copy buttons, the membership picker, the library's "Open now" notes, the Business Friends logos and the gentle scroll motion |
+| `script.js` | Phone menu, header shadow, gallery viewer, video players, copy buttons, membership tabs, the library's "Open now" notes and the Business Friends logos |
 | `sponsors.js` | The list of Business Friends. The home, About and Join pages all show their logos from this one list |
 | `images/` | Logo, smiling book drawing, tab and home-screen icons, and the share image |
 | `images/photo-originals/` | The full-size photos (the gallery viewer shows these) |
@@ -40,7 +40,6 @@ Every time you Commit and Sync, GitHub tests every page: links, HTML errors, Jav
 - **A new newsletter:** add it at the top of the list on `newsletters.html` and update the "Current Edition" card there. On the home page, update the edition name and the "Read the Latest Edition" link.
 - **A new Business Friend:** open `sponsors.js` and follow the three steps at the top. Add a business's `level` (like `"Patron"`) and Partners and Patrons get bigger spots up front. The logos show in a new random order on every visit, and the home page row starts scrolling by itself once there are more logos than fit on one line.
 - **A new photo:** save it about 1600 pixels wide in `images/photo-originals/`, then save 400, 800 and 1200-pixel-wide copies in `images/photos/`, named like the others (the free Squoosh.app can resize them). Give it a short description in its `alt` text.
-- **Membership prices:** they appear in four places. Update all of them: the `MEMBERSHIP` list near the top of the picker section in `script.js`, the plain "picker-all" lists on `index.html` and `join.html` (shown when JavaScript is off), and the compare tables on `join.html`.
 - **The menu and footer** are repeated on every page. To change them everywhere at once, use VS Code's Replace in Files (Ctrl+Shift+H).
 - **Colors, type and writing rules** are on `styleguide.html`.
 
@@ -57,7 +56,6 @@ Every time you Commit and Sync, GitHub tests every page: links, HTML errors, Jav
 ## Checked so far
 
 - Accessibility: the axe-core checker (WCAG 2.2 A and AA plus best practices) passes on every page at laptop and phone sizes. Keyboard navigation, zoom and text spacing tested.
-- Lighthouse (phone, Oct 27, 2026 redesign): accessibility 100 and best practices 100 on Home, Join and About; speed 88 to 93 on Home (it varies run to run), 96 on Join and 98 on About. (The search score stays low on purpose until launch, because of the noindex tag.)
-- Motion: things fade up gently as you scroll, and the home photo opens with a rolling blind. All of it switches off for anyone whose device asks for reduced motion.
+- Lighthouse: accessibility 100 on every page; speed 94 to 96 with the real photos. (The search score stays low on purpose until launch, because of the noindex tag.)
 - Works at phone, tablet and desktop widths (tested from 320 to 1440 pixels).
 - All internal links, page anchors and images checked, now automatically on every push.
