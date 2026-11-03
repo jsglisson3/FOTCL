@@ -49,9 +49,18 @@ Every time you Commit and Sync, GitHub tests every page: links, HTML errors, Jav
 2. **Let search engines in.** Delete `<meta name="robots" content="noindex, nofollow">` from every page except `styleguide.html`, which stays hidden.
 3. **Confirm the details.** Prices, emails, the phone number, and the Privacy and Accessibility page wording.
 4. **Connect the domain.** In GitHub: Settings → Pages → Custom domain → `fotcpl.org`. Then whoever manages the domain points its DNS to GitHub Pages (GitHub's instructions walk through it).
-5. **Tell Google.** Add the site in Google Search Console and submit `https://fotcpl.org/sitemap.xml`.
-6. **Test the old links.** `404.html` already sends old addresses like `/what-we-do` and `/become-a-friend-%2F-renew` to the new pages. Try a few once the site is live. Then change the links in `404.html` to start with `/` (like `/style.css`), so the page keeps its look at any address.
-7. **Cancel the GoDaddy website plan last,** once the new site works at fotcpl.org. Nothing on the new site loads from GoDaddy anymore. If the domain name or the fotcpl.org email addresses are also with GoDaddy, keep those; only the website plan goes.
+5. **Lock the address to this site.** In GitHub, verify fotcpl.org under your profile's Settings → Pages → Verified domains (GitHub shows a TXT record to add to the domain's DNS), so nobody else can ever publish a site at that address. Once the site loads at fotcpl.org, tick **Enforce HTTPS** in the repository's Settings → Pages.
+6. **Tell Google.** Add the site in Google Search Console and submit `https://fotcpl.org/sitemap.xml`.
+7. **Test the old links.** `404.html` already sends old addresses like `/what-we-do` and `/become-a-friend-%2F-renew` to the new pages. Try a few once the site is live. Then change the links in `404.html` to start with `/` (like `/style.css`), so the page keeps its look at any address.
+8. **Cancel the GoDaddy website plan last,** once the new site works at fotcpl.org. Nothing on the new site loads from GoDaddy anymore. If the domain name or the fotcpl.org email addresses are also with GoDaddy, keep those; only the website plan goes.
+
+## Keeping the accounts safe
+
+The site itself has no passwords, forms or databases, so the real risks are the accounts around it.
+
+- **Turn on two-step sign-in** (2FA) for GitHub, Donorbox, Google Drive, GoDaddy (domain and email), Facebook and Instagram.
+- **Have a second person with access** to each account, chosen by the board, so the Friends never get locked out if one volunteer steps away.
+- **Email spoofing:** fotcpl.org's email protection (DMARC) is set to watch only (`p=none`), so scammers can still send email that looks like it's from fotcpl.org. Whoever manages the domain can change it to `p=quarantine` once they've checked the reports.
 
 ## Checked so far
 

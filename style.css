@@ -4366,3 +4366,26 @@ code {
     box-decoration-break: clone;
     padding: 0 0.08em;
 }
+
+/* ===== Windows High Contrast (forced colors) =====
+   High Contrast mode removes background colors, so filled buttons would
+   look like plain links. An outline drawn just inside each button puts
+   its shape back, without changing its size. This only applies in High
+   Contrast mode; the normal look doesn't change at all. */
+@media (forced-colors: active) {
+    .button,
+    .tab,
+    .biz-toggle,
+    .back-to-top,
+    .lightbox-nav,
+    .lightbox-close {
+        outline: 2px solid ButtonText;
+        outline-offset: -2px;
+    }
+
+    /* The chosen membership tab gets a thicker, highlighted ring */
+    .tab[aria-selected="true"] {
+        outline: 4px solid Highlight;
+        outline-offset: -4px;
+    }
+}

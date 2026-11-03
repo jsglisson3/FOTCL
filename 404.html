@@ -31,6 +31,10 @@
          Literata for headings (made for reading books), Public Sans for text
          (made for clear, accessible public-service websites). -->
 
+    <!-- Start downloading the two main fonts right away, so text appears in
+         its final look sooner -->
+    <link rel="preload" href="fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/literata-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="style.css">
 
     <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
@@ -59,7 +63,11 @@
             for (var old in moved) {
                 var at = path.lastIndexOf("/" + old);
                 if (at !== -1 && at + old.length + 1 === path.length) {
-                    location.replace(raw.slice(0, at + 1) + moved[old]);
+                    // Only ever send people to a page on this same website.
+                    // (An address like fotcpl.org//other-site.com/home could
+                    // otherwise send them to someone else's site.)
+                    var target = new URL(raw.slice(0, at + 1).replace(/^[\/\\]+/, "/") + moved[old], location.href);
+                    if (target.origin === location.origin) location.replace(target.href);
                     return;
                 }
             }

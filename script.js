@@ -44,10 +44,13 @@ nav.addEventListener("click", (event) => {
     }
 });
 
-// Close the menu with the Escape key
+// Close the menu with the Escape key. If you were on one of the menu's
+// links, you land back on the Menu button instead of losing your place.
 document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    if (event.key === "Escape" && header.classList.contains("menu-open")) {
+        const wasInMenu = nav.contains(document.activeElement);
         setMenu(false);
+        if (wasInMenu) menuButton.focus();
     }
 });
 
