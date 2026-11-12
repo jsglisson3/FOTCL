@@ -13,6 +13,7 @@ A volunteer-built redesign of fotcpl.org. Plain HTML, CSS and a little JavaScrip
 | `style.css` | All the styling. Brand colors are at the top in `:root`, followed by a table of contents |
 | `script.js` | Phone menu, header shadow, gallery viewer, video players, copy buttons, membership tabs, the library's "Open now" notes and the Business Friends logos |
 | `sponsors.js` | The list of Business Friends. The home, About and Join pages all show their logos from this one list |
+| `site-notes.js`, `notes/` | Site Notes, Jeremy's way for the Friends to send change requests and photos: the private page at `/notes/` (log in, a box for each thing to send, and Edit mode, where you tap any part of the website and type what you'd like changed). Visitors never see any of it, and the website itself never changes. Holding the "Powered by Stray Wolf" wolf in the footer for 2 seconds opens it |
 | `images/` | Logo, smiling book drawing, tab and home-screen icons, and the share image |
 | `images/photo-originals/` | The full-size photos (the gallery viewer shows these) |
 | `images/photos/` | Smaller copies of each photo, 400, 800 and 1200 pixels wide, so phones download only what they need |
