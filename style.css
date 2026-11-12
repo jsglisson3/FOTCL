@@ -2556,7 +2556,8 @@ a.biz-card:hover .biz-name {
 }
 
 /* ===== Footer: night over Lake Lewisville =====
-   Stars, a crescent moon, the far shore and a little sailboat.
+   Stars, a crescent moon, the far shore, a little sailboat and a
+   book island with a lit-up library.
    The sky fades from the join band's blue into the footer's. */
 .lake-scene {
     height: clamp(84px, 9vw, 128px);
@@ -2575,10 +2576,28 @@ a.biz-card:hover .biz-name {
     transform-origin: 50% 100%;
 }
 
-/* The boat rocks on the waves when you reach the footer (script.js adds
-   "in-view"), and again when you point at it */
+/* When you reach the footer (script.js adds "in-view"), the boat sails
+   across to the book island, rocking on the waves as it goes. It rocks
+   again when you point at it.
+   - The trip takes 4.5 seconds and happens once, so it never needs a
+     Pause button (moving things that last over 5 seconds would).
+   - Without JavaScript, or for anyone who has asked their device to
+     reduce motion, the boat simply waits beside the island. */
+.lake-scene.will-reveal .boat-trip {
+    transform: translateX(-220px);
+}
+
+.lake-scene.in-view .boat-trip {
+    animation: sail 4.5s ease-in-out forwards;
+}
+
 .lake-scene.in-view .night-boat {
-    animation: rock 2.4s ease-in-out 2;
+    animation: rock 2.25s ease-in-out 2;
+}
+
+@keyframes sail {
+    from { transform: translateX(-220px); }
+    to { transform: translateX(0); }
 }
 
 .lake-scene:hover .night-boat {

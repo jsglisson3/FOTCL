@@ -364,7 +364,7 @@ if (lightbox) {
 
 // ===== Little moments as things scroll into view =====
 // On the About page the "How your support helps" line draws itself in,
-// and in the footer the sailboat rocks on the waves. Skipped for anyone
+// and in the footer the sailboat sails over to the book island. Skipped for anyone
 // who has asked their device to reduce motion.
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
