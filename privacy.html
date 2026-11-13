@@ -43,6 +43,7 @@
 
     <!-- Tells the CSS that JavaScript is running, so the phone menu can start closed -->
     <script>document.documentElement.classList.add("js");</script>
+    <script src="analytics.js" defer></script>
     <script src="script.js" defer></script>
     <script src="site-notes.js" data-site="friends-of-the-colony-public-library" data-api="https://site-notes.jsglisson.workers.dev" data-login-url="portal/" data-door=".swt-badge, .moon-door" defer></script>
 </head>
@@ -123,12 +124,20 @@
 
                 <h2>What We Collect</h2>
                 <p>This website doesn't use cookies, analytics or advertising trackers, and it doesn't ask you to create an account. That's why you won't see a cookie banner.</p>
+                <!-- LAUNCH DAY: when the Measurement ID goes into analytics.js, replace the paragraph above with these three:
+                <p>This website uses Google Analytics to count visits and see which pages are most helpful, such as how many people tap to join or call. Google Analytics sets cookies so it can tell new visits from returning ones. We don't use it for advertising, and it doesn't collect your name or email.</p>
+                <p>If your browser sends a Global Privacy Control signal, Google Analytics doesn't load. You can also turn it off with Google's <a href="https://tools.google.com/dlpage/gaoptout">opt-out browser add-on</a>.</p>
+                <p>The website doesn't ask you to create an account.</p>
+                -->
 
                 <h2>Services We Link to or Show</h2>
                 <ul>
                     <li><strong>Membership and donations</strong> are handled by <a href="https://donorbox.org/">Donorbox</a> on its own website, under its own privacy policy.</li>
                     <li><strong>Videos</strong> on the Gallery page show a preview picture from YouTube. The video player loads only when you press play, in YouTube's privacy-enhanced mode.</li>
                     <li><strong>Newsletters</strong> open in Google Drive.</li>
+                    <!-- LAUNCH DAY: also add this line to the list:
+                    <li><strong>Visit counts</strong> are handled by Google Analytics, under <a href="https://policies.google.com/privacy">Google's privacy policy</a>.</li>
+                    -->
                 </ul>
 
                 <h2>Email</h2>

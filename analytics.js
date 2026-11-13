@@ -1,8 +1,12 @@
 /* ==========================================================================
    Google Analytics 4
    --------------------------------------------------------------------------
-   Turn it on: paste the site's GA4 Measurement ID below (it starts with "G-").
-   Turn it off: make it "" again. Nothing loads from Google while it's empty.
+   OFF FOR NOW. Turn it on once the site is live on its real domain:
+   1. Paste the site's GA4 Measurement ID below (it starts with "G-").
+   2. In privacy.html, swap in the Google Analytics wording saved in the
+      LAUNCH DAY comments, so the Privacy page stays accurate.
+   Turn it off: make the ID "" again and put the old privacy text back.
+   Nothing loads from Google while the ID is empty.
 
    It also stays off:
    - when a page is opened straight from the computer (file://), so local

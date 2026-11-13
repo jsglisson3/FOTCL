@@ -1036,14 +1036,15 @@
     got.then(function (d) {
       if (!d || !d.ok || d.visitors == null) return;
       var n = function (v) { return (Number(v) || 0).toLocaleString("en-US"); };
-      // ▲ 4 more than before / ▼ 3 fewer than before / Same as before / None before to compare
+      // ▲ 4 more than the 4 weeks before / ▼ 3 fewer than the 4 weeks before / Same as the 4 weeks before / None in the 4 weeks before
+      var dd = d.days || 28, before = "the " + (dd % 7 === 0 ? (dd / 7) + " weeks" : dd + " days") + " before";
       var change = function (now, prev, pct) {
         if (typeof prev === "number") {
-          if (prev === 0) return now ? { t: "None before to compare" } : { t: "Same as before" };
+          if (prev === 0) return now ? { t: "None in " + before } : { t: "Same as " + before };
           var diff = now - prev;
-          return diff > 0 ? { t: "▲ " + n(diff) + " more than before", c: "up" } : diff < 0 ? { t: "▼ " + n(-diff) + " fewer than before", c: "down" } : { t: "Same as before" };
+          return diff > 0 ? { t: "▲ " + n(diff) + " more than " + before, c: "up" } : diff < 0 ? { t: "▼ " + n(-diff) + " fewer than " + before, c: "down" } : { t: "Same as " + before };
         }
-        if (typeof pct === "number" && pct !== 0) return pct > 0 ? { t: "▲ " + pct + "% more than before", c: "up" } : { t: "▼ " + -pct + "% fewer than before", c: "down" };
+        if (typeof pct === "number" && pct !== 0) return pct > 0 ? { t: "▲ " + pct + "% more than " + before, c: "up" } : { t: "▼ " + -pct + "% fewer than " + before, c: "down" };
         return null;
       };
       var put = function (k, now, prev, pct) {

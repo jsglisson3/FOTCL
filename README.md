@@ -12,6 +12,7 @@ A volunteer-built redesign of fotcpl.org. Plain HTML, CSS and a little JavaScrip
 | `styleguide.html` | Colors, type, buttons and writing rules for anyone editing the site. Not in the menu, and hidden from search engines |
 | `style.css` | All the styling. Brand colors are at the top in `:root`, followed by a table of contents |
 | `script.js` | Phone menu, header shadow, gallery viewer, video players, copy buttons, membership tabs, the library's "Open now" notes and the Business Friends logos |
+| `analytics.js` | Google Analytics 4, switched off until launch day (see the launch checklist). Nothing loads from Google while its Measurement ID is empty |
 | `sponsors.js` | The list of Business Friends. The home, About and Join pages all show their logos from this one list |
 | `site-notes.js`, `portal/` | The Client Portal (Site Notes), Jeremy's way for the Friends to send change requests and photos: the private page at `/portal/` (log in, a box for each thing to send, and Edit mode, where you tap any part of the website and type what you'd like changed). Visitors never see any of it, and the website itself never changes. Holding the moon or the "Powered by Stray Wolf" wolf in the footer for 2 seconds opens it (`notes/` just forwards there, the first address it had) |
 | `images/` | Logo, smiling book drawing, tab and home-screen icons, and the share image |
@@ -52,8 +53,9 @@ Every time you Commit and Sync, GitHub tests every page: links, HTML errors, Jav
 4. **Connect the domain.** In GitHub: Settings → Pages → Custom domain → `fotcpl.org`. Then whoever manages the domain points its DNS to GitHub Pages (GitHub's instructions walk through it).
 5. **Lock the address to this site.** In GitHub, verify fotcpl.org under your profile's Settings → Pages → Verified domains (GitHub shows a TXT record to add to the domain's DNS), so nobody else can ever publish a site at that address. Once the site loads at fotcpl.org, tick **Enforce HTTPS** in the repository's Settings → Pages.
 6. **Tell Google.** Add the site in Google Search Console and submit `https://fotcpl.org/sitemap.xml`.
-7. **Test the old links.** `404.html` already sends old addresses like `/what-we-do` and `/become-a-friend-%2F-renew` to the new pages. Try a few once the site is live. Then change the links in `404.html` to start with `/` (like `/style.css`), so the page keeps its look at any address.
-8. **Cancel the GoDaddy website plan last,** once the new site works at fotcpl.org. Nothing on the new site loads from GoDaddy anymore. If the domain name or the fotcpl.org email addresses are also with GoDaddy, keep those; only the website plan goes.
+7. **Turn on Google Analytics.** In Google Analytics, make a GA4 property with a web data stream for `https://fotcpl.org` and copy its Measurement ID (it starts with `G-`). Paste it between the quotes on the `GA_MEASUREMENT_ID` line in `analytics.js`. Then, in `privacy.html`, replace the "doesn't use cookies, analytics" paragraph with the Google Analytics wording saved in the LAUNCH DAY comments right below it, and add the "Visit counts" line from the other LAUNCH DAY comment. Do both in the same commit, so the Privacy page is never wrong. Phone taps, email taps and Donorbox join taps show up in GA4 as `phone_call_click`, `email_click` and `generate_lead`.
+8. **Test the old links.** `404.html` already sends old addresses like `/what-we-do` and `/become-a-friend-%2F-renew` to the new pages. Try a few once the site is live. Then change the links in `404.html` to start with `/` (like `/style.css`), so the page keeps its look at any address.
+9. **Cancel the GoDaddy website plan last,** once the new site works at fotcpl.org. Nothing on the new site loads from GoDaddy anymore. If the domain name or the fotcpl.org email addresses are also with GoDaddy, keep those; only the website plan goes.
 
 ## Keeping the accounts safe
 
