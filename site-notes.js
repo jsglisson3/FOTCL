@@ -123,6 +123,23 @@
     arrow: ["M5 12h14", "M13 6l6 6-6 6"],
     plus: ["M12 5v14", "M5 12h14"]
   };
+  // Social sites the portal knows by name: their own colors, logo and an example of the address to paste.
+  var BRANDS = {
+    facebook: { bg: "#1877F2", ph: "facebook.com/yourpage",
+      svg: '<path fill="#fff" d="M13.6 21v-7.4h2.5l.4-2.9h-2.9V8.9c0-.8.2-1.4 1.4-1.4h1.6V4.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.1H8v2.9h2.5V21z"/>' },
+    instagram: { bg: "radial-gradient(circle at 30% 107%,#fdf497 0%,#fdf497 5%,#fd5949 45%,#d6249f 60%,#285AEB 90%)", ph: "instagram.com/yourname",
+      svg: '<g fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.8"/></g><circle cx="16.8" cy="7.2" r="1.2" fill="#fff"/>' },
+    linkedin: { bg: "#0A66C2", ph: "linkedin.com/company/yourname",
+      svg: '<g fill="#fff"><circle cx="7" cy="6.8" r="1.8"/><rect x="5.5" y="9.6" width="3" height="9.4" rx=".4"/><path d="M10.8 9.6h2.9v1.3c.5-.9 1.6-1.6 3.1-1.6 2.5 0 3.4 1.6 3.4 4.2V19h-3v-4.9c0-1.3-.3-2.2-1.6-2.2s-1.8.9-1.8 2.2V19h-3z"/></g>' },
+    google: { bg: "#fff", ph: "Your Google Maps or business link",
+      svg: '<g fill="none" stroke-width="3.2"><path stroke="#EA4335" d="M16.95 7.05A7 7 0 0 0 5.94 8.5"/><path stroke="#FBBC05" d="M5.94 8.5A7 7 0 0 0 5.94 15.5"/><path stroke="#34A853" d="M5.94 15.5A7 7 0 0 0 16.95 16.95"/><path stroke="#4285F4" d="M16.95 16.95A7 7 0 0 0 19 12H12"/></g>' }
+  };
+  function brandLogo(b) {
+    var t = document.createElement("span"); t.className = "logo"; t.style.background = b.bg;
+    if (b.bg === "#fff") t.style.boxShadow = "inset 0 0 0 1px #e2dcd2";
+    t.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + b.svg + "</svg>";
+    return t;
+  }
   function icon(name, size) {
     var ns = "http://www.w3.org/2000/svg", s = document.createElementNS(ns, "svg");
     s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true"); s.setAttribute("class", "ic");
@@ -153,7 +170,7 @@
     ".frame.picking{box-shadow:inset 0 0 0 6px var(--accent),inset 0 0 0 9999px rgba(194,84,27,.05)}",
     ".strip{background:var(--accent);color:#fff;padding:6px max(12px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px))}",
     ".strip-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:8px;font-size:15px;line-height:1.2}",
-    ".strip .lbl{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.01em;min-width:0;white-space:nowrap}",
+    ".strip .lbl{display:flex;align-items:center;gap:8px;transform-origin:left center;font-weight:800;letter-spacing:.01em;min-width:0;white-space:nowrap}",
     ".strip .lbl .ic{width:20px;height:20px}",
     ".strip .dot{width:9px;height:9px;border-radius:50%;background:#fff;flex:none;box-shadow:0 0 0 0 rgba(255,255,255,.7);animation:beat 2s infinite}",
     "@keyframes beat{70%{box-shadow:0 0 0 7px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}",
@@ -219,6 +236,16 @@
     ".field input{font:inherit;font-size:17px;color:var(--ink);width:100%;min-width:0;min-height:50px;border:2px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--soft)}",
     ".field input:focus{outline:none;border-color:var(--accent);background:#fff}",
     "@media (max-width:420px){.field{grid-template-columns:1fr;gap:4px}}.fields.stack .field{grid-template-columns:1fr;gap:4px}",
+    /* social pages: one roomy row per site, with that site's own logo and an example address */
+    ".fields.brands{gap:12px}",
+    ".field.brand{grid-template-columns:48px minmax(0,1fr);gap:6px 14px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}",
+    ".field.brand .logo{grid-row:span 2;width:48px;height:48px;border-radius:12px;display:grid;place-items:center;color:#fff}",
+    ".field.brand .logo svg{width:28px;height:28px}",
+    ".field.brand label{font-size:17px;line-height:1.2}",
+    ".field.brand input{min-height:48px;font-size:16.5px;background:var(--soft)}",
+    ".field.brand:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(194,84,27,.12)}",
+    ".tip{display:flex;gap:10px;align-items:flex-start;margin:-4px 0 0;color:var(--muted);font-size:15px;line-height:1.45}.tip .ic{flex:none;width:20px;height:20px;margin-top:1px;color:var(--accent)}",
+    ".note.wide{width:480px}",
     "textarea{font:inherit;font-size:18px;color:var(--ink);width:100%;min-height:120px;border:2px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--soft);resize:vertical}",
     "textarea:focus{border-color:var(--accent);background:#fff;outline:none}",
     "textarea::placeholder{color:#8d877e}",
@@ -228,11 +255,19 @@
     ".add-ph b{display:block;font-size:17px}",
     ".add-ph span{color:var(--muted);font-size:14px}",
     ".thumbs{display:flex;flex-wrap:wrap;gap:10px}",
-    ".thumbs .t{position:relative;width:76px;height:76px}",
+    ".thumbs .t{position:relative;width:76px;height:76px}.thumbs .ph{position:relative;display:block}",
     ".thumbs img{width:76px;height:76px;object-fit:cover;border-radius:10px;display:block;background:var(--soft);border:1px solid var(--line)}",
     ".thumbs .rm{position:absolute;top:-8px;right:-8px;width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--ink);color:#fff;display:grid;place-items:center;padding:0;box-shadow:0 2px 6px rgba(0,0,0,.25)}",
     ".thumbs .rm .ic{width:16px;height:16px;stroke-width:3}",
     ".thumbs.small .t,.thumbs.small img{width:56px;height:56px}",
+    /* a few photos: a short "What is this?" line beside each one (optional) */
+    ".thumbs.capt{display:grid;gap:10px}",
+    ".thumbs.capt .t{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;width:auto;height:auto}",
+    ".thumbs.capt .ph{position:relative;width:64px;height:64px}.thumbs.capt img{width:64px;height:64px}",
+    ".thumbs.capt .rm{width:26px;height:26px;top:-7px;right:-7px}",
+    ".thumbs .cap{font:inherit;font-size:16px;color:var(--ink);width:100%;min-width:0;min-height:46px;border:2px solid var(--line);border-radius:10px;padding:8px 11px;background:var(--soft)}",
+    ".thumbs .cap:focus{outline:none;border-color:var(--accent);background:#fff}.thumbs .cap::placeholder{color:#8d877e}",
+    ".capts{justify-self:start;border:0;background:none;padding:6px 0;color:var(--accent);font-weight:700;font-size:15px;text-decoration:underline;text-underline-offset:3px}",
     ".b{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 20px;border-radius:12px;border:2px solid transparent;font-size:17px;font-weight:700;white-space:nowrap}",
     ".b.main{background:var(--accent);color:#fff}.b.main:hover{background:var(--accent-dk)}",
     ".b.go{background:var(--go);color:#fff}.b.go:hover{background:var(--go-dk)}",
@@ -255,15 +290,24 @@
     ".veil{position:fixed;inset:0;background:rgba(24,22,20,.55);display:grid;place-items:center;padding:16px}",
     ".veil > .card{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px)}",
     "@media (max-width:719px){.veil{place-items:end stretch;padding:0}.veil > .card{width:100%;max-height:92vh;border-radius:20px 20px 0 0}}",
-    ".steps{list-style:none;margin:0;padding:0;display:grid;gap:12px}",
-    ".steps li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center;background:var(--soft);border-radius:14px;padding:12px 14px}",
-    ".steps .circ{width:56px;height:56px;border-radius:50%;background:#fff;color:var(--accent);display:grid;place-items:center;position:relative;box-shadow:0 1px 0 var(--line)}",
-    ".steps .circ .ic{width:28px;height:28px}",
-    ".steps .circ i{position:absolute;top:-4px;left:-4px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;font:800 13px/24px system-ui,sans-serif;text-align:center;font-style:normal}",
-    ".steps b{display:block;font-size:18px}",
-    ".steps span{color:var(--muted);font-size:15px}",
-    ".calm{display:flex;gap:10px;align-items:center;background:#eef6f0;color:#24563a;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:600}",
-    ".calm .ic{color:var(--go)}",
+    ".steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}",
+    ".steps li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px 14px 14px}",
+    ".steps .circ{width:52px;height:52px;border-radius:15px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;position:relative}",
+    ".steps .circ .ic{width:26px;height:26px}",
+    ".steps .circ i{position:absolute;right:-7px;bottom:-7px;width:24px;height:24px;border-radius:50%;border:2px solid #fff;box-sizing:content-box;background:var(--accent);color:#fff;font:800 12.5px/24px system-ui,sans-serif;text-align:center;font-style:normal}",
+    ".steps b{display:block;font-size:17.5px;line-height:1.3}",
+    ".steps span{display:block;color:var(--muted);font-size:15px;line-height:1.45;margin-top:2px}",
+    ".calm{display:flex;gap:12px;align-items:flex-start;background:#eef6f0;border:1px solid #d5e8db;color:#24563a;border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.45;font-weight:500;margin-top:4px}",
+    ".calm .ic{flex:none;width:20px;height:20px;margin-top:1px;color:var(--go)}",
+    ".card.photo{width:min(960px,100%)}.card.photo .bd{padding:0 18px 4px;gap:10px}",
+    ".card.photo .shot{position:relative;display:grid;place-items:center;background:#1e1c19;border-radius:12px;overflow:hidden}",
+    ".card.photo .shot img{display:block;max-width:100%;max-height:calc(100vh - 230px);width:auto;height:auto}",
+    ".card.photo .nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--ink);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.3)}",
+    ".card.photo .nav.l{left:10px}.card.photo .nav.r{right:10px}.card.photo .nav.l .ic{transform:scaleX(-1)}",
+    ".card.photo .cap{margin:0;color:var(--muted);font-size:15px}",
+    ".card.help .hd{padding:26px 26px 6px}.card.help .hd h2{font-size:23px}.card.help .hd p{font-size:16px;margin-top:5px}",
+    ".card.help .bd{padding:14px 26px 22px;gap:12px}.card.help .ft{padding:16px 26px calc(20px + env(safe-area-inset-bottom,0px))}.card.help .ft .b{min-height:56px;font-size:18px}",
+    "@media (max-width:719px){.card.help .hd{padding:22px 20px 4px}.card.help .bd{padding:12px 20px 18px}.card.help .ft{padding:14px 20px calc(16px + env(safe-area-inset-bottom,0px))}}",
 
     /* review list */
     ".list{list-style:none;margin:0;padding:0;display:grid;gap:12px}",
@@ -560,11 +604,15 @@
     // "Label" or "Label=example text"
     var fieldEls = (note.fields || []).map(function (raw, k) {
       var f = raw.split("=")[0], ex = raw.split("=")[1];
+      var b = !ex && BRANDS[f.toLowerCase()];
       var inp = h("input", ex ? { type: "text", id: "swn-f" + k, autocomplete: "off", placeholder: ex }
-                              : { type: "text", id: "swn-f" + k, inputmode: "url", autocapitalize: "off", autocomplete: "off", placeholder: "Paste the link here" });
+                              : { type: "text", id: "swn-f" + k, inputmode: "url", autocapitalize: "off", autocomplete: "off", placeholder: b ? b.ph : "Paste the link here" });
       inp.value = (note.vals && note.vals[f]) || "";
-      return { name: f, input: inp, row: h("div", { class: "field" }, [h("label", { for: "swn-f" + k, text: f }), inp]) };
+      var row = b ? h("div", { class: "field brand" }, [brandLogo(b), h("label", { for: "swn-f" + k, text: f === "Google" ? "Google business" : f }), inp])
+                  : h("div", { class: "field" }, [h("label", { for: "swn-f" + k, text: f }), inp]);
+      return { name: f, input: inp, brand: !!b, row: row };
     });
+    var brands = fieldEls.length && fieldEls.every(function (f) { return f.brand; });
     if (note.fields) { text.placeholder = "Anything else? (You can leave this empty.)"; text.style.minHeight = "70px"; }
     text.addEventListener("paste", function (e) { var f = e.clipboardData && e.clipboardData.files; if (f && f.length) { e.preventDefault(); addPictures(f); } });
     var thumbs = h("div", { class: "thumbs" });
@@ -574,7 +622,7 @@
     drop.addEventListener("dragleave", function () { drop.classList.remove("over"); });
     drop.addEventListener("drop", function (e) { e.preventDefault(); drop.classList.remove("over"); addPictures(e.dataTransfer.files); });
 
-    var card = h("div", { class: "card note" + (phone ? " sheet" : ""), role: "dialog", "aria-label": "Note " + (i + 1) }, [
+    var card = h("div", { class: "card note" + (brands ? " wide" : "") + (phone ? " sheet" : ""), role: "dialog", "aria-label": "Note " + (i + 1) }, [
       h("div", { class: "hd" }, [
         h("span", { class: "num", text: String(i + 1) }),
         h("div", { class: "grow" }, [h("h2", { text: note.text || note.pics.length ? "Your note" : "New note" })]),
@@ -583,7 +631,8 @@
       h("div", { class: "bd" }, [
         h("div", { class: "where" }, [h("span", { text: "About:" }), h("b", { text: note.on })]),
         h("label", { class: "q", for: note.fields ? "swn-f0" : "swn-text", text: note.ask || "What would you like changed?" }),
-        note.fields ? h("div", { class: "fields" + (fieldEls.some(function (f) { return f.name.length > 11; }) ? " stack" : "") }, fieldEls.map(function (f) { return f.row; })) : null,
+        brands ? h("p", { class: "tip" }, [icon("help"), h("span", { text: "Not sure where to find it? Open your page, then copy the address from the top of the screen." })]) : null,
+        note.fields ? h("div", { class: "fields" + (brands ? " brands" : fieldEls.some(function (f) { return f.name.length > 11; }) ? " stack" : "") }, fieldEls.map(function (f) { return f.row; })) : null,
         text, thumbs, drop
       ]),
       h("div", { class: "ft" }, [
@@ -624,16 +673,30 @@
     y = Math.max(16, Math.min(y, vh - dockH - hh - 16));
     card.style.cssText = "left:" + Math.round(x) + "px;top:" + Math.round(y) + "px;max-height:" + (vh - dockH - 32) + "px";
   }
+  // Up to CAPS_AT photos: a "What is this?" line beside each one. A bigger batch keeps it to one tap
+  // ("Say what these are") so nobody has to label 15 photos. Words are optional either way.
+  var CAPS_AT = 6;
   function drawThumbs(note, box, editable) {
     box.textContent = "";
     box.hidden = !note.pics.length;
+    note.caps = note.caps || {};
+    var withCaps = editable && note.pics.length && (note.pics.length <= CAPS_AT || note.showCaps || Object.keys(note.caps).length > 0);   // never hide words already typed
+    box.className = box.className.replace(/\s*capt\b/, "") + (withCaps ? " capt" : "");
     note.pics.forEach(function (id, k) {
-      var img = h("img", { alt: "Photo " + (k + 1) });
+      var img = h("img", { alt: note.caps[id] || "Photo " + (k + 1), title: note.caps[id] || "" });
       picUrl(id).then(function (u) { if (u) img.src = u; });
-      box.appendChild(h("span", { class: "t" }, [img, editable ? h("button", { class: "rm", type: "button", "aria-label": "Take out photo " + (k + 1), onclick: function () {
-        note.pics.splice(note.pics.indexOf(id), 1); picDel(id); save(); drawThumbs(note, box, true); refreshDrop(note);
-      } }, [icon("x")]) : null]));
+      var ph = h("span", { class: "ph" }, [img, editable ? h("button", { class: "rm", type: "button", "aria-label": "Take out photo " + (k + 1), onclick: function () {
+        note.pics.splice(note.pics.indexOf(id), 1); delete note.caps[id]; picDel(id); save(); drawThumbs(note, box, true); refreshDrop(note);
+      } }, [icon("x")]) : null]);
+      var cap = withCaps ? h("input", { class: "cap", type: "text", maxlength: "140", autocomplete: "off", "aria-label": "What is photo " + (k + 1) + "? (optional)",
+        placeholder: k === 0 ? "What is this? For example: the book sale" : "What is this? (optional)",
+        oninput: function () { var v = this.value.trim(); if (v) note.caps[id] = v; else delete note.caps[id]; img.alt = v || "Photo " + (k + 1); save(); } }) : null;
+      if (cap) cap.value = note.caps[id] || "";
+      box.appendChild(h("span", { class: "t" }, [ph, cap]));
     });
+    if (editable && note.pics.length > CAPS_AT && !note.showCaps)
+      box.appendChild(h("button", { class: "capts", type: "button", text: "Say what these are (optional)",
+        onclick: function () { note.showCaps = true; save(); drawThumbs(note, box, true); var f = box.querySelector(".cap"); if (f) f.focus(); } }));
   }
   function refreshDrop(note) { if (els.note) els.note.drop.querySelector("b").textContent = note.pics.length ? "Add more photos" : "Add photos"; }
   function saveNote() {
@@ -785,7 +848,15 @@
     }, Promise.resolve(null)).then(function (stop) {
       if (stop) return failWith(stop);
       step("Sending notes…", total / (total + 1));
-      var body = { notes: st.notes.map(function (n) { return { page: n.page, title: n.title, on: n.on, text: n.text, pics: n.pics.map(function (id) { return keys[id]; }).filter(Boolean) }; }) };
+      var body = { notes: st.notes.map(function (n) {
+        var sent = n.pics.filter(function (id) { return keys[id]; }), caps = n.caps || {};
+        var said = sent.map(function (id) { return caps[id] || ""; });
+        var lines = said.map(function (c, k) { return c ? "Photo " + (k + 1) + ": " + c : ""; }).filter(Boolean);
+        return { page: n.page, title: n.title, on: n.on,
+                 text: n.text + (lines.length ? (n.text ? "\n\n" : "") + lines.join("\n") : ""),
+                 pics: sent.map(function (id) { return keys[id]; }),
+                 picNotes: lines.length ? said : undefined };        // same order as pics; "" = no words
+      }) };
       var go = DEMO ? new Promise(function (r) { setTimeout(function () { r({ ok: true }); }, 600); }) : api("/api/notes", { token: token, body: body });
       return go.then(function (d) {
         if (!d.ok) return failWith(d);
@@ -828,7 +899,7 @@
   function showHelp(first) {
     panel = "help";
     var step = function (n, ic, title, text) { return h("li", {}, [h("div", { class: "circ" }, [icon(ic), h("i", { text: String(n) })]), h("div", {}, [h("b", { text: title }), h("span", { text: text })])]); };
-    veil(h("div", { class: "card", role: "dialog", "aria-label": "How this works" }, [
+    veil(h("div", { class: "card help", role: "dialog", "aria-label": "How this works" }, [
       h("div", { class: "hd" }, [
         h("div", { class: "grow" }, [h("h2", { text: first ? (MODE === "edit" ? "You're in Edit mode. Here's how it works." : "Welcome! Here's how it works.") : "How this works" }), h("p", { text: MODE === "edit" ? "Leave notes for " + TO + " right on your own website." : "This is your Client Portal for sending " + TO + " what you need." })]),
         first ? null : h("button", { class: "xbtn", type: "button", "aria-label": "Close", onclick: function () { closePanels(); render(); } }, [icon("x")])
@@ -847,9 +918,78 @@
         ]),
         h("div", { class: "calm" }, [icon("check"), h("span", { text: "You can't break anything. Your website stays exactly as it is until " + TO + " makes the change." })])
       ]),
-      h("div", { class: "ft" }, [h("button", { class: "b main wide", type: "button", text: first ? "Got it. Let's start." : "Got it", onclick: function () { st[MODE === "edit" ? "intro" : "introHub"] = true; save(); closePanels(); render(); } })])
+      h("div", { class: "ft" }, [h("button", { class: "b main wide", type: "button", text: first ? "Got it. Let's start." : "Got it", onclick: function () { st[MODE === "edit" ? "intro" : "introHub"] = true; save(); tuckAway(this.closest(".card")); } })])
     ]));
     els.dock.hidden = isPhone();
+  }
+  // "Got it": the steps shrink down into the bar at the bottom ("Edit mode is on" / "You're logged in"),
+  // so it's clear where they went and that the mode is still on. Help in that bar brings them back.
+  // One of their site's photos, big. Close with the button, Esc or a tap outside; arrows step through.
+  function showPhoto(img) {
+    var all = Array.prototype.slice.call(document.querySelectorAll("[data-big]")), at = Math.max(0, all.indexOf(img));
+    var pic = h("img", { alt: "" }), cap = h("p", { class: "cap" }), title = h("h2", {});
+    var show = function (i) {
+      at = (i + all.length) % all.length; var it = all[at];
+      pic.src = it.getAttribute("data-big"); pic.alt = it.alt || "";
+      title.textContent = it.alt || "On your site now"; cap.textContent = "Photo " + (at + 1) + " of " + all.length + " · on your website now";
+    };
+    var nav = all.length > 1 ? [h("button", { class: "nav l", type: "button", "aria-label": "Previous photo", onclick: function () { show(at - 1); } }, [icon("arrow")]),
+                                h("button", { class: "nav r", type: "button", "aria-label": "Next photo", onclick: function () { show(at + 1); } }, [icon("arrow")])] : [];
+    var card = h("div", { class: "card photo", role: "dialog", "aria-label": "Photo" }, [
+      h("div", { class: "hd" }, [h("div", { class: "grow" }, [title]), h("button", { class: "xbtn", type: "button", "aria-label": "Close", onclick: function () { closePanels(); render(); } }, [icon("x")])]),
+      h("div", { class: "bd" }, [h("div", { class: "shot" }, [pic].concat(nav)), cap]),
+      h("div", { class: "ft" }, [
+        h("button", { class: "b plain", type: "button", onclick: function () {
+          var box = img.closest("[data-note-box]"), which = all[at].alt || "this photo";
+          closePanels(); if (!box) return render();
+          addNote(box, box.getAttribute("data-area") || null);
+          var t = els.note && els.note.text; if (t) { t.value = "Please swap this photo: " + which + ". "; try { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } catch (x) {} }
+        } }, [icon("photo"), h("span", { text: "Swap this one" })]),
+        h("button", { class: "b main push", type: "button", text: "Close", onclick: function () { closePanels(); render(); } })
+      ])
+    ]);
+    card.addEventListener("keydown", function (e) { if (e.key === "ArrowLeft") show(at - 1); if (e.key === "ArrowRight") show(at + 1); });
+    show(at); veil(card); panel = "photo";
+    try { card.querySelector(".b.main").focus({ preventScroll: true }); } catch (x) {}
+  }
+
+  // A few headline numbers from Google Analytics for their page ([data-stats]). The notes service
+  // asks GA4 and sends them back; with no numbers (or an older service) the card just stays hidden.
+  function loadStats() {
+    var box = document.querySelector("[data-stats]"); if (!box) return;
+    var got = DEMO ? Promise.resolve({ ok: true, sample: true, days: 28, visitors: 412, visitorsChange: 18, calls: 23, callsChange: 9, leads: 7, leadsChange: -2, source: "Facebook" })
+                   : api("/api/stats", { token: lsGet("token"), body: { site: SITE } });
+    got.then(function (d) {
+      if (!d || !d.ok || d.visitors == null) return;
+      var put = function (k, v, ch) {
+        var el = box.querySelector('[data-stat="' + k + '"]'); if (!el) return;
+        el.textContent = typeof v === "number" ? v.toLocaleString() : String(v || "–");
+        if (typeof ch === "number" && ch !== 0) el.appendChild(h("small", { class: ch < 0 ? "down" : "", text: (ch > 0 ? "▲ " : "▼ ") + Math.abs(ch) + "% vs. before" }));
+      };
+      put("visitors", d.visitors, d.visitorsChange); put("calls", d.calls, d.callsChange); put("leads", d.leads, d.leadsChange); put("source", d.source);
+      var r = box.querySelector('[data-stat="range"]'); if (r && d.days) r.textContent = "last " + d.days + " days";
+      var n = box.querySelector('[data-stat="note"]');
+      if (n) { n.textContent = "From Google Analytics"; if (d.sample) n.parentNode.appendChild(h("span", { class: "sample", text: "Sample" })); }
+      box.hidden = false;
+    });
+  }
+
+  function tuckAway(card) {
+    var to = els.stripLbl, v = els.veil;
+    var finish = function () {
+      closePanels(); render();
+      if (to && to.animate && !reduceMotion) to.animate([{ transform: "scale(1)" }, { transform: "scale(1.12)", offset: .35 }, { transform: "scale(1)" }], { duration: 650, easing: "ease-out" });
+    };
+    if (!card || !card.animate || reduceMotion || !to) return finish();
+    if (els.dock) els.dock.hidden = false;             // the bar has to be on screen to shrink into it
+    var a = card.getBoundingClientRect(), b = to.getBoundingClientRect();
+    if (!b.width) return finish();
+    var dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+    card.style.pointerEvents = "none";
+    if (v) v.animate([{ backgroundColor: "rgba(24,22,20,.55)" }, { backgroundColor: "rgba(24,22,20,0)" }], { duration: 520, easing: "ease-in", fill: "forwards" });
+    card.animate([{ transform: "none", opacity: 1, borderRadius: "18px" },
+                  { transform: "translate(" + dx + "px," + dy + "px) scale(.06)", opacity: .2, borderRadius: "60px" }],
+                 { duration: 520, easing: "cubic-bezier(.5,0,.75,0)", fill: "forwards" }).onfinish = finish;
   }
   function goEdit(url) {
     if (!url || url === "soon") { toast("Your mockup isn't ready yet. " + TO + " will let you know when it is."); return; }
@@ -881,13 +1021,13 @@
     var helpBtn = h("button", { type: "button", onclick: function () { showHelp(false); } }, [icon("help"), h("span", { text: "Help" })]);
     var strip = MODE === "edit"
       ? h("div", { class: "strip", role: "status" }, [h("div", { class: "strip-in" }, [
-          h("span", { class: "lbl" }, [h("span", { class: "dot" }), h("span", { text: "Edit mode is on" })]),
+          els.stripLbl = h("span", { class: "lbl" }, [h("span", { class: "dot" }), h("span", { text: "Edit mode is on" })]),
           h("span", { class: "sub", text: "· Your website isn't changing" }),
           h("span", { class: "gap" }), helpBtn,
           h("button", { type: "button", onclick: exitEdit }, [icon("power"), h("span", { class: "lg", text: "Exit edit mode" }), h("span", { class: "sm", text: "Exit" })])
         ])])
       : h("div", { class: "strip hub", role: "status" }, [h("div", { class: "strip-in" }, [
-          h("span", { class: "lbl" }, [icon("lock"), h("span", { class: "lg", text: "You're logged in" }), h("span", { class: "sm", text: "Logged in" })]),
+          els.stripLbl = h("span", { class: "lbl" }, [icon("lock"), h("span", { class: "lg", text: "You're logged in" }), h("span", { class: "sm", text: "Logged in" })]),
           h("span", { class: "sub", text: "· Only you can see this page" }),
           h("span", { class: "gap" }), helpBtn,
           h("button", { type: "button", onclick: askLogOut }, [icon("power"), h("span", { text: "Log out" })])
@@ -908,6 +1048,9 @@
       if (inUs(e)) return;
       var em = MODE === "hub" && !els.veil && e.target.closest && e.target.closest("[data-edit-mode]");
       if (em) { e.preventDefault(); goEdit(em.getAttribute("data-edit-mode") || em.getAttribute("href") || "/"); return; }
+      // A photo with data-big (the Photos box on their page) opens bigger instead of starting a note.
+      var big = MODE === "hub" && !picking && !els.note && !els.veil && e.target.closest && e.target.closest("[data-big]");
+      if (big) { e.preventDefault(); e.stopPropagation(); showPhoto(big); return; }
       // Boxes made for notes (like on the welcome page) open a note with one tap, no "Add a note" first.
       var box = !picking && !st.sent && !els.note && !els.veil && e.target.closest && e.target.closest("[data-note-box]");
       if (box) { e.preventDefault(); addNote(box, box.getAttribute("data-area") || null, e); return; }
@@ -929,7 +1072,9 @@
     var oldRender = render; render = function () { oldRender(); syncPickClass(); };
 
     render();
-    if (!st[MODE === "edit" ? "intro" : "introHub"]) showHelp(true);
+    if (MODE === "hub") loadStats();
+    var introKey = MODE === "edit" ? "intro" : "introHub";
+    if (!st[introKey]) { st[introKey] = true; save(); showHelp(true); }   // only ever the first time; Help brings it back
     else if (st.sent) { /* the dock already says it was sent */ }
   }
 

@@ -13,6 +13,13 @@
   Stray Wolf" wolf in the footer for 2 seconds.
   "On your site now" in each box shows what the site says today (copied from the pages, Nov 13 2026).
   When the site changes, update it here too. Never make anything up.
+  Photos box: "+7 more" = the 12 photos used on the site (images/photos/), minus the 5 shown.
+  "Photos that would help most" = things the site talks about that have no photo yet (the Fall Book Sale,
+  volunteers, genealogy projects) plus newer photos, since today's all came from the old website.
+  Update both when photos are added.
+  Numbers card: stays hidden until Google Analytics is set up for this site (the notes service needs the
+  GA4 property ID saved as ga:friends-of-the-colony-public-library). "Calls tapped" and "Join requests"
+  count GA4 events named phone_call_click and generate_lead, which this site doesn't send yet.
 -->
 <style>
   @font-face{font-family:"SW Zilla";src:url("brand/zilla-slab-600.woff2") format("woff2");font-weight:600;font-display:swap}
@@ -53,27 +60,37 @@
   .trust{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;color:var(--soft);font-size:13px}
   .trust li{display:inline-flex;align-items:center;gap:6px}
   .trust svg{width:14px;height:14px;color:var(--sage)}
+  .hero > div:nth-child(2){flex:1;min-width:0}
 
-  /* ---------- Edit mode ---------- */
-  .edit{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr auto;gap:14px 18px;align-items:center;color:#fff;border-radius:18px;padding:18px 18px 18px 20px;margin:0 0 12px;text-decoration:none;cursor:pointer;
-        background:linear-gradient(135deg,#2e2a26,#1e1c19);box-shadow:0 18px 40px -24px rgba(36,34,31,.6)}
-  .edit::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;box-shadow:inset 0 0 0 1.5px rgba(217,83,30,.85)}
-  .edit::before{content:"";position:absolute;right:-60px;top:-110px;width:280px;height:280px;pointer-events:none;
-        background:conic-gradient(from 200deg,rgba(255,255,255,.05) 0 50deg,transparent 50deg 95deg,rgba(255,255,255,.03) 95deg 150deg,transparent 150deg)}
-  .edit .ic{width:46px;height:46px;border-radius:13px;background:var(--accent-hi);display:grid;place-items:center;box-shadow:0 6px 16px -6px rgba(217,83,30,.6)}
+  /* ---------- a few numbers from Google Analytics ---------- */
+  .stats{flex:none;width:250px;background:var(--card);border-radius:16px;padding:14px 16px 12px;box-shadow:0 0 0 1px var(--line),0 10px 26px -20px rgba(36,34,31,.3)}
+  .stats[hidden]{display:none}
+  .stats-k{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 10px;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+  .stats-k span{color:var(--soft);letter-spacing:.06em}
+  .stats dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+  .stats dt{font-size:12px;color:var(--soft);line-height:1.2}
+  .stats dd{margin:2px 0 0;font:700 24px/1.1 var(--slab);color:var(--ink);font-variant-numeric:tabular-nums}
+  .stats dd.word{font:650 15px/1.25 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-top:4px}
+  .stats dd small{display:block;font:600 11.5px/1.2 system-ui,sans-serif;margin-top:3px;color:var(--sage)}
+  .stats dd small.down{color:var(--soft)}
+  .stats-f{margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--soft);display:flex;justify-content:space-between;gap:8px}
+  .stats-f .sample{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent-soft);border-radius:999px;padding:3px 6px}
+
+  /* ---------- Edit mode: the main action, in the same calm white card as the boxes ---------- */
+  .edit{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:14px 18px;align-items:center;color:var(--ink);border-radius:18px;padding:18px 18px 18px 20px;margin:0 0 36px;text-decoration:none;cursor:pointer;
+        background:var(--card);box-shadow:0 0 0 1px var(--line),0 10px 26px -18px rgba(36,34,31,.28);transition:box-shadow .18s}
+  .edit:hover{box-shadow:0 0 0 2px var(--accent),0 12px 26px -16px rgba(194,84,27,.4)}
+  .edit .ic{width:46px;height:46px;border-radius:13px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
   .edit .ic svg{width:23px;height:23px}
-  .edit .k{font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#f3a57d;margin:0 0 6px}
+  .edit .k{font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
   .edit b{display:block;font:700 20px/1.2 var(--slab)}
   .edit em{font-style:normal}
-  .edit .t{color:#d4cec5;font-size:14.5px;line-height:1.45;margin:4px 0 0}
-  .edit .go{position:relative;display:flex;justify-content:center;align-items:center;gap:8px;background:var(--accent-hi);color:#fff;font-weight:650;font-size:15.5px;border-radius:11px;min-height:46px;padding:0 18px;white-space:nowrap;transition:filter .15s}
+  .edit .t{color:var(--muted);font-size:14.5px;line-height:1.45;margin:4px 0 0}
+  .edit .go{position:relative;display:flex;justify-content:center;align-items:center;gap:8px;background:var(--accent);color:#fff;font-weight:650;font-size:15.5px;border-radius:11px;min-height:46px;padding:0 18px;white-space:nowrap;transition:background .15s}
   .edit .go svg{width:18px;height:18px;transition:transform .2s}
-  .edit:hover .go{filter:brightness(1.07)}.edit:hover .go svg{transform:translateX(3px)}
+  .edit:hover .go{background:#a94816}.edit:hover .go svg{transform:translateX(3px)}
   .edit:focus-visible{outline:3px solid var(--accent-hi);outline-offset:4px}
-  .edit[data-edit-mode="soon"]{background:var(--card);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
-  .edit[data-edit-mode="soon"]::after,.edit[data-edit-mode="soon"]::before{display:none}
-  .edit[data-edit-mode="soon"] .ic{background:var(--accent-soft);color:var(--accent);box-shadow:none}
-  .edit[data-edit-mode="soon"] .k,.edit[data-edit-mode="soon"] .t{color:var(--muted)}
+  .edit[data-edit-mode="soon"]{box-shadow:0 0 0 1px var(--line)}
   .edit[data-edit-mode="soon"] .go{background:var(--stone);color:var(--muted)}
   .edit .soon,.edit[data-edit-mode="soon"] .ready{display:none}.edit[data-edit-mode="soon"] .soon{display:inline}
 
@@ -111,8 +128,18 @@
             background:repeating-conic-gradient(#f3efe9 0 25%,#fff 0 50%) 0 0/14px 14px;box-shadow:inset 0 0 0 1px var(--line)}
   .logo-now img{max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain}
   .pics{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
-  .pics img,.pics .more{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--stone)}
-  .pics .more{display:grid;place-items:center;text-align:center;font-size:12.5px;line-height:1.25;color:var(--muted);font-weight:600;padding:4px}
+  .pics > img,.pics .more{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;background:var(--stone)}
+  .pics > img{cursor:zoom-in;transition:transform .15s,box-shadow .15s}
+  .pics > img:hover{transform:scale(1.04);box-shadow:0 6px 16px -8px rgba(36,34,31,.5)}
+  .pics .more{position:relative;overflow:hidden}
+  .pics .more img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;filter:grayscale(.3)}
+  .pics .more span{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-size:11.5px;line-height:1.2;font-weight:600;color:var(--ink);background:rgba(255,255,255,.55);padding:4px}
+  .pics .more b{display:block;font:700 22px/1 var(--slab);margin-bottom:2px}
+  /* photos that would help most (see the note at the top) */
+  .want{margin:14px 0 0}
+  .want-k{color:var(--accent)}
+  .want ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+  .want li{font-size:13.5px;line-height:1.3;background:var(--accent-soft);color:#8a3a12;border-radius:999px;padding:6px 11px}
   .facts{margin:0;display:grid;gap:7px}
   .facts div{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:baseline}
   .facts dt{color:var(--soft);font-size:13px}
@@ -120,11 +147,13 @@
   .facts dd.miss{color:var(--soft);font-style:italic}
   .facts .q{font-family:var(--slab);font-weight:600;font-size:16px}
   .soc{list-style:none;margin:0;padding:0;display:grid;gap:7px}
-  .soc li{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:center;font-size:14.5px}
+  .soc li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:center;font-size:14.5px}
   .soc li > span:first-child{color:var(--soft);font-size:13px}
   .soc .on{display:inline-flex;align-items:center;gap:6px;min-width:0;overflow-wrap:anywhere}
   .soc .on svg{flex:none;width:15px;height:15px;color:var(--sage)}
-  .soc .off{color:var(--soft);font-style:italic}
+  .soc .url{min-width:0;overflow-wrap:anywhere}
+  .soc .off{display:inline-flex;align-items:center;gap:8px;min-width:0;color:var(--soft);padding-left:21px}
+  .soc .off em{flex:none;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;font-style:normal;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 7px}
 
   /* ---------- private ---------- */
   .kept{background:var(--card);border-radius:16px;box-shadow:0 0 0 1px var(--line);padding:20px 22px;margin:0 0 44px}
@@ -159,12 +188,13 @@
     .trust{font-size:14.5px}.edit b{font-size:25px}.edit .t{font-size:16px}.edit .go{font-size:17px;min-height:52px}.box b{font-size:19px}.bh span{font-size:15.5px}.box .tap{font-size:15px}
     .bh .ic{width:44px;height:44px}.sec-h{font-size:30px}.sub{font-size:17px;max-width:720px}.now-k{font-size:11.5px}.facts dt,.soc li > span:first-child{font-size:14.5px}.facts dd,.soc li{font-size:17px}
     .facts div,.soc li{grid-template-columns:110px 1fr}.logo-now{height:124px}.logo-now img{max-height:94px}.kept li b{font-size:16px}.kept li span{font-size:15px}.sw-brand img{height:38px}}
+  @media (min-width:561px) and (max-width:899px){.hero{flex-wrap:wrap}.stats{width:100%}.stats dl{grid-template-columns:repeat(4,1fr)}}
   @media (max-width:699px){
     .pics{grid-template-columns:repeat(3,1fr)}
   }
   @media (max-width:560px){
     .sw-head .wrap{min-height:54px}.sw-brand img{height:26px}.secure{padding:6px 9px 6px 8px;font-size:10px;letter-spacing:.08em}
-    .hero{flex-direction:column;text-align:center;gap:16px;padding:26px 0 22px}.plate{width:116px;height:116px;padding:14px;border-radius:18px}
+    .hero{flex-direction:column;text-align:center;gap:16px;padding:26px 0 22px}.stats{width:100%;text-align:left}.plate{width:116px;height:116px;padding:14px;border-radius:18px}
     .kicker{justify-content:center}.kicker::before{content:"";width:28px;height:1px;background:currentColor;opacity:.5}
     h1{font-size:27px}.lead{font-size:15.5px}.trust{justify-content:center;font-size:12.5px;gap:4px 12px}
     .edit{grid-template-columns:auto 1fr;padding:16px;gap:12px 14px}.edit .ic{width:40px;height:40px;border-radius:11px}.edit .ic svg{width:20px;height:20px}
@@ -172,6 +202,7 @@
     .meet{flex-wrap:wrap}
     .sec-h{font-size:22px}.box{padding:14px}.bh{gap:10px}.box .tap{font-size:12.5px;padding:6px 10px}
     .facts div,.soc li{grid-template-columns:84px 1fr}
+    .soc{gap:10px}.soc li{grid-template-columns:1fr;gap:1px}.soc .off{flex-wrap:wrap;row-gap:4px}
     .kept{padding:18px}
   }
   @media (max-width:360px){.secure .w{display:none}}
@@ -201,6 +232,18 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.9 8.3 2 12 2 12s3.5 7 10 7a9.8 9.8 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>Hidden from search engines</li>
       </ul>
     </div>
+    <!-- A few numbers from Google Analytics. Hidden until the notes service sends real ones
+         (site-notes.js asks /api/stats after login); the demo shows sample numbers, marked as samples. -->
+    <aside class="stats" data-stats hidden aria-label="Your website this month">
+      <p class="stats-k">Your website <span data-stat="range">last 28 days</span></p>
+      <dl>
+        <div><dt>Visitors</dt><dd data-stat="visitors">–</dd></div>
+        <div><dt>Calls tapped</dt><dd data-stat="calls">–</dd></div>
+        <div><dt>Join requests</dt><dd data-stat="leads">–</dd></div>
+        <div><dt>Most came from</dt><dd data-stat="source" class="word">–</dd></div>
+      </dl>
+      <p class="stats-f"><span data-stat="note">From Google Analytics</span></p>
+    </aside>
   </section>
 
   <a class="edit" href="../" data-edit-mode="../">
@@ -212,11 +255,6 @@
     </div>
     <div class="go"><em class="ready">Open Edit mode</em><em class="soon">Coming soon</em><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
   </a>
-
-  <!-- Meeting requests come in as a note. Later this can link straight to a booking page instead. -->
-  <div class="meet box" data-note-box data-area="Meeting request" data-note-fields="Days that work for you=For example: Tuesday or Thursday|Best time of day=For example: mornings, or after 3|Phone, video or in person?=For example: a phone call is easiest" data-note-ask="When can we talk? I'll set it up and confirm with you.">
-    <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8.5 15l2.2 2.2 4.8-4.8"/></svg></div><div class="grow"><b>Let's talk</b><span>Tell me what times work and I'll set up a call or a meeting.</span></div><em class="tap">Pick a time</em></div>
-  </div>
 
   <h2 class="sec-h">What's on your site now</h2>
   <p class="sub">Here's what your website shows today. Tap a box to add something new or fix anything that's wrong, then tap <b>Send to Stray Wolf</b> at the bottom.</p>
@@ -235,31 +273,30 @@
         <dl class="facts"><div><dt>Email</dt><dd>info@fotcpl.org</dd></div><div><dt>President</dt><dd>president@fotcpl.org</dd></div><div><dt>Find us</dt><dd>The Colony Public Library, 6800 Main St., The Colony, TX 75056</dd></div><div><dt>Library phone</dt><dd>972-625-1900</dd></div></dl>
       </div>
     </li>
-    <li class="box wide" data-note-box data-area="Photos" data-note-ask="Add new photos below. Want a photo on your site swapped out? Tell me which one." data-note-hint="For example: Swap the driveway photo for this one.">
-      <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg></div><div class="grow"><b>Photos</b><span>Your work, your place, your people.</span></div><em class="tap">Add photos</em></div>
+    <li class="box wide" data-note-box data-area="Photos" data-note-ask="Add new photos below. Want a photo on your site swapped out? Tell me which one." data-note-hint="For example: Swap the story time photo for this one.">
+      <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg></div><div class="grow"><b>Photos</b><span>Your events, your library, your volunteers.</span></div><em class="tap">Add photos</em></div>
       <div class="now">
         <p class="now-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>On your site now</p>
-        <div class="pics"><img src="../images/photos/story-time-400.jpg" alt="" loading="lazy" decoding="async"><img src="../images/photos/crafts-400.jpg" alt="" loading="lazy" decoding="async"><img src="../images/photos/little-free-library-400.jpg" alt="" loading="lazy" decoding="async"><img src="../images/photos/childrens-program-400.jpg" alt="" loading="lazy" decoding="async"><img src="../images/photos/technology-400.jpg" alt="" loading="lazy" decoding="async"><span class="more">More on<br>your site</span></div>
+        <div class="pics"><img src="../images/photos/story-time-400.jpg" data-big="../images/photos/story-time-1200.jpg" alt="Children at story time" title="Tap to see it bigger" loading="lazy" decoding="async"><img src="../images/photos/crafts-400.jpg" data-big="../images/photos/crafts-1200.jpg" alt="Crafts at the library" title="Tap to see it bigger" loading="lazy" decoding="async"><img src="../images/photos/little-free-library-400.jpg" data-big="../images/photos/little-free-library-1200.jpg" alt="A Little Free Library" title="Tap to see it bigger" loading="lazy" decoding="async"><img src="../images/photos/childrens-program-400.jpg" data-big="../images/photos/childrens-program-1200.jpg" alt="A children&#x27;s program" title="Tap to see it bigger" loading="lazy" decoding="async"><img src="../images/photos/technology-400.jpg" data-big="../images/photos/technology-1200.jpg" alt="Technology at the library" title="Tap to see it bigger" loading="lazy" decoding="async"><span class="more"><img src="../images/photos/outdoor-family-event-400.jpg" alt="" loading="lazy" decoding="async"><span><b>+7</b>more on your site</span></span></div>
+        <div class="want">
+          <p class="now-k want-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>Photos that would help most</p>
+          <ul><li>The Fall Book Sale</li><li>Friends volunteering</li><li>A genealogy project</li><li>Anything from this year</li></ul>
+        </div>
       </div>
     </li>
-    <li class="box" data-note-box data-area="The words that matter" data-note-ask="What should be added or changed? Anything you leave out stays the same." data-note-hint="For example: Change the headline to: Family owned since 1998.">
-      <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div><div class="grow"><b>The words that matter</b><span>Headline, slogan, prices.</span></div><em class="tap">Add or change</em></div>
-      <div class="now">
-        <p class="now-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>On your site now</p>
-        <dl class="facts"><div><dt>Headline</dt><dd class="q">Supporting The Colony Public Library</dd></div><div><dt>About</dt><dd>We're a nonprofit dedicated to supporting, enhancing and promoting the work of our library through fundraising and volunteer activities.</dd></div><div><dt>Membership</dt><dd>Memberships start at $15 a year.</dd></div><div><dt>What we do</dt><dd>Technology projects, book donations and memoriams, genealogy projects, Little Free Libraries</dd></div></dl>
-      </div>
-    </li>
-    <li class="box" data-note-box data-area="Your social pages" data-note-fields="Facebook|Instagram|LinkedIn|Google" data-note-ask="Paste a link for any page that&#x27;s new or wrong. Leave the rest empty.">
+    <li class="box wide" data-note-box data-area="Your social pages" data-note-fields="Facebook|Instagram|LinkedIn|Google" data-note-ask="Paste a link for any page that&#x27;s new or wrong. Leave the rest empty.">
       <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg></div><div class="grow"><b>Your social pages</b><span>Just the ones you have.</span></div><em class="tap">Add or change</em></div>
       <div class="now">
         <p class="now-k"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>On your site now</p>
-        <ul class="soc"><li><span>Facebook</span><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>facebook.com/FOTCPL</span></li><li><span>Instagram</span><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>instagram.com/fotcpl</span></li><li><span>LinkedIn</span><span class="off">Not on your site yet</span></li><li><span>Google</span><span class="off">Not on your site yet</span></li></ul>
+        <ul class="soc"><li><span>Facebook</span><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="url">facebook.com/FOTCPL</span></span></li><li><span>Instagram</span><span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span class="url">instagram.com/fotcpl</span></span></li><li><span>LinkedIn</span><span class="off"><span class="url">linkedin.com/company/yourname</span><em>Example</em></span></li><li><span>Google</span><span class="off"><span class="url">maps.app.goo.gl/yourplace</span><em>Example</em></span></li></ul>
       </div>
     </li>
-    <li class="box wide" data-note-box data-area="Sites you like" data-note-ask="Which websites do you like the look of?" data-note-hint="Paste the address, and say what you like about it.">
-      <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><div class="grow"><b>Sites you like</b><span>Seen a website you like the look of? Share it.</span></div><em class="tap">Share one</em></div>
-    </li>
   </ul>
+
+  <!-- Meeting requests come in as a note. Later this can link straight to a booking page instead. -->
+  <div class="meet box" data-note-box data-area="Meeting request" data-note-fields="Days that work for you=For example: Tuesday or Thursday|Best time of day=For example: mornings, or after 3|Phone, video or in person?=For example: a phone call is easiest" data-note-ask="When can we talk? I'll set it up and confirm with you.">
+    <div class="bh"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8.5 15l2.2 2.2 4.8-4.8"/></svg></div><div class="grow"><b>Let's talk</b><span>Tell me what times work and I'll set up a call or a meeting.</span></div><em class="tap">Pick a time</em></div>
+  </div>
 
   <section class="kept" aria-labelledby="kept-h">
     <h2 id="kept-h">Your portal is private</h2>
