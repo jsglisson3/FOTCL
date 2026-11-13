@@ -405,7 +405,7 @@ figcaption {
 }
 
 .brand img {
-    height: 60px;
+    height: 72px;   /* made a little bigger after the library presentation (was 60px) */
     width: auto;
 }
 
@@ -2811,6 +2811,58 @@ a.biz-card:hover .biz-name {
     font-size: 0.95rem;
 }
 
+/* ===== Events page =====
+   Built from pieces already on the site: the "More ways to help"
+   cards (.help-item), the white .panel and the home page's
+   "Happening this week" strip. */
+
+/* The date and time line above each event's name */
+.event-card .kicker {
+    color: var(--blue);
+}
+
+/* Where the event is, with a small map pin */
+.event-place {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-weight: 700;
+}
+
+.event-place .icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 0.2em;
+}
+
+/* Shown only when every event is over */
+.event-empty {
+    max-width: var(--text-width);
+    border: 1px solid var(--line);
+}
+
+.event-empty p {
+    margin-bottom: 0;
+}
+
+/* The library's own calendar, in a white box on the tinted band */
+.library-calendar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+}
+
+.library-calendar .icon-badge {
+    margin: 0;
+}
+
+.library-calendar h2 {
+    margin: 0 0 4px;
+    font-size: 1.5rem;
+}
+
 /* ===== Open now / closed now notes (filled in by script.js) =====
    A line of space is kept for the note before it's filled in,
    so nothing on the page jumps when it appears. */
@@ -4103,7 +4155,7 @@ code {
 @media (max-width: 760px) {
 
     .brand img {
-        height: 48px;
+        height: 56px;   /* was 48px */
     }
 
     .library-link {
@@ -4285,7 +4337,7 @@ code {
     }
 
     .brand img {
-        height: 40px;
+        height: 46px;   /* was 40px */
     }
 
     /* Slightly slimmer buttons, so two fit side by side */

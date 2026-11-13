@@ -209,6 +209,36 @@ if (statusNotes.length || hoursRows.length) {
     });
 }
 
+// ===== Past events (Events page) =====
+// Each event card has data-ends="2026-11-14T16:00": the date and time
+// it's over, in The Colony's time. Once that time has passed, the card
+// hides itself. If every card is hidden, the "No events right now"
+// box shows instead. Without JavaScript, every card simply stays.
+function centralTimeNow() {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+        timeZone: "America/Chicago",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23",
+    }).formatToParts(new Date());
+    const part = (type) => parts.find((p) => p.type === type).value;
+    // Written the same way as data-ends, so the two compare like words
+    return `${part("year")}-${part("month")}-${part("day")}T${part("hour")}:${part("minute")}`;
+}
+
+const eventCards = document.querySelectorAll("[data-ends]");
+if (eventCards.length) {
+    const now = centralTimeNow();
+    eventCards.forEach((card) => {
+        if (card.dataset.ends <= now) card.hidden = true;
+    });
+    const emptyNote = document.querySelector("[data-events-empty]");
+    if (emptyNote && [...eventCards].every((card) => card.hidden)) emptyNote.hidden = false;
+}
+
 // ===== Membership tabs (Join page) =====
 // Switches between the Individual and Business levels. Without JavaScript,
 // both lists simply show one after the other.
