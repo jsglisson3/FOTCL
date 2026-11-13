@@ -2250,10 +2250,11 @@ a.biz-card:hover .biz-name {
 /* ===== Join: benefits ===== */
 .benefit-grid {
     list-style: none;
+    max-width: 760px;   /* two cards now, so they stay a tidy pair under the heading */
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
